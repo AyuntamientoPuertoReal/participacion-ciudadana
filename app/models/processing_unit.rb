@@ -1,0 +1,2 @@
+class ProcessingUnit < ApplicationRecord
+end

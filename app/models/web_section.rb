@@ -1,0 +1,2 @@
+class WebSection < ApplicationRecord
+end

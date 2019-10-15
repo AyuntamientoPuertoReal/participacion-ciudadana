@@ -1,0 +1,2 @@
+class IncidenceType < ApplicationRecord
+end
