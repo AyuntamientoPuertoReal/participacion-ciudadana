@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_of_creation: 2019-10-15 10:14:20
+  author: one
+  author_processing_units: MyString
+  type_of_modification: MyString
+  editor: one
+  editor_processing_units: MyString
+  base_instance: one
+  previous_instance: one
+  date: 2019-10-15 10:14:20
+  is_active: false
+  title: MyString
+  description: MyString
+  body: MyText
+  image_url: MyString
+  web_section: one
+  published: false
+
+two:
+  date_of_creation: 2019-10-15 10:14:20
+  author: two
+  author_processing_units: MyString
+  type_of_modification: MyString
+  editor: two
+  editor_processing_units: MyString
+  base_instance: two
+  previous_instance: two
+  date: 2019-10-15 10:14:20
+  is_active: false
+  title: MyString
+  description: MyString
+  body: MyText
+  image_url: MyString
+  web_section: two
+  published: false

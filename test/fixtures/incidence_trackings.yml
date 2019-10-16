@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  incidence: one
+  staff: one
+  processing_units: MyString
+  status: 1
+  previous_status: 1
+  message: MyString
+  date: 2019-10-15 10:14:08
+
+two:
+  incidence: two
+  staff: two
+  processing_units: MyString
+  status: 1
+  previous_status: 1
+  message: MyString
+  date: 2019-10-15 10:14:08

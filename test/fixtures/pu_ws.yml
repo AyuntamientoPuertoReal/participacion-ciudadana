@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  processing_unit: one
+  web_section: one
+
+two:
+  processing_unit: two
+  web_section: two
