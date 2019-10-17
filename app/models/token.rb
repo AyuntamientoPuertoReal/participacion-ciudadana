@@ -1,3 +1,3 @@
 class Token < ApplicationRecord
-  has_many :incidence, optional: true
+  has_many :incidence
 end
