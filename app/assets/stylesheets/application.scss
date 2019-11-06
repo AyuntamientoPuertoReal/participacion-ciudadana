@@ -15,6 +15,9 @@
  */
 
 @import "foundation_and_overrides";
+@import "foundation-icons";
+
+$brand: #9E0176;
 
 @font-face
 {
@@ -76,4 +79,48 @@
     color: #000;
     text-decoration: underline;
   }
+}
+
+.admin-content-container
+{
+  max-width: 100%;
+  height: 100vh;
+}
+
+.admin-sidebar-container
+{
+  background-color: darken($brand, 10%);
+  border-right: 1px solid #dee0e3;
+}
+
+
+.admin-sidebar-list-item
+{
+  color: #FFF;
+  font-size: 1rem;
+  line-height: 3rem;
+  padding-left: 0.75rem;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: "Source Sans Pro";
+  font-weight: bold;
+  padding: 20px !important;
+
+  &:visited
+  {
+    color:#FFF;
+  }
+
+  &:hover
+  {
+    color: #FFF;
+    background-color: $brand;
+  }
+}
+
+i
+{
+  display: inline-block;
+  width: 1.4rem;
 }
