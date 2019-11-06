@@ -3,7 +3,7 @@
 one:
   description: MyText
   image_url: MyString
-  token: one
+  phone_identifier: one
   latitude: MyString
   longitude: MyString
   incidence_type: one
@@ -11,7 +11,7 @@ one:
 two:
   description: MyText
   image_url: MyString
-  token: two
+  phone_identifier: two
   latitude: MyString
   longitude: MyString
   incidence_type: two
