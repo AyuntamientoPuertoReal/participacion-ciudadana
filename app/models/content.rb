@@ -8,5 +8,4 @@ class Content < ApplicationRecord
 
   has_many :children, class_name: "Content", foreign_key: "base_instance"
   has_one :next_instance, class_name: "Content", foreign_key: "previous_instance"
-
 end

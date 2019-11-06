@@ -1,0 +1,79 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "foundation_and_overrides";
+
+@font-face
+{
+  font-family: "Source Sans Pro";
+  src: url('sourcesanspro-regular-webfont.ttf') format('truetype');
+}
+
+@font-face
+{
+  font-family: "Lato";
+  src: url('lato-regular.ttf') format('truetype');
+}
+
+.back-link
+{
+  text-align: right;
+  float: right;
+  color: #FFF;
+  font-size: 0.875rem;
+  font-family: "Source Sans Pro" !important;
+  
+  &:hover
+  {
+    color: #FFF;
+    text-decoration: underline;
+  }
+}
+
+.back-link-row
+{
+  max-width: 100%;
+  background-color: #000;
+  padding: 7px 0;
+}
+
+.admin-home-row
+{
+  max-width: 100%;
+  background-color: #FFF;
+  padding: 8px 0;
+  box-shadow: 0 2px 0px #eee;
+}
+
+.admin-home-link
+{
+  font-size: 1.5rem;
+  font-family: "Lato" !important;
+  font-weight: lighter;
+  color: #000;
+  line-height: 1.5rem;
+
+  small
+  {
+    font-size: 0.875rem;
+  }
+  
+  &:hover
+  {
+    color: #000;
+    text-decoration: underline;
+  }
+}
