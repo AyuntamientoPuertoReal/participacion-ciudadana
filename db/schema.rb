@@ -14,6 +14,24 @@ ActiveRecord::Schema.define(version: 2019_11_06_082612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "apicasso_keys", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.json "scope"
+    t.integer "scope_type"
+    t.json "request_limiting"
+    t.text "token"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "apicasso_requests", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.text "api_key_id"
+    t.json "object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contents", force: :cascade do |t|
     t.datetime "date", null: false
@@ -31,10 +49,23 @@ ActiveRecord::Schema.define(version: 2019_11_06_082612) do
     t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["base_instance_id"], name: "index_contents_on_base_instance_id"
     t.index ["previous_instance_id"], name: "index_contents_on_previous_instance_id"
+    t.index ["slug"], name: "index_contents_on_slug", unique: true
     t.index ["staff_id"], name: "index_contents_on_staff_id"
     t.index ["web_section_id"], name: "index_contents_on_web_section_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "incidence_trackings", force: :cascade do |t|
@@ -124,11 +155,17 @@ ActiveRecord::Schema.define(version: 2019_11_06_082612) do
 
   create_table "staffs", force: :cascade do |t|
     t.string "username", null: false
-    t.string "password", null: false
-    t.boolean "can_publish", null: false
+    t.boolean "can_publish", default: false, null: false
     t.string "full_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_staffs_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
 
   create_table "web_sections", force: :cascade do |t|

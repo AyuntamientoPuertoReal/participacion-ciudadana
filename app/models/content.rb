@@ -1,4 +1,6 @@
 class Content < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
   belongs_to :staff
   belongs_to :base_instance, class_name: "Content", optional: true
   belongs_to :previous_instance, class_name: "Content", optional: true
