@@ -17,7 +17,7 @@ class Staff < ApplicationRecord
            dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :pu_staff
-  has_many :processing_units, through: :pu_staff
+  has_many :processing_units, through: :pu_staff, class_name: 'PuStaff'
   has_many :incidence_tracking
   has_many :content
 
