@@ -28,3 +28,9 @@
 
 # RubyMine project files
 .idea
+
+# Unicorn folder
+/shared/*
+
+# Yarn
+yarn.lock
