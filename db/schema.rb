@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_082050) do
+ActiveRecord::Schema.define(version: 2019_11_14_122753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,30 +31,6 @@ ActiveRecord::Schema.define(version: 2019_11_07_082050) do
     t.json "object"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "contents", force: :cascade do |t|
-    t.datetime "date", null: false
-    t.bigint "staff_id", null: false
-    t.string "staff_processing_units", null: false
-    t.string "type_of_action", null: false
-    t.boolean "is_active", null: false
-    t.bigint "base_instance_id"
-    t.bigint "previous_instance_id"
-    t.string "title"
-    t.string "description"
-    t.text "body"
-    t.string "image_url"
-    t.bigint "web_section_id"
-    t.boolean "published"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.index ["base_instance_id"], name: "index_contents_on_base_instance_id"
-    t.index ["previous_instance_id"], name: "index_contents_on_previous_instance_id"
-    t.index ["slug"], name: "index_contents_on_slug", unique: true
-    t.index ["staff_id"], name: "index_contents_on_staff_id"
-    t.index ["web_section_id"], name: "index_contents_on_web_section_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -113,6 +89,24 @@ ActiveRecord::Schema.define(version: 2019_11_07_082050) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "news", force: :cascade do |t|
+    t.datetime "date_of_creation", null: false
+    t.bigint "author_id", null: false
+    t.string "title"
+    t.string "description"
+    t.text "body"
+    t.string "image_url"
+    t.boolean "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.datetime "date_of_last_edit"
+    t.bigint "last_editor_id"
+    t.index ["author_id"], name: "index_news_on_author_id"
+    t.index ["last_editor_id"], name: "index_news_on_last_editor_id"
+    t.index ["slug"], name: "index_news_on_slug", unique: true
+  end
+
   create_table "phone_identifiers", force: :cascade do |t|
     t.string "phone_identifier", null: false
     t.datetime "created_at", null: false
@@ -165,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_11_07_082050) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "is_web_editor", default: false
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
@@ -176,12 +171,12 @@ ActiveRecord::Schema.define(version: 2019_11_07_082050) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "contents", "staffs"
-  add_foreign_key "contents", "web_sections"
   add_foreign_key "incidence_trackings", "incidences"
   add_foreign_key "incidence_trackings", "staffs"
   add_foreign_key "incidences", "incidence_types"
   add_foreign_key "incidences", "phone_identifiers"
+  add_foreign_key "news", "staffs", column: "author_id"
+  add_foreign_key "news", "staffs", column: "last_editor_id"
   add_foreign_key "pu_its", "incidence_types"
   add_foreign_key "pu_its", "processing_units"
   add_foreign_key "pu_staffs", "processing_units"
