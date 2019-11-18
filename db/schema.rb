@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_122753) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
   end
 
   create_table "incidences", force: :cascade do |t|
