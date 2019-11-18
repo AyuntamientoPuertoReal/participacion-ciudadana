@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Tipos de incidencias
+IncidenceType.create(code: "PAR", name: "Parques y Jardines", description: "Incidencias sobre Parques y Jardines", order: 1)
+IncidenceType.create(code: "INF", name: "Infraestructura", description: "Incidencias sobre Infraestructura", order: 2)
+IncidenceType.create(code: "LIM", name: "Limpieza", description: "Incidencias sobre Limpieza", order: 3)
+IncidenceType.create(code: "ILU", name: "Iluminación", description: "Incidencias sobre Iluminación", order: 4)
+IncidenceType.create(code: "RES", name: "Recogida de Residuos", description: "Incidencias sobre la Recogida de Residuos", order: 5)
+IncidenceType.create(code: "AMB", name: "Medio Ambiente", description: "Incidencias sobre Medioambiente", order: 6)
+IncidenceType.create(code: "SAN", name: "Saneamiento", description: "Incidencias sobre Saneamiento", order: 7)
+IncidenceType.create(code: "GEN", name: "General", description: "Incidencias Generales", order: 8)
