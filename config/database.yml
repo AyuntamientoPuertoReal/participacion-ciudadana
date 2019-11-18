@@ -82,5 +82,3 @@ test:
 production:
   <<: *default
   database: ParticipacionCiudadana_production
-  username: ParticipacionCiudadana
-  password: <%= ENV['PARTICIPACIONCIUDADANA_DATABASE_PASSWORD'] %>
