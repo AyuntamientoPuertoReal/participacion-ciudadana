@@ -6,6 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Token de Apicasso
+Apicasso::Key.create(scope:
+                         { read:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true,
+                                   interest_point: true,
+                                   incidence_type: true,
+                                   incidence_tracking: true,
+                                   news: true
+                               },
+                           create:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true
+                               }
+                         })
+
 # Tipos de incidencias
 IncidenceType.create(code: "PAR", name: "Parques y Jardines", description: "Incidencias sobre Parques y Jardines", order: 1)
 IncidenceType.create(code: "INF", name: "Infraestructura", description: "Incidencias sobre Infraestructura", order: 2)
