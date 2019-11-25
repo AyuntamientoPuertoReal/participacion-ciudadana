@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Apicasso::Key.create(scope:
+                         { read:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true,
+                                   interest_point: true,
+                                   incidence_type: true,
+                                   incidence_tracking: true,
+                                   news: true
+                               },
+                           create:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true
+                               }
+                         })

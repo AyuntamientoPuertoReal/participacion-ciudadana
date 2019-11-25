@@ -1,23 +1,8 @@
 class ApiController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionController::Serialization
+  protect_from_forgery unless: -> { request.format.json? }
   prepend_before_action :restrict_access
-
-  Apicasso::Key.create(scope:
-                           { read:
-                                 {
-                                   incidence: true,
-                                   phone_identifier: true,
-                                   interest_point: true,
-                                   incidence_type: true,
-                                   incidence_tracking: true
-                                 },
-                             create:
-                                 {
-                                   incidence: true,
-                                   phone_identifier: true
-                                 }
-                           })
-
 
   def show_incidences_historical
     render json: {entries: Incidence.find_by_sql(["SELECT inc.id, inc.image_url, inc.description, inc.latitude, inc.longitude, inc.created_at, it.status, ityp.name
@@ -36,7 +21,19 @@ class ApiController < ApplicationController
                                                    AND inc.phone_identifier_id = ?", PhoneIdentifier.find(params[:id]).id])}
   end
 
+  def post_incidences
+    @incidence = Incidence.new(incidence_params)
+    @incidence.save
+    @incidence.image_url = rails_blob_path(@incidence.picture, only_path: true) if @incidence.picture.attached?
+    @incidence.save
+    render json: @incidence
+  end
+
   private
+
+  def incidence_params
+    params.permit(:description, :picture, :phone_identifier_id, :latitude, :longitude, :incidence_type_id)
+  end
 
   def restrict_access
     authenticate_or_request_with_http_token do |token, _options|
@@ -45,4 +42,3 @@ class ApiController < ApplicationController
   end
 
 end
-
