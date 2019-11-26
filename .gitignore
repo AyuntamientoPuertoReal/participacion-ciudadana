@@ -25,3 +25,12 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# RubyMine project files
+.idea
+
+# Unicorn folder
+/shared/*
+
+# Yarn
+yarn.lock

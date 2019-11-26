@@ -1,0 +1,71 @@
+<div class="grid-container">
+  <div class="grid-x grid-margin-x small-up-3 medium-up-4 large-up-6">
+    <div class="cell">
+      <label>
+        Código
+        <input type="text" placeholder="Código">
+      </label>
+    </div>
+
+    <div class="cell">
+      <label>
+        Nombre Completo
+        <input type="text" placeholder="Nombre Completo">
+      </label>
+    </div>
+
+    <div class="cell">
+      <label>
+        Unidad Tramitadora
+        <input type="text" placeholder="Unidad Tramitadora">
+      </label>
+    </div>
+
+    <div class="cell large-offset-4">
+      <a class="button success" href="#">Nuevo Usuario</a>
+    </div>
+  </div>
+
+  <div class="grid-x grid-margin-x">
+    <table class="hover">
+      <thead>
+        <tr>
+          <th width="100">Código</th>
+          <th width="100">Contraseña</th>
+          <th width="150">Nombre Completo</th>
+          <th width="50">Publicar</th>
+          <th width="50">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PAR</td>
+          <td>12345678</td>
+          <td>Nuria Participación</td>
+          <td>Sí</td>
+          <td>
+            <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-2">
+              <div class="cell">
+                <a class="button primary" href="#">Detalles</a>
+              </div>
+              <div class="cell">
+                <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
+                <div class="small reveal" id="ModalEliminar1" data-reveal>
+                  <h3 class="text-center">¿Estás seguro de querer eliminar este usuario?</h3>
+                  <div class="grid-x">
+                    <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                      <a class="button success" type="button" data-close>Aceptar</a>
+                    </div>
+                    <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                      <a class="button alert" type="button" data-close>Cancelar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

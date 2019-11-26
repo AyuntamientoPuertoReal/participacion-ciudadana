@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  image_url: MyString
+  phone_identifier: one
+  latitude: MyString
+  longitude: MyString
+  incidence_type: one
+
+two:
+  description: MyText
+  image_url: MyString
+  phone_identifier: two
+  latitude: MyString
+  longitude: MyString
+  incidence_type: two
