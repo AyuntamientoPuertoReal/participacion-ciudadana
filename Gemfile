@@ -46,6 +46,7 @@ gem 'unicorn'
 
 # Api
 gem 'apicasso'
+gem 'active_model_serializers'
 
 # Slugs
 gem 'friendly_id', '~> 5.2.4'
