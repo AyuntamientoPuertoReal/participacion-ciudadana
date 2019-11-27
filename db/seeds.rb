@@ -6,6 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Creación del token de Apicasso.
+print "Creación del token de Apicasso... "
+Apicasso::Key.create(scope:
+                         { read:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true,
+                                   interest_point: true,
+                                   incidence_type: true,
+                                   incidence_tracking: true,
+                                   news: true
+                               },
+                           create:
+                               {
+                                   incidence: true,
+                                   phone_identifier: true
+                               }
+                         })
+puts "✔"
+
 # Creación del usuario administrador. ¡Cambiar email y contraseña lo primero de todo!
 unless Staff.any?
   print "Creando usuario administrador... "
