@@ -44,6 +44,16 @@ gem 'autoprefixer-rails'
 # Unicorn
 gem 'unicorn'
 
+# Api
+gem 'apicasso'
+gem 'active_model_serializers'
+
+# Slugs
+gem 'friendly_id', '~> 5.2.4'
+
+# Autenticación
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -68,7 +78,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'apicasso'
-gem 'friendly_id', '~> 5.2.4'
-gem 'devise'
-gem 'active_model_serializers'
