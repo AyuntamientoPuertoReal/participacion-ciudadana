@@ -1,0 +1,195 @@
+<%= form_for :staff do |f| %>
+<div class="rid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos del Usuario</h3>
+      </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
+    <%= f.label "Nombre Completo" %>
+    <%= f.text_field :full_name %>
+
+    <%= f.label "Codigo" %>
+    <%= f.text_field :username %>
+
+    <%= f.label "Email" %>
+    <%= f.email_field :email %>
+    </div>
+
+    <div class="large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
+        <%= f.label "Contraseña" %>
+        <%= f.password_field :password %>
+
+        <%= f.label "Repetir Contraseña" %>
+        <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
+        <fieldset class="large-5 cell">
+          <legend>Modificar Web</legend>
+          <div class="grid-x">
+                <%= f.radio_button :is_web_editor, 'web_editor', value: true, :checked => staff.is_web_editor %> 
+                <%= f.label 'Si' %>
+          </div>
+          
+          <div class="grid-x">
+                <%= f.radio_button :is_web_editor, 'web_editor', value: false, :checked => staff.is_web_editor %> 
+                <%= f.label 'No' %>
+          </div>
+        </fieldset>
+    </div>
+
+    <div class="large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
+        <fieldset class="large-5 cell">
+          <legend>Publicar</legend>
+          <p><% @staff.can_publish %></p>
+          <div class="grid-x">
+            <% if :can_publish == true %>
+                <%= f.radio_button :can_publish, 'publisher', value: true, :checked => true %> 
+                <%= f.label 'Si' %>
+            <% elsif :can_publish == false %>
+                <%= f.radio_button :can_publish, 'publisher', value: true %> 
+                <%= f.label 'Si' %>
+            <% else %>
+                <%= f.radio_button :can_publish, 'publisher', value: true %> 
+                <%= f.label 'Si' %>
+            <% end %>
+          </div>
+          <div class="grid-x">
+            <% if :can_publish_true == true %>
+                <%= f.radio_button :can_publish, 'publisher', value: false %> 
+                <%= f.label 'No' %>
+            <% elsif :can_publish == false %>
+                <%= f.radio_button :can_publish, 'publisher', value: false, :checked => true %> 
+                <%= f.label 'No' %>
+            <% else %>
+                <%= f.radio_button :can_publish, 'publisher', value: false %> 
+                <%= f.label 'No' %>
+            <% end %>
+          </div>
+        </fieldset>
+    </div>
+  </div>
+</div>
+
+<div class="grid-y">
+  <div class="grid-x">
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Unidad Tramitadoras</h3>
+    </div>
+  </div>
+  <div class="grid-x">
+    <div class="grid-y large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
+      <div class="cell">
+        <label>Disponibles
+          <input type="text" placeholder="Buscar">
+        </label>
+      
+        <table class="hover">
+          <thead>
+            <tr>
+              <th width="25">Seleccionar</th>
+              <th width="75">Unidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+    
+    <div class="large-2 medium-2 small-2">
+      <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
+        <a href="#"><i class="fi-arrow-right"></i></a>
+        <a href="#"><i class="fi-x"></i></a>
+        <a href="#"><i class="fi-arrow-left"></i></a>
+      </div>
+    </div>
+    
+    <div class="grid-y large-2 medium-2 small-2">
+      
+       <div class="cell">
+        <label>Asignadas
+          <input type="text" placeholder="Buscar">
+        </label>
+      
+        <table class="hover">
+          <thead>
+            <tr>
+              <th width="25">Seleccionar</th>
+              <th width="75">Unidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            <tr>
+              <td><input id="ut_dispnible" type="checkbox"/></td>
+              <td>PTC</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+    
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
+</div>
+<% end %>
+
+
+  
+    
+    
+
+
+
+  
