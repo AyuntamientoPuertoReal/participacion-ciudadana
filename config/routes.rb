@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     root to: 'demo#index'
 
     resources :staffs, except: [:show]
+    resources :processing_units, except: [:show]
   # end
 
   get 'api/v1/incidences_historical/:id', to: 'api#show_incidences_historical'
