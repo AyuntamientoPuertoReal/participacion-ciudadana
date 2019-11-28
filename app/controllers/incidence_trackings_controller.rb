@@ -1,5 +1,5 @@
 class IncidenceTrackingsController < ApplicationController
-  before_action :set_incidence_tracking, only: [:show, :edit, :update, :destroy]
+  before_action :set_incidence_tracking, only: [:edit, :update, :destroy]
 
   # GET /incidence_trackings
   # GET /incidence_trackings.json
