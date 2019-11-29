@@ -1,0 +1,17 @@
+<%= form_with(model: incidence_tracking, local: true) do |form| %>
+  <% if incidence_tracking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(incidence_tracking.errors.count, "error") %> prohibited this incidence_tracking from being saved:</h2>
+
+      <ul>
+      <% incidence_tracking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
