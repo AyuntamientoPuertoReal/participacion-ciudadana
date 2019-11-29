@@ -11,11 +11,15 @@ class StaffsController < ApplicationController
 
   # GET /staffs/new
   def new
+    @proc_unit_staff = []
+    @proc_unit_all = ProcessingUnit.all
     @staff = Staff.new
   end
 
   # GET /staffs/1/edit
   def edit
+    @proc_unit_staff = ProcessingUnit.includes(:staff).where("id = "+params[:id]).all
+    @proc_unit_all = ProcessingUnit.includes(:staff).where.not("id = "+params[:id]).all
   end
 
   # POST /staffs
