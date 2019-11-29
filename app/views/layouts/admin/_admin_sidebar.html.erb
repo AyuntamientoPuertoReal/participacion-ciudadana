@@ -1,17 +1,25 @@
 <ul class="vertical menu" data-accordion-menu>
-  <li><a class="admin-sidebar-list-item" href="#"><i class="fi-torso"></i> <span>Gestión de Usuarios</span></a></li>
 
-  <li><a class="admin-sidebar-list-item" href="#"><i class="fi-torsos-all"></i> <span>Gestión de Unidades Tramitadoras</span></a></li>
+  <li>
+    <a class="admin-sidebar-list-item" href="<%= staffs_path %>"><i class="fi-torso"></i> <span>Gestión de Usuarios</span></a>
+  </li>
+
+  <li>
+    <a class="admin-sidebar-list-item" href="<%= processing_units_path %>"><i class="fi-torsos-all"></i> <span>Gestión de Unidades Tramitadoras</span></a>
+  </li>
 
   <li>
     <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span>Gestión de Incidencias</span></a>
     <ul class="menu vertical nested">
-      <li><a class="admin-sidebar-list-item" href="#"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
-      <li><a class="admin-sidebar-list-item" href="#"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
+      <li><a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
+      <li><a class="admin-sidebar-list-item" href="<%= incidences_index_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
     </ul>
   </li>
 
-  <li><a class="admin-sidebar-list-item" href="#"><i class="fi-comment-quotes"></i> <span>Gestión de Noticias</span></a></li>
+  <!-- Parte de la Web de Participacion
+ <li>
+    <a class="admin-sidebar-list-item" href="#"><i class="fi-comment-quotes"></i> <span>Gestión de Noticias</span></a>
+  </li>
 
   <li>
     <a class="admin-sidebar-list-item" href="#"><i class="fi-web"></i> <span>Gestión de la Web</span></a>
@@ -19,5 +27,5 @@
       <li><a class="admin-sidebar-list-item" href="#"><i class="fi-background-color"></i> <span>Personalización de Textos</span></a></li>
       <li><a class="admin-sidebar-list-item" href="#"><i class="fi-photo"></i> <span>Personalización de Imágenes</span></a></li>
     </ul>
-  </li>
+  </li>  -->
 </ul>

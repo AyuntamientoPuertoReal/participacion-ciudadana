@@ -11,11 +11,19 @@ class ProcessingUnitsController < ApplicationController
 
   # GET /processing_units/new
   def new
+    @staff_ut = []
+    @staff_all = Staff.all
+    @incidence_type_ut = []
+    @incidence_type_all = Incidence.all
     @processing_unit = ProcessingUnit.new
   end
 
   # GET /processing_units/1/edit
   def edit
+    @staff_ut = Staff.all
+    @staff_all = Staff.all
+    @incidence_type_ut = Incidence.all
+    @incidence_type_all = Incidence.all
   end
 
   # POST /processing_units
