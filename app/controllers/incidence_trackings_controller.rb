@@ -1,4 +1,6 @@
 class IncidenceTrackingsController < ApplicationController
+  layout "admin/admin_layout"
+
   before_action :set_incidence_tracking, only: [:edit, :update, :destroy]
 
   # GET /incidence_trackings
@@ -9,11 +11,15 @@ class IncidenceTrackingsController < ApplicationController
 
   # GET /incidence_trackings/new
   def new
+    @proc_unit_incType = []
+    @proc_unit_all = ProcessingUnit.all
     @incidence_tracking = IncidenceTracking.new
   end
 
   # GET /incidence_trackings/1/edit
   def edit
+    @proc_unit_staff = ProcessingUnit.includes(:processing_unit).where("id = "+params[:id]).all
+    @proc_unit_all = ProcessingUnit.includes(:processing_unit).where.not("id = "+params[:id]).all
   end
 
   # POST /incidence_trackings

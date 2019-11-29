@@ -1,4 +1,6 @@
 class IncidenceTypesController < ApplicationController
+  layout "admin/admin_layout"
+
   before_action :set_incidence_type, only: [:edit, :update, :destroy]
 
   # GET /incidence_types
@@ -9,11 +11,15 @@ class IncidenceTypesController < ApplicationController
 
   # GET /incidence_types/new
   def new
+    @proc_unit_incType = []
+    @proc_unit_all = ProcessingUnit.all
     @incidence_type = IncidenceType.new
   end
 
   # GET /incidence_types/1/edit
   def edit
+    @proc_unit_incType = ProcessingUnit.includes(:processing_unit).where("id = "+params[:id]).all
+    @proc_unit_all = ProcessingUnit.includes(:processing_unit).where.not("id = "+params[:id]).all
   end
 
   # POST /incidence_types
