@@ -93,7 +93,7 @@ end
 # Noticias de prueba
 unless News.any?
   print "Creando las noticias de prueba... "
-  News.create(title: "Jornadas gratutitas", description: "Nuevas fuentes de financiación para entidades sin ánimo de lucro",
+  News.create(title: "Jornadas gratuitas", description: "Nuevas fuentes de financiación para entidades sin ánimo de lucro",
               body: "<img src='https://i.imgur.com/yiIUH1w.jpg'/><p>El Ayuntamiento de Puerto Real, dentro del programa Andalucía Compromiso Digital, iniciativa de la Consejería de Economía, Conocimiento, Empresas y Universidad, puesta en marcha en el año 2007, organiza para el público en general y en especial para asociaciones y entidades sin ánimo de lucro, la jornada gratuita \"Nuevas fuentes de financiación para entidades sin ánimo de lucro\"...</br></br>Los interesados en inscribirse en estas jornadas gratuitas pueden acudir bien a la Casa de la Juventud, bien a la U.G. Feminismos-LGTBI (Centro de Servicios Sociales, C/ Zambra 4), o llamar a los teléfonos 856 21 33 81 ó 856 21 33 39. La admisión será por orden de llegada y las plazas son limitadas. </p><br />",
               image_url: "https://decide.puertoreal.es/assets/logo_header-b43bade3f054a60247722d7de1023275c70d559375b6efb60d210389ea70c081.png",
               published: true, author: Staff.find(1), date_of_creation: DateTime.now)
