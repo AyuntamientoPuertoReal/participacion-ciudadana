@@ -1,6 +1,5 @@
-<h1>Editing Incidence Type</h1>
+<%= link_to 'Volver', incidence_types_path %>
+<h3>Editando el usuario <%= @incidence_type.name %></h3>
 
 <%= render 'form', incidence_type: @incidence_type %>
 
-<%= link_to 'Show', @incidence_type %> |
-<%= link_to 'Back', incidence_types_path %>

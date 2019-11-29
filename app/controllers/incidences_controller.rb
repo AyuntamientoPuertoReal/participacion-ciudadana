@@ -1,4 +1,6 @@
 class IncidencesController < ApplicationController
+  layout "admin/admin_layout"
+
   before_action :set_incidence, only: [:show]
 
   def index

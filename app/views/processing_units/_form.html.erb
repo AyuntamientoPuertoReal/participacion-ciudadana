@@ -1,3 +1,4 @@
+<%= form_for :processing_unit do |f| %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
@@ -6,20 +7,19 @@
   </div>
   <div class="grid-x">
     <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-      <label>Código
-        <input type="text">
-      </label>
+    <%= f.label "Codigo" %>
+    <%= f.text_field :code %>
     </div>
   </div>
 
   <div class="grid-x">
     <div class="large-8 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-      <label>Descripción
-        <textarea></textarea>
-      </label>
+      <%= f.label "Descripcion" %>
+      <%= f.text_area :description %>
     </div>
   </div>
 </div>
+
 
 <div class="grid-y">
   <div class="grid-x">
@@ -44,31 +44,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-
+          <% @staff_all.each do |staff| %>
+            <tr id="ut_disponible_<%= staff.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= staff.username %></td>
+            <tr>
+          <% end %>
           </tbody>
         </table>
       </div>
@@ -98,27 +79,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-          <tr>
-            <td><input id="ut_dispnible" type="checkbox"/></td>
-            <td>PTC</td>
-          </tr>
-
+          <% @staff_ut.each do |staff| %>
+            <tr id="ut_asignada_<%= staff.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= staff.username %></td>
+            <tr>
+          <% end %>
           </tbody>
         </table>
       </div>
@@ -149,31 +115,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-
+            <% @incidence_type_all.each do |incidence_type| %>
+              <tr id="incTy_disponible_<%= incidence_type.id %>">
+                <td><input type="checkbox"/></td>
+                <td><%= incidence_type.code %></td>
+              <tr>
+            <% end %>
             </tbody>
           </table>
         </div>
@@ -203,27 +150,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-
+            <% @incidence_type_ut.each do |incidence_type| %>
+              <tr id="incTy_asignado_<%= incidence_type.id %>">
+                <td><input type="checkbox"/></td>
+                <td><%= incidence_type.code %></td>
+              <tr>
+            <% end %>
             </tbody>
           </table>
         </div>
@@ -236,3 +168,4 @@
     </div>
   </div>
 </div>
+<% end %>
