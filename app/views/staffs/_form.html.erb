@@ -6,6 +6,7 @@
       </div>
   </div>
 
+  <p><% :full_name %></p>
   <div class="grid-x">
     <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
     <%= f.label "Nombre Completo" %>
@@ -32,12 +33,12 @@
         <fieldset class="large-5 cell">
           <legend>Modificar Web</legend>
           <div class="grid-x">
-                <%= f.radio_button :is_web_editor, 'web_editor', value: true, :checked => staff.is_web_editor %> 
+                <%= f.radio_button :is_web_editor, true %> 
                 <%= f.label 'Si' %>
           </div>
           
           <div class="grid-x">
-                <%= f.radio_button :is_web_editor, 'web_editor', value: false, :checked => staff.is_web_editor %> 
+                <%= f.radio_button :is_web_editor, false %> 
                 <%= f.label 'No' %>
           </div>
         </fieldset>
@@ -46,30 +47,14 @@
     <div class="large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
         <fieldset class="large-5 cell">
           <legend>Publicar</legend>
-          <p><% @staff.can_publish %></p>
           <div class="grid-x">
-            <% if :can_publish == true %>
-                <%= f.radio_button :can_publish, 'publisher', value: true, :checked => true %> 
-                <%= f.label 'Si' %>
-            <% elsif :can_publish == false %>
-                <%= f.radio_button :can_publish, 'publisher', value: true %> 
-                <%= f.label 'Si' %>
-            <% else %>
-                <%= f.radio_button :can_publish, 'publisher', value: true %> 
-                <%= f.label 'Si' %>
-            <% end %>
+            <%= f.radio_button :can_publish, true %> 
+            <%= f.label 'Si' %>
           </div>
+
           <div class="grid-x">
-            <% if :can_publish_true == true %>
-                <%= f.radio_button :can_publish, 'publisher', value: false %> 
-                <%= f.label 'No' %>
-            <% elsif :can_publish == false %>
-                <%= f.radio_button :can_publish, 'publisher', value: false, :checked => true %> 
-                <%= f.label 'No' %>
-            <% else %>
-                <%= f.radio_button :can_publish, 'publisher', value: false %> 
-                <%= f.label 'No' %>
-            <% end %>
+            <%= f.radio_button :can_publish, false %> 
+            <%= f.label 'No' %>
           </div>
         </fieldset>
     </div>
@@ -97,31 +82,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
+          <% @proc_unit_all.each do |proc_unit| %>
+            <tr id="procUnit_<%= proc_unit.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= proc_unit.code %></td>
             </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            
+          <% end %>
           </tbody>
         </table>
       </div>
@@ -151,26 +117,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
+          <% @proc_unit_staff.each do |proc_unit| %>
+            <tr id="procUnit_<%= proc_unit.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= proc_unit.code %></td>
             </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
-            <tr>
-              <td><input id="ut_dispnible" type="checkbox"/></td>
-              <td>PTC</td>
-            </tr>
+          <% end %>
             
           </tbody>
         </table>
