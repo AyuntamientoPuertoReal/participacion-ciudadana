@@ -5,7 +5,7 @@ class Staff < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :pu_staff
   has_many :processing_units, through: :pu_staff, class_name: 'PuStaff'
   has_many :incidence_tracking
