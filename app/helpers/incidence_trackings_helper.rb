@@ -1,0 +1,2 @@
+module IncidenceTrackingsHelper
+end
