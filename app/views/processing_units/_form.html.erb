@@ -1,4 +1,4 @@
-<%= form_for :processing_unit do |f| %>
+<%= form_with(model: @processing_unit, local: true) do |f| %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
@@ -164,7 +164,7 @@
     </div>
 
     <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
-      <a class="button primary" href="#">Guardar</a>
+      <%= f.submit "Guardar", class: "button primary" %>
     </div>
   </div>
 </div>
