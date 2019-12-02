@@ -33,7 +33,7 @@ class ProcessingUnitsController < ApplicationController
 
     respond_to do |format|
       if @processing_unit.save
-        format.html { redirect_to processing_units_url, notice: 'Processing unit was successfully created.' }
+        format.html { redirect_to processing_units_path, notice: 'Processing unit was successfully created.' }
         format.json { render :index, status: :created, location: @processing_unit }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class ProcessingUnitsController < ApplicationController
   def update
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
-        format.html { redirect_to processing_units_url, notice: 'Processing unit was successfully updated.' }
+        format.html { redirect_to processing_units_path, notice: 'Processing unit was successfully updated.' }
         format.json { render :index, status: :ok, location: @processing_unit }
       else
         format.html { render :edit }
@@ -74,6 +74,6 @@ class ProcessingUnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
-      params.fetch(:processing_unit, {})
+      params.require(:processing_unit).permit(:code, :description)
     end
 end
