@@ -18,8 +18,8 @@ class IncidenceTypesController < ApplicationController
 
   # GET /incidence_types/1/edit
   def edit
-    @proc_unit_incType = ProcessingUnit.includes(:processing_unit).where("id = "+params[:id]).all
-    @proc_unit_all = ProcessingUnit.includes(:processing_unit).where.not("id = "+params[:id]).all
+    @proc_unit_incType = ProcessingUnit.includes(:incidence_type).where("id = "+params[:id]).all
+    @proc_unit_all = ProcessingUnit.includes(:incidence_type).where.not("id = "+params[:id]).all
   end
 
   # POST /incidence_types
@@ -29,7 +29,7 @@ class IncidenceTypesController < ApplicationController
 
     respond_to do |format|
       if @incidence_type.save
-        format.html { redirect_to incidence_types_url, notice: 'Incidence type was successfully created.' }
+        format.html { redirect_to incidence_types_path, notice: 'Incidence type was successfully created.' }
         format.json { render :index, status: :created, location: @incidence_type }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class IncidenceTypesController < ApplicationController
   def update
     respond_to do |format|
       if @incidence_type.update(incidence_type_params)
-        format.html { redirect_to incidence_types_url, notice: 'Incidence type was successfully updated.' }
+        format.html { redirect_to incidence_types_path, notice: 'Incidence type was successfully updated.' }
         format.json { render :index, status: :ok, location: @incidence_type }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class IncidenceTypesController < ApplicationController
   def destroy
     @incidence_type.destroy
     respond_to do |format|
-      format.html { redirect_to incidence_types_url, notice: 'Incidence type was successfully destroyed.' }
+      format.html { redirect_to incidence_types_path, notice: 'Incidence type was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,6 @@ class IncidenceTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incidence_type_params
-      params.fetch(:incidence_type, {})
+      params.require(:incidence_type).permit(:name, :code, :description)
     end
 end
