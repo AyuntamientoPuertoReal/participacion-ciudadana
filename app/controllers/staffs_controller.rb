@@ -58,6 +58,7 @@ class StaffsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to staffs_path, notice: 'Staff was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

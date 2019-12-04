@@ -1,0 +1,10 @@
+var actual_id = <%= @incidence_type.id %>;
+
+var actual_order=$("tr#"+actual_id).attr("name");
+var next_id=$("[name='"+(parseInt(actual_order)+1)+"']").attr("id");
+
+if( actual_order < <%= @maximum %>) {
+    $("tr#" + actual_id).insertAfter("tr#"+next_id);
+    $("tr#" + actual_id).attr("name",parseInt(actual_order) + 1);
+    $("tr#" + next_id).attr("name",parseInt(actual_order));
+}
