@@ -24,7 +24,7 @@ class IncidenceTrackingsController < ApplicationController
     #TODO
     # Necesitamos que esto coja el Nombre del Staff que lo hizo
     for incidence in @incidence_tracking_messages do
-      @incidence_tracking_messages += Staff.where(id: @incidence_tracking_messages.staff_id)
+      @incidence_tracking_messages += Staff.take(@incidence_tracking_messages.staff_id).select(:full_name)
     end
   end
 
