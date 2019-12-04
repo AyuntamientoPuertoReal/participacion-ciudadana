@@ -11,11 +11,22 @@ class ProcessingUnitsController < ApplicationController
 
   # GET /processing_units/new
   def new
+    @staff_ut = []
+    @staff_all = Staff.all
+    @incidence_type_ut = []
+    @incidence_type_all = IncidenceType.all
     @processing_unit = ProcessingUnit.new
   end
 
   # GET /processing_units/1/edit
   def edit
+    staff_all_absolute = Staff.all
+    @staff_ut = Staff.joins(:processing_units).select(:id, :username).distinct
+    @staff_all = staff_all_absolute - @staff_ut
+
+    incidence_type_all_absolute = IncidenceType.all
+    @incidence_type_ut = IncidenceType.joins(:processing_unit).select(:id, :code).distinct
+    @incidence_type_all = incidence_type_all_absolute - @incidence_type_ut
   end
 
   # POST /processing_units
@@ -25,7 +36,7 @@ class ProcessingUnitsController < ApplicationController
 
     respond_to do |format|
       if @processing_unit.save
-        format.html { redirect_to processing_units_url, notice: 'Processing unit was successfully created.' }
+        format.html { redirect_to processing_units_path, notice: 'Processing unit was successfully created.' }
         format.json { render :index, status: :created, location: @processing_unit }
       else
         format.html { render :new }
@@ -39,7 +50,7 @@ class ProcessingUnitsController < ApplicationController
   def update
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
-        format.html { redirect_to processing_units_url, notice: 'Processing unit was successfully updated.' }
+        format.html { redirect_to processing_units_path, notice: 'Processing unit was successfully updated.' }
         format.json { render :index, status: :ok, location: @processing_unit }
       else
         format.html { render :edit }
@@ -66,6 +77,6 @@ class ProcessingUnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
-      params.fetch(:processing_unit, {})
+      params.require(:processing_unit).permit(:code, :description)
     end
 end

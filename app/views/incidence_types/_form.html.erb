@@ -1,0 +1,103 @@
+<%= form_with(model: @incidence_type, local: true) do |f| %>
+<div class="grid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos del tipo de Incidencia</h3>
+      </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Nombre" %>
+      <%= f.text_field :name %>
+    </div>
+    
+    <div class="large-1 medium-1 small-1 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Codigo" %>
+      <%= f.text_field :code %>
+    </div>
+  </div>  
+  
+  <div class="grid-x">
+    <div class="large-8 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Descripcion" %>
+      <%= f.text_area :description %>
+    </div>
+  </div>
+</div>
+
+<div class="grid-y">
+  <div class="grid-x">
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Unidad Gestoras</h3>
+    </div>
+  </div>
+  <div class="grid-x">
+    <div class="grid-y large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
+      <div class="cell">
+        <label>Disponibles
+          <input type="text" placeholder="Buscar">
+        </label>
+      
+        <table id="procUnit_table_disponible" class="hover">
+          <thead>
+            <tr>
+              <th width="25">Seleccionar</th>
+              <th width="75">Unidad</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @proc_unit_all.each do |proc_unit| %>
+            <tr id="procUnit_disponible_<%= proc_unit.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= proc_unit.code %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+    
+    <div class="large-2 medium-2 small-2">
+      <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
+        <a href="#"><i class="fi-arrow-right"></i></a>
+        <a href="#"><i class="fi-x"></i></a>
+        <a href="#"><i class="fi-arrow-left"></i></a>
+      </div>
+    </div>
+    
+    <div class="grid-y large-2 medium-2 small-2">
+      
+       <div class="cell">
+        <label>Asignadas
+          <input type="text" placeholder="Buscar">
+        </label>
+      
+        <table id="procUnit_table_asignada" class="hover">
+          <thead>
+            <tr>
+              <th width="25">Seleccionar</th>
+              <th width="75">Unidad</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @proc_unit_incType.each do |proc_unit| %>
+            <tr id="procUnit_asignada_<%= proc_unit.id %>">
+              <td><input type="checkbox"/></td>
+              <td><%= proc_unit.code %></td>
+            </tr>
+          <% end %>
+            
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+    
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
+</div>
+<% end %>
