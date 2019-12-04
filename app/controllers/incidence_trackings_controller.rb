@@ -18,8 +18,14 @@ class IncidenceTrackingsController < ApplicationController
 
   # GET /incidence_trackings/1/edit
   def edit
-    @proc_unit_staff = ProcessingUnit.includes(:processing_unit).where("id = "+params[:id]).all
-    @proc_unit_all = ProcessingUnit.includes(:processing_unit).where.not("id = "+params[:id]).all
+    @incidence_tracking_messages = IncidenceTracking.where(incidece_id: params[:id]).select(:id, :staff_id, :status, :message, :date)
+
+    # No se si funciona
+    #TODO
+    # Necesitamos que esto coja el Nombre del Staff que lo hizo
+    for incidence in @incidence_tracking_messages do
+      @incidence_tracking_messages += Staff.where(id: @incidence_tracking_messages.staff_id)
+    end
   end
 
   # POST /incidence_trackings
