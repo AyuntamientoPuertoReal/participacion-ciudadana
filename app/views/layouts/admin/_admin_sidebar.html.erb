@@ -12,7 +12,9 @@
     <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span>Gestión de Incidencias</span></a>
     <ul class="menu vertical nested">
       <li><a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
-      <li><a class="admin-sidebar-list-item" href="<%= incidences_index_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
+      <% if can? :read, Incidence  %>
+        <li><a class="admin-sidebar-list-item" href="<%= incidences_index_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
+      <% end %>
     </ul>
   </li>
 
