@@ -18,8 +18,9 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/edit
   def edit
-    @proc_unit_staff = ProcessingUnit.includes(:staff).where("id = "+params[:id]).all
-    @proc_unit_all = ProcessingUnit.includes(:staff).where.not("id = "+params[:id]).all
+    proc_unit_all_absolute = ProcessingUnit.all
+    @proc_unit_staff = ProcessingUnit.joins(:staff).select(:id, :code).distinct
+    @proc_unit_all = proc_unit_all_absolute - @proc_unit_staff
   end
 
   # POST /staffs
