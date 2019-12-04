@@ -21,7 +21,7 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units/1/edit
   def edit
     staff_all_absolute = Staff.all
-    @staff_ut = Staff.joins(:staff).select(:id, :username).distinct
+    @staff_ut = Staff.joins(:processing_units).select(:id, :username).distinct
     @staff_all = staff_all_absolute - @staff_ut
 
     incidence_type_all_absolute = IncidenceType.all
