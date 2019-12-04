@@ -20,11 +20,12 @@ class IncidenceTrackingsController < ApplicationController
   def edit
     @incidence_tracking_messages = IncidenceTracking.where(incidece_id: params[:id]).select(:id, :staff_id, :status, :message, :date)
 
+
     # No se si funciona
     #TODO
     # Necesitamos que esto coja el Nombre del Staff que lo hizo
     for incidence in @incidence_tracking_messages do
-      @incidence_tracking_messages += Staff.take(@incidence_tracking_messages.staff_id).select(:full_name)
+      @incidence_tracking_messages[incidence] += Staff.where(id: @incidence_tracking_messages.staff_id).select(:id, :full_name)
     end
   end
 
