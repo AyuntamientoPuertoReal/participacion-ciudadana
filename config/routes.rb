@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :processing_units, except: [:show]
     resources :incidence_trackings, except: [:show]
     resources :incidence_types, except: [:show]
+    get 'incrementorder/:id', to: 'incidence_types#increment_order', as: 'increment_order'
+    get 'decrementorder/:id', to: 'incidence_types#decrement_order', as: 'decrement_order'
     get 'incidences/index'
     get 'incidences/show'
   # end

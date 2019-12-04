@@ -1,12 +1,12 @@
 class IncidenceTypesController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_incidence_type, only: [:edit, :update, :destroy]
+  before_action :set_incidence_type, only: [:edit, :update, :destroy, :increment_order, :decrement_order]
 
   # GET /incidence_types
   # GET /incidence_types.json
   def index
-    @incidence_types = IncidenceType.all
+    @incidence_types = IncidenceType.all.order(:order)
   end
 
   # GET /incidence_types/new
@@ -60,7 +60,30 @@ class IncidenceTypesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to incidence_types_path, notice: 'Incidence type was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
+  end
+
+  def increment_order
+    @minimum = IncidenceType.minimum(:order).to_i
+    actual =  @incidence_type.order
+    if actual.to_i > @minimum
+      @next_it = IncidenceType.where(order: actual - 1).take!
+      @incidence_type.decrement!(:order)
+      @next_it.increment!(:order)
+    end
+    respond_to :js
+  end
+
+  def decrement_order
+    @maximum = IncidenceType.maximum(:order).to_i
+    actual = @incidence_type.order
+    if actual.to_i < @maximum
+      @previous_it = IncidenceType.where(order: actual + 1).take!
+      @incidence_type.increment!(:order)
+      @previous_it.decrement!(:order)
+    end
+    respond_to :js
   end
 
   private
