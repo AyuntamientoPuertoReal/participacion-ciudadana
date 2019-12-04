@@ -2,6 +2,7 @@ class StaffsController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_staff, only: [:edit, :update, :destroy]
+  before_action :set_processing_units, only: [:edit, :update]
 
   # GET /staffs
   # GET /staffs.json
@@ -18,9 +19,6 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/edit
   def edit
-    proc_unit_all_absolute = ProcessingUnit.all
-    @proc_unit_staff = ProcessingUnit.joins(:staff).select(:id, :code).distinct
-    @proc_unit_all = proc_unit_all_absolute - @proc_unit_staff
   end
 
   # POST /staffs
@@ -72,5 +70,10 @@ class StaffsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
       params.require(:staff).permit(:full_name, :username, :email, :password, :password_confirmation, :is_web_editor, :can_publish, :description)
+    end
+
+    def set_processing_units
+      @proc_unit_staff = ProcessingUnit.joins(:staff).select(:id, :code)
+      @proc_unit_all = ProcessingUnit.left_outer_joins(:staff).select(:id, :code)
     end
 end
