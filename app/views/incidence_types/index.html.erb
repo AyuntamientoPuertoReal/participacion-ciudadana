@@ -39,11 +39,11 @@
       </thead>
       <tbody>
       <% @incidence_types.each do |incidence_type| %>
-        <tr id="<%= incidence_type.order %>" name="incidenceTypes_<%= incidence_type.id %>">
+        <tr id="<%= incidence_type.id %>" name="<%= incidence_type.order %>">
           <td>
             <div class="grid-y grid-margin-y">
-              <a href="#"><i class="fi-arrow-up cell"></i></a>
-              <a href="#"><i class="fi-arrow-down cell"></i></a>
+              <a href="/incrementorder/<%= incidence_type.id %>" data-remote="true"><i class="fi-arrow-up cell" ></i></a>
+              <a href="/decrementorder/<%= incidence_type.id %>" data-remote="true"><i class="fi-arrow-down cell" ></i></a>
             </div>
           </td>
           <td><%= incidence_type.code %></td>
