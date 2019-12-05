@@ -2,6 +2,10 @@
   <div class="row back-link-row">
     <div class="large-12 columns">
       <%= link_to "Volver a Puerto Real ― Participa", '#', class: 'back-link' %>
+      <% if staff_signed_in? %>
+        <span class="back-link">|</span>
+        <%= link_to "Cerrar Sesión (#{current_staff.username})", destroy_staff_session_path, method: :delete, class: 'back-link' %>
+      <% end %>
     </div>
   </div>
   <div class="row admin-home-row">

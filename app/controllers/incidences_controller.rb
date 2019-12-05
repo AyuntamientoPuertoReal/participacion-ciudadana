@@ -2,6 +2,7 @@ class IncidencesController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_incidence, only: [:show]
+  load_and_authorize_resource
 
   def index
     @incidences = Incidence.all

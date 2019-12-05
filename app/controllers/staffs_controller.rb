@@ -3,6 +3,7 @@ class StaffsController < ApplicationController
 
   before_action :set_staff, only: [:edit, :update, :destroy]
   before_action :set_processing_units, only: [:edit, :update]
+  load_and_authorize_resource
 
   # GET /staffs
   # GET /staffs.json
@@ -61,6 +62,7 @@ class StaffsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to staffs_path, notice: 'Staff was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
