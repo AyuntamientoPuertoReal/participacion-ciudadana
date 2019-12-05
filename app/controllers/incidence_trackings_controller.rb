@@ -24,9 +24,10 @@ class IncidenceTrackingsController < ApplicationController
     # No se si funciona
     #TODO
     # Necesitamos que esto coja el Nombre del Staff que lo hizo
-    for incidence in @incidence_tracking_messages do
+    @incidence_tracking_messages.each do | incidence |
       @incidence_tracking_messages[incidence] += Staff.where(id: @incidence_tracking_messages.staff_id).select(:id, :full_name)
     end
+
   end
 
   # POST /incidence_trackings

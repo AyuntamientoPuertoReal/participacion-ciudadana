@@ -19,7 +19,7 @@ class IncidenceTypesController < ApplicationController
   # GET /incidence_types/1/edit
   def edit
     proc_unit_all_absolute = ProcessingUnit.all
-    @proc_unit_incType = ProcessingUnit.joins(:incidence_type).select(:id, :code).distinct
+    @proc_unit_incType = ProcessingUnit.joins(:incidence_type).where(pu_its: { processing_unit_id: params[:id] }).select(:id, :code).distinct
     @proc_unit_all = proc_unit_all_absolute - @proc_unit_incType
   end
 

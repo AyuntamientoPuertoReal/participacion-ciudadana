@@ -19,6 +19,9 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/edit
   def edit
+    processing_unit_all_absolute = Staff.all
+    @processing_unit_ut = Staff.joins(:processing_unit).where(pu_staffs: { staff_id: params[:id] }).select(:id, :code).distinct
+    @processing_unit_all = processing_unit_all_absolute - @processing_unit_ut
   end
 
   # POST /staffs
