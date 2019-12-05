@@ -28,11 +28,28 @@ unless Apicasso::Key.exists?
   puts "✔"
 end
 
+# Creación de los roles administrativos.
+unless Role.any?
+  print "Creando roles... "
+  Role.create(name: "Administrador")
+  Role.create(name: "Supervisor")
+  puts "✔"
+end
+
 # Creación del usuario administrador. ¡Cambiar email y contraseña lo primero de todo!
 unless Staff.any?
   print "Creando usuario administrador... "
   admin = Staff.new(username: "administrador", email: "administrador@participacionciudadana.com", password: "12345678", password_confirmation: "12345678", full_name: "Administración Participación Ciudadana",
                     can_publish: true, is_web_editor: true)
+  admin.save!
+  puts "✔"
+end
+
+# Asignando al administrador su rol.
+admin = Staff.find(1)
+if admin.role.blank?
+  print "Asignando al administrador su rol correspondiente... "
+  admin.role = Role.find(1)
   admin.save!
   puts "✔"
 end

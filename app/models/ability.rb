@@ -6,6 +6,20 @@ class Ability
     if user.present?
       if user.processing_units.any?
         can :read, Incidence
+        can :manage, IncidenceTracking
+      end
+
+      if user.role == Role.find(1)
+        can :manage, Staff
+        can :manage, ProcessingUnit
+        can :manage, IncidenceType
+        can :read, Incidence
+        can :manage, IncidenceTracking
+      end
+
+      if user.role == Role.find(2)
+        can :read, Incidence
+        can :manage, IncidenceTracking
       end
     end
 
