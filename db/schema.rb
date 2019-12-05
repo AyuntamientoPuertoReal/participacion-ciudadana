@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_093359) do
+ActiveRecord::Schema.define(version: 2019_12_05_085301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,15 +161,6 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.index ["staff_id"], name: "index_pu_staffs_on_staff_id"
   end
 
-  create_table "pu_ws", force: :cascade do |t|
-    t.bigint "processing_unit_id", null: false
-    t.bigint "web_section_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["processing_unit_id"], name: "index_pu_ws_on_processing_unit_id"
-    t.index ["web_section_id"], name: "index_pu_ws_on_web_section_id"
-  end
-
   create_table "staffs", force: :cascade do |t|
     t.string "username", null: false
     t.boolean "can_publish", default: false, null: false
@@ -186,13 +177,6 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
 
-  create_table "web_sections", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "incidence_trackings", "incidences"
   add_foreign_key "incidence_trackings", "staffs"
@@ -204,6 +188,4 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
   add_foreign_key "pu_its", "processing_units"
   add_foreign_key "pu_staffs", "processing_units"
   add_foreign_key "pu_staffs", "staffs"
-  add_foreign_key "pu_ws", "processing_units"
-  add_foreign_key "pu_ws", "web_sections"
 end
