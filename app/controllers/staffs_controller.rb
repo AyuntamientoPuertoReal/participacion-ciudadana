@@ -3,6 +3,7 @@ class StaffsController < ApplicationController
 
   before_action :set_staff, only: [:edit, :update, :destroy]
   before_action :set_processing_units, only: [:edit, :update]
+  load_and_authorize_resource
 
   # GET /staffs
   # GET /staffs.json

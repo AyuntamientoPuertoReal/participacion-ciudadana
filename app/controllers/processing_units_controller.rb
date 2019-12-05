@@ -2,6 +2,7 @@ class ProcessingUnitsController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_processing_unit, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /processing_units
   # GET /processing_units.json
