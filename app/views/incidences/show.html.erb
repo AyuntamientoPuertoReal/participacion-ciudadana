@@ -1,0 +1,149 @@
+<%= form_with(model: @incidence, local: true) do |f| %>
+<div class="grid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos de la Incidencia</h3>
+      </div>
+          <div class="large-12 medium-12 small-12 text-center">
+  <img class="thumbnail" src="<%= @incidences.image_url %>" alt="Farola Rota">
+      </div>
+  </div>
+  
+  <div class="grid-x">
+    <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+      <h3>Descripcion</h3>
+      <div class="row">
+        <div class="columns">
+          <p><%= @incidences.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="grid-x">
+  <div class="large-2 medium-2 small-10 large-offset-2 medium-offset-2 small-offset-2">
+  <h3>Estado</h3>
+      <div class="row">
+        <div class="columns">
+        <% if @incidence_tracking_status.nil? %>
+            <p style="color: #2EFE2E;">Enviado</p>
+        <% else %>
+          <% if @incidence_tracking_status.status == 2 %>
+            <p style="color: #D2691E;">En Proceso</p>
+          <% elsif @incidence_tracking_status.status == 3 %>
+            <p style="color: #1E90FF;">Finalizado %></p>
+          <% elsif @incidence_tracking_status.status == 4 %>
+            <p style="color: #B90000;">Desestimada</p>
+
+          <% end %>
+        <% end %>
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="large-2 medium-2 small-10 large-offset-2 medium-offset-2 small-offset-2">
+    <h3>Localizacion</h3>
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=<%= @incidences.latitude %>,<%= @incidences.longitude %>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="grid-x grid-margin-x">
+    <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Historial</h3>
+    </div>
+    <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
+      <a class="button success" data-open="ModalCrear">Nuevo estado</a>
+      <%= form_with(url: incidence_trackings_path, metod: :post, local: true) do |f| %>
+        <div class="small reveal" id="ModalCrear" data-reveal>
+          <h3 class="text-center">Nuevo estado</h3>
+          <label>
+            Estado
+            <%= f.select(:status, options_for_select([['Enviado', 1], ['En Proceso', 2], ['Finalizado', 3], ['Desestimado', 4]], 2)) %>
+          </label>
+          <label>
+            Mensaje
+            <%= f.text_area :description %>
+          </label>
+          
+          <div class="grid-x">
+            <div class="cell large-2 medium-2 small-2 large-offset-5 mediun-offset-5 small-offset-5">
+
+            </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
+    <table class="hover">
+      <thead>
+        <tr>
+          <th width="25">Fecha</th>
+          <th width="25">Estado</th>
+          <th width="50">Mensaje</th>
+          <th width="50">Personal</th>
+          <th width="100">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <% @incidence_tracking_incidence.each do |tracking| %>
+            <td><%= @tracking.date %></td>
+            <td style="color: #2EFE2E;"><%= @tracking.status %></td>
+            <td><%= @tracking.description %></td>
+            <td><%= @tracking.staff_id %></td>
+            <td>
+                <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-1">
+                <div class="cell">
+                    <a class="button primary" data-open="ModalModificar1">Modificar</a>
+                    <div class="small reveal" id="ModalModificar1" data-reveal>
+                    <h3 class="text-center">Modificar estado</h3>
+                    <label>
+                        Estado
+                        <select>
+                            <option value="2">En Proceso</option>
+                            <option value="3">Finalizado</option>
+                            <option value="4">Desestimado</option>
+                        </select>
+                    </label>
+                    <label>
+                        Mensaje
+                        <textarea><%= @tracking.description %></textarea>
+                    </label>
+
+                    <div class="grid-x">
+                        <div class="cell large-2 medium-2 small-2 large-offset-5 mediun-offset-5 small-offset-5">
+                            <a class="button success" type="button" data-close>Crear</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
+                    <div class="small reveal" id="ModalEliminar1" data-reveal>
+                        <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+                        <div class="grid-x">
+                        <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                            <a class="button success" type="button" data-close>Aceptar</a>
+                        </div>
+                        
+                        <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                            <a class="button alert" type="button" data-close>Cancelar</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <td>
+        <% end %>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>
+<% end %>
