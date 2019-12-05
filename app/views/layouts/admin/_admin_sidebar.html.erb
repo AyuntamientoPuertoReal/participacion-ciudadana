@@ -20,11 +20,12 @@
           <li><a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
         <% end %>
         <% if can? :read, Incidence  %>
-          <li><a class="admin-sidebar-list-item" href="<%= incidences_index_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
+          <li><a class="admin-sidebar-list-item" href="<%= incidences_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
         <% end %>
       </ul>
     </li>
   <% end %>
+
 
   <!-- Parte de la Web de Participacion
  <li>

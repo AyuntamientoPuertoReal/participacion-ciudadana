@@ -9,6 +9,9 @@ class IncidencesController < ApplicationController
   end
 
   def show
+    @incidences = Incidence.find(params[:id])
+    @incidence_tracking_status = IncidenceTracking.where(:incidence_id => params[:id]).select(:status, :date).order(:date).first
+    @incidence_tracking_incidence = IncidenceTracking.where(:incidence_id => params[:id]).select(:id, :staff_id, :status, :message, :date)
   end
 
   private

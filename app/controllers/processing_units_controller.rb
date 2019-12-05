@@ -22,11 +22,11 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units/1/edit
   def edit
     staff_all_absolute = Staff.all
-    @staff_ut = Staff.joins(:processing_units).select(:id, :username).distinct
+    @staff_ut = Staff.joins(:processing_units).where(pu_staffs: { staff_id: params[:id] }).select(:id, :username).distinct
     @staff_all = staff_all_absolute - @staff_ut
 
     incidence_type_all_absolute = IncidenceType.all
-    @incidence_type_ut = IncidenceType.joins(:processing_unit).select(:id, :code).distinct
+    @incidence_type_ut = IncidenceType.joins(:processing_unit).where(pu_its: { incidence_type_id: params[:id] }).select(:id, :code).distinct
     @incidence_type_all = incidence_type_all_absolute - @incidence_type_ut
   end
 
