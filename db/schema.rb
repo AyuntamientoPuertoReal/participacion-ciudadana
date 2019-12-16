@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_092420) do
+ActiveRecord::Schema.define(version: 2019_12_16_121238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2019_12_05_092420) do
     t.integer "status", null: false
     t.integer "previous_status", null: false
     t.string "message"
-    t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["incidence_id"], name: "index_incidence_trackings_on_incidence_id"
@@ -112,7 +111,6 @@ ActiveRecord::Schema.define(version: 2019_12_05_092420) do
   end
 
   create_table "news", force: :cascade do |t|
-    t.datetime "date_of_creation", null: false
     t.bigint "author_id", null: false
     t.string "title"
     t.string "description"
@@ -122,7 +120,6 @@ ActiveRecord::Schema.define(version: 2019_12_05_092420) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.datetime "date_of_last_edit"
     t.bigint "last_editor_id"
     t.index ["author_id"], name: "index_news_on_author_id"
     t.index ["last_editor_id"], name: "index_news_on_last_editor_id"
