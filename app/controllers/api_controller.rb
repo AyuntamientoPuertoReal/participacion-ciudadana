@@ -18,7 +18,8 @@ class ApiController < ApplicationController
                                                                                                                         WHERE incidence_id = inc.id)) it, incidence_types ityp
                                                    WHERE inc.id = it.incidence_id
                                                    AND inc.incidence_type_id = ityp.id
-                                                   AND inc.phone_identifier_id = ?", PhoneIdentifier.find(params[:id]).id])}
+                                                   AND inc.phone_identifier_id = ?
+                                                   ORDER BY inc.created_at DESC", PhoneIdentifier.find(params[:id]).id])}
   end
 
   def post_incidences

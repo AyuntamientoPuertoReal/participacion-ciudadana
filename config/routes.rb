@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     authenticate :staff do
       resources :staffs, except: [:show]
       resources :processing_units, except: [:show]
+      get 'assign_incidence_type/:id', to:'processing_units#assign_incidence_types', as: 'assign_it'
+      get 'unassign_incidence_type/:id', to:'processing_units#unassign_incidence_types', as: 'unassign_it'
       resources :incidence_trackings, except: [:show]
       resources :incidence_types, except: [:show]
       get 'incrementorder/:id', to: 'incidence_types#increment_order', as: 'increment_order'
