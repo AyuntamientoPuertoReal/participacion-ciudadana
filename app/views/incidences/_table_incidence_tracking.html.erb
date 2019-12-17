@@ -1,0 +1,56 @@
+<table class="hover">
+    <thead>
+      <tr>
+        <th width="25">Fecha</th>
+        <th width="25">Estado</th>
+        <th width="50">Mensaje</th>
+        <th width="50">Personal</th>
+        <th width="100">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @incidence_tracking_incidence.each_with_index do |tracking, index| %>
+      <tr id=<%= tracking.id %>>
+          <td><%= tracking.created_at.strftime("%d/%m/%Y") %></td>
+          <% if tracking.status == 1 %>
+                  <td style="color: #2EFE2E;">Enviado</td>
+              <% else %>
+                <% if tracking.status == 2 %>
+                    <td style="color: #D2691E;">En Proceso</td>
+                <% elsif tracking.status == 3 %>
+                    <td style="color: #1E90FF;">Finalizado</td>
+                <% elsif tracking.status == 4 %>
+                    <td style="color: #B90000;">Desestimada</td>
+              <% end %>
+          <% end %>
+          <td><%= tracking.message %></td>
+          <td><%= @staff_names[tracking.staff_id] %></td>
+          <td>
+            <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-1">
+              <% if tracking.id != 0 %>
+                <div class="cell">
+                    <%= link_to "Modificar", edit_incidence_incidence_tracking_path(@incidence, tracking), class: "button primary"  %>
+                </div>
+                <% if index >= (@incidence_tracking_incidence.size - 1)  %>
+                <div class="cell">
+                    <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
+                    <div class="small reveal" id="ModalEliminar1" data-reveal>
+                        <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+                        <div class="grid-x">
+                        <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                            <%= link_to "Aceptar", incidence_incidence_tracking_path(@incidence, tracking), method: :delete, class: "button success", type: "button", data: {close: ""} %>
+                        </div>
+
+                        <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                            <a class="button alert" type="button" data-close>Cancelar</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+              <% end %>
+            </div>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

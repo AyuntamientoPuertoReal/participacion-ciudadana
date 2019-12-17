@@ -1,5 +1,10 @@
-<h1>New Incidence Tracking</h1>
+<h1>Creando nuevo seguimiento para: </h1>
+  <% if @incidence_tracking.errors.any? %>
+    <% @incidence_tracking.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
+<%= link_to "Volver", incidence_path(@incidence) %>
 
 <%= render 'form', incidence_tracking: @incidence_tracking %>
 
-<%= link_to 'Back', incidence_trackings_path %>

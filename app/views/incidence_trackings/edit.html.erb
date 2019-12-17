@@ -1,6 +1,5 @@
-<h1>Editing Incidence Tracking</h1>
+<h1>Editando Seguimiento nº <%= @incidence_tracking.id %>, de la incidencia <%= @incidence.id %>.</h1>
+<%= link_to "Volver", incidence_path(@incidence) %>
 
 <%= render 'form', incidence_tracking: @incidence_tracking %>
 
-<%= link_to 'Show', @incidence_tracking %> |
-<%= link_to 'Back', incidence_trackings_path %>
