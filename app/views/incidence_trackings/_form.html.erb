@@ -1,17 +1,28 @@
-<%= form_with(model: incidence_tracking, local: true) do |form| %>
-  <% if incidence_tracking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(incidence_tracking.errors.count, "error") %> prohibited this incidence_tracking from being saved:</h2>
-      
-      <ul>
-      <% incidence_tracking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: @incidence_tracking, url: @url_form, method: @method_form, local: true) do |f| %>
+<div class="grid-y">
+  <div class="grid-x">
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Nuevo estado</h3>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
+
+  <div class="grid-x">
+    <div class="large-2 medium-2 small-2 large-offset-5 medium-offset-5 small-offset-5">
+      <label class="text-center">
+        Estado
+        <%= f.select(:status, options_for_select([['En Proceso', 2], ['Finalizado', 3], ['Desestimado', 4]], @incidence_tracking.status)) %>
+      </label>
+    </div>
+
+    <div class="large-10 medium-10 small-10 large-offset-1 medium-offset-1 small-offset-1">
+      <label>Mensaje
+          <%= f.text_area :message %>
+      </label>
+    </div>
+  </div>
+
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
+</div>
 <% end %>

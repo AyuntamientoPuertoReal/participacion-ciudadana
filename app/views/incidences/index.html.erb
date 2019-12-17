@@ -38,12 +38,11 @@
       </thead>
       <tbody>
       <% @incidences.each do |incidence| %>
-        <tr id="incidenceTraking_<%= incidence.id %>">
-        <tr>
+        <tr id="incidence_<%= incidence.id %>">
           <td><%= incidence.image_url %></td>
           <td><%= incidence.description %></td>
-          <td><%= incidence.incidence_type_id %></td>
-          <td><%= incidence.created_at %></td>
+          <td><%= @incidence_type_name[incidence.incidence_type_id] %></td>
+          <td><%= incidence.created_at.strftime("%d/%m/%Y") %></td>
           <td>
             <div class="grid-x grid-margin-x">
               <div class="cell">
