@@ -1,7 +1,7 @@
 class ProcessingUnitsController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_processing_unit, only: [:edit, :update, :destroy]
+  before_action :set_processing_unit, only: [:edit, :update, :destroy, :assign_incidence_types, :unassign_incidence_types]
   load_and_authorize_resource
 
   # GET /processing_units
@@ -22,12 +22,17 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units/1/edit
   def edit
     staff_all_absolute = Staff.all
-    @staff_ut = Staff.joins(:processing_units).where(pu_staffs: { processing_unit_id:params[:id] }).select(:id, :username).distinct
+    @staff_ut = Staff.joins(:processing_units).where(pu_staffs: { staff_id: params[:id] }).select(:id, :username).distinct
     @staff_all = staff_all_absolute - @staff_ut
 
     incidence_type_all_absolute = IncidenceType.all
-    @incidence_type_ut = IncidenceType.joins(:processing_unit).where(pu_its: { processing_unit_id: params[:id] }).select(:id, :code).distinct
-    @incidence_type_all = incidence_type_all_absolute - @incidence_type_ut
+    @incidence_type_ut = PuIt.joins(:incidence_type, :processing_unit).where(processing_unit_id: params[:id])
+    @incidence_type_ut_array = Array.new
+
+    @incidence_type_ut.each do |inc_ut|
+      @incidence_type_ut_array += Array(IncidenceType.find(inc_ut.incidence_type_id))
+    end
+    @incidence_type_all = incidence_type_all_absolute - @incidence_type_ut_array
   end
 
   # POST /processing_units
@@ -68,6 +73,16 @@ class ProcessingUnitsController < ApplicationController
       format.html { redirect_to processing_units_url, notice: 'Processing unit was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def assign_incidence_types
+    PuIt.find_or_create_by(processing_unit: @processing_unit, incidence_type: IncidenceType.find_by(id: params[:available_incidence]))
+    respond_to :js
+  end
+
+  def unassign_incidence_types
+    PuIt.find_or_create_by(processing_unit: @processing_unit, incidence_type: IncidenceType.find_by(id: params[:assigned_incidence])).destroy
+    respond_to :js
   end
 
   private

@@ -1,4 +1,4 @@
-<%= form_with(model: @processing_unit, local: true) do |f| %>
+<%= form_with(model: processing_unit, remote: true) do |f| %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
@@ -117,9 +117,9 @@
             <tbody>
             <% @incidence_type_all.each do |incidence_type| %>
               <tr id="incTy_disponible_<%= incidence_type.id %>">
-                <td><input type="checkbox"/></td>
+                <td><input type="checkbox" class="ch_disponible"/></td>
                 <td><%= incidence_type.code %></td>
-              <tr>
+              </tr>
             <% end %>
             </tbody>
           </table>
@@ -129,9 +129,9 @@
 
       <div class="large-2 medium-2 small-2">
         <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
-          <a href="#"><i class="fi-arrow-right"></i></a>
-          <a href="#"><i class="fi-x"></i></a>
-          <a href="#"><i class="fi-arrow-left"></i></a>
+          <a href="/assign_incidence_type/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-right cell" ></i></a>
+<!--          <a href="/reset_assigns" data-remote="true"><i class="fi-x"></i></a>-->
+          <a href="/unassign_incidence_type/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-left cell" ></i></a>
         </div>
       </div>
 
@@ -150,11 +150,11 @@
             </tr>
             </thead>
             <tbody>
-            <% @incidence_type_ut.each do |incidence_type| %>
+            <% @incidence_type_ut_array.each do |incidence_type| %>
               <tr id="incTy_asignado_<%= incidence_type.id %>">
-                <td><input type="checkbox"/></td>
+                <td><input type="checkbox" class="ch_asignado"/></td>
                 <td><%= incidence_type.code %></td>
-              <tr>
+              </tr>
             <% end %>
             </tbody>
           </table>
