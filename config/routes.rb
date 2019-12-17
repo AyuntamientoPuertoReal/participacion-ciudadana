@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   authenticate :staff do
     resources :staffs, except: [:show]
     resources :processing_units, except: [:show]
-    resources :incidence_trackings, except: [:show]
     resources :incidence_types, except: [:show]
     resources :incidences, only: [:index, :show]
+    resources :incidence, except: [:index, :show] do
+      resources :incidence_trackings
+    end
   end
 
 
