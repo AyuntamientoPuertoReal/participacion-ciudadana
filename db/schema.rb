@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_093359) do
+ActiveRecord::Schema.define(version: 2019_12_16_121238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.integer "status", null: false
     t.integer "previous_status", null: false
     t.string "message"
-    t.datetime "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["incidence_id"], name: "index_incidence_trackings_on_incidence_id"
@@ -112,7 +111,6 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
   end
 
   create_table "news", force: :cascade do |t|
-    t.datetime "date_of_creation", null: false
     t.bigint "author_id", null: false
     t.string "title"
     t.string "description"
@@ -122,7 +120,6 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.datetime "date_of_last_edit"
     t.bigint "last_editor_id"
     t.index ["author_id"], name: "index_news_on_author_id"
     t.index ["last_editor_id"], name: "index_news_on_last_editor_id"
@@ -161,13 +158,10 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.index ["staff_id"], name: "index_pu_staffs_on_staff_id"
   end
 
-  create_table "pu_ws", force: :cascade do |t|
-    t.bigint "processing_unit_id", null: false
-    t.bigint "web_section_id", null: false
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["processing_unit_id"], name: "index_pu_ws_on_processing_unit_id"
-    t.index ["web_section_id"], name: "index_pu_ws_on_web_section_id"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -182,15 +176,10 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "is_web_editor", default: false
+    t.bigint "role_id"
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
-  end
-
-  create_table "web_sections", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_staffs_on_role_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -204,6 +193,5 @@ ActiveRecord::Schema.define(version: 2019_11_26_093359) do
   add_foreign_key "pu_its", "processing_units"
   add_foreign_key "pu_staffs", "processing_units"
   add_foreign_key "pu_staffs", "staffs"
-  add_foreign_key "pu_ws", "processing_units"
-  add_foreign_key "pu_ws", "web_sections"
+  add_foreign_key "staffs", "roles"
 end

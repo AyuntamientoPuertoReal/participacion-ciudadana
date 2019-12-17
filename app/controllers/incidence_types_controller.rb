@@ -2,6 +2,7 @@ class IncidenceTypesController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_incidence_type, only: [:edit, :update, :destroy, :increment_order, :decrement_order]
+  load_and_authorize_resource
 
   # GET /incidence_types
   # GET /incidence_types.json
@@ -19,7 +20,7 @@ class IncidenceTypesController < ApplicationController
   # GET /incidence_types/1/edit
   def edit
     proc_unit_all_absolute = ProcessingUnit.all
-    @proc_unit_incType = ProcessingUnit.joins(:incidence_type).select(:id, :code).distinct
+    @proc_unit_incType = ProcessingUnit.joins(:incidence_type).where(pu_its: { incidence_type_id: params[:id] }).select(:id, :code).distinct
     @proc_unit_all = proc_unit_all_absolute - @proc_unit_incType
   end
 

@@ -11,6 +11,7 @@ class Staff < ApplicationRecord
   has_many :incidence_tracking
   has_many :created_news, class_name: "News", foreign_key: "author_id"
   has_many :edited_news, class_name: "News", foreign_key: "editor_id"
+  belongs_to :role, optional: true
 
   def self.find_for_database_authentication warden_conditions
     conditions = warden_conditions.dup

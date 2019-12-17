@@ -3,6 +3,7 @@ class StaffsController < ApplicationController
 
   before_action :set_staff, only: [:edit, :update, :destroy]
   before_action :set_processing_units, only: [:edit, :update]
+  load_and_authorize_resource
 
   # GET /staffs
   # GET /staffs.json
@@ -19,6 +20,9 @@ class StaffsController < ApplicationController
 
   # GET /staffs/1/edit
   def edit
+    processing_unit_all_absolute = ProcessingUnit.all
+    @processing_unit_ut = ProcessingUnit.joins(:staff).where(pu_staffs: { staff_id: params[:id] }).select(:id, :code).distinct
+    @processing_unit_all = processing_unit_all_absolute - @processing_unit_ut
   end
 
   # POST /staffs
@@ -70,7 +74,7 @@ class StaffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
-      params.require(:staff).permit(:full_name, :username, :email, :password, :password_confirmation, :is_web_editor, :can_publish, :description)
+      params.require(:staff).permit(:full_name, :username, :email, :password, :password_confirmation, :is_web_editor, :can_publish, :description, :role_id)
     end
 
     def set_processing_units

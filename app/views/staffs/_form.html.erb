@@ -18,7 +18,7 @@
     <%= f.email_field :email %>
     </div>
 
-    <div class="large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
+    <div class="large-2 medium-2 small-2 large-offset-4 medium-offset-4 small-offset-4">
         <%= f.label "Contraseña" %>
         <%= f.password_field :password %>
 
@@ -29,22 +29,42 @@
 
   <div class="grid-x">
     <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-        <fieldset class="large-5 cell">
+        <fieldset class="large-6 cell">
           <legend>Modificar Web</legend>
           <div class="grid-x">
-                <%= f.radio_button :is_web_editor, true %> 
+                <%= f.radio_button :is_web_editor, true %>
                 <%= f.label 'Si' %>
           </div>
           
           <div class="grid-x">
-                <%= f.radio_button :is_web_editor, false %> 
+                <%= f.radio_button :is_web_editor, false %>
                 <%= f.label 'No' %>
           </div>
         </fieldset>
     </div>
 
-    <div class="large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
-        <fieldset class="large-5 cell">
+    <div class="large-3 medium-3 small-3 large-offset-1 medium-offset-1 small-offset-1">
+      <fieldset class="large-6 cell">
+        <legend>Roles</legend>
+        <div class="grid-x">
+          <%= f.radio_button :role_id, Role.find(3).id, :checked => true %>
+          <%= f.label 'Ninguno' %>
+        </div>
+
+        <div class="grid-x">
+          <%= f.radio_button :role_id, Role.find(1).id %>
+          <%= f.label 'Administrador' %>
+        </div>
+
+        <div class="grid-x">
+          <%= f.radio_button :role_id, Role.find(2).id %>
+          <%= f.label 'Supervisor' %>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="large-2 medium-2 small-2">
+        <fieldset class="large-6 cell">
           <legend>Publicar</legend>
           <div class="grid-x">
             <%= f.radio_button :can_publish, true %> 

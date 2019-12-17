@@ -1,0 +1,19 @@
+<%= form_with(model: @incidence_tracking, url: incidence_tracking_path, method: "POST") do |f| %>
+  <div class="small reveal" id="ModalCrear" data-reveal>
+    <h3 class="text-center">Nuevo estado</h3>
+    <label>
+      Estado
+      <%= f.select(:status, options_for_select([['Enviado', 1], ['En Proceso', 2], ['Finalizado', 3], ['Desestimado', 4]], 2)) %>
+    </label>
+    <label>
+      Mensaje
+      <%= f.text_area :description %>
+    </label>
+    
+    <div class="grid-x">
+      <div class="cell large-2 medium-2 small-2 large-offset-5 mediun-offset-5 small-offset-5">
+        <%= f.submit "Crear", class: "button success" %>
+      </div>
+    </div>
+  </div>
+<% end %>
