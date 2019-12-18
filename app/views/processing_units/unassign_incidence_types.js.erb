@@ -1,0 +1,20 @@
+$('table#incTy_table_asignado tbody tr').each(function () {
+    var id_it = this.id.split("_")[2];
+
+    if($('tr#incTy_asignado_' + id_it + ' td input[type="checkbox"]').is(":checked")) {
+        Rails.ajax({
+            url: "/unassign_incidence_type/<%= @processing_unit.id %>",
+            type: "get",
+            data: "assigned_incidence="+id_it,
+            success: function (data) {
+            },
+            error: function () {},
+            dataType: 'script'
+        });
+        $('tr#incTy_asignado_' + id_it).clone().appendTo("table#incTy_table_disponible tbody");
+        $('table#incTy_table_disponible tbody tr#incTy_asignado_' + id_it).attr("id", "incTy_disponible_"+id_it);
+        $('table#incTy_table_disponible tbody tr#incTy_disponible_' + id_it + ' td input[type="checkbox"].ch_asignado').attr("class", "ch_disponible");
+        $('table#incTy_table_disponible tbody tr#incTy_disponible_' + id_it + ' td input[type="checkbox"]').removeProp('checked');
+        $('tr#incTy_asignado_' + id_it).remove();
+    }
+});

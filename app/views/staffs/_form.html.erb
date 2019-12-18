@@ -47,7 +47,7 @@
       <fieldset class="large-6 cell">
         <legend>Roles</legend>
         <div class="grid-x">
-          <%= f.radio_button :role_id, Role.find(3).id %>
+          <%= f.radio_button :role_id, Role.find(3).id, :checked => true %>
           <%= f.label 'Ninguno' %>
         </div>
 
