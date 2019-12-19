@@ -29,8 +29,8 @@ class IncidenceTrackingsController < ApplicationController
 
     pro_ut_staff = PuStaff.where(:staff_id => current_user.id)
 
-    pro_ut_staff.each_with_index do |pro_ut_staff, index|
-      @incidence_tracking.processing_units += pro_ut_staff.code
+    pro_ut_staff.each_with_index do |pro_ut, index|
+      @incidence_tracking.processing_units += ProcessingUnit.find_by(:id => pro_ut.processing_unit_id).code
 
       if pro_ut_staff.size < index
         @incidence_tracking.processing_units += "/"
