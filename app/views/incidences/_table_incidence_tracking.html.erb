@@ -11,7 +11,7 @@
     <tbody>
       <% @incidence_tracking_incidence.each_with_index do |tracking, index| %>
       <tr id=<%= tracking.id %>>
-          <td><%= tracking.created_at.strftime("%d/%m/%Y") %></td>
+          <td><%= tracking.created_at.strftime("%d/%m/%Y %R") %></td>
           <% if tracking.status == 1 %>
                   <td style="color: #2EFE2E;">Enviado</td>
               <% else %>
