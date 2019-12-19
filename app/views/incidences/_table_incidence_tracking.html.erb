@@ -5,7 +5,13 @@
         <th width="25">Estado</th>
         <th width="50">Mensaje</th>
         <th width="50">Personal</th>
+        <% if !(@incidence_tracking_status.nil?) %>
+        <% if @incidence_tracking_status.status != 3 %>
+        <% if @incidence_tracking_status.status != 4 %>
         <th width="100">Acciones</th>
+        <% end %>
+        <% end %>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -28,10 +34,15 @@
           <td>
             <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-1">
               <% if tracking.id != 0 %>
+                <% if @user_role == 5 || @incidence_tracking_status.status != 3  %>
+                <% if @incidence_tracking_status.status != 4 %>
                 <div class="cell">
                     <%= link_to "Modificar", edit_incidence_incidence_tracking_path(@incidence, tracking), class: "button primary"  %>
                 </div>
-                <% if index >= (@incidence_tracking_incidence.size - 1)  %>
+                <% end %>
+                <% end %>
+                <% if @user_role == 5 || (@incidence_tracking_status.status != 3 && index >= (@incidence_tracking_incidence.size - 1))  %>
+                <% if @incidence_tracking_status.status != 4 %>
                 <div class="cell">
                     <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
                     <div class="small reveal" id="ModalEliminar1" data-reveal>
@@ -47,6 +58,7 @@
                         </div>
                     </div>
                 </div>
+              <% end %>
               <% end %>
               <% end %>
             </div>
