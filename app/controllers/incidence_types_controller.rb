@@ -2,6 +2,7 @@ class IncidenceTypesController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_incidence_type, only: [:edit, :update, :destroy, :increment_order, :decrement_order]
+  before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
 
   # GET /incidence_types
@@ -12,6 +13,7 @@ class IncidenceTypesController < ApplicationController
 
   # GET /incidence_types/new
   def new
+    @edit = false
     @proc_unit_incType = []
     @proc_unit_all = ProcessingUnit.all
     @incidence_type = IncidenceType.new
@@ -20,8 +22,14 @@ class IncidenceTypesController < ApplicationController
   # GET /incidence_types/1/edit
   def edit
     proc_unit_all_absolute = ProcessingUnit.all
-    @proc_unit_incType = ProcessingUnit.joins(:incidence_type).where(pu_its: { incidence_type_id: params[:id] }).select(:id, :code).distinct
-    @proc_unit_all = proc_unit_all_absolute - @proc_unit_incType
+    proc_unit_pi = PuIt.joins(:processing_unit, :incidence_type).where(incidence_type_id: params[:id])
+    @processing_unit_pi_array = Array.new
+
+    proc_unit_pi.each do |pr_pi|
+      @processing_unit_pi_array += Array(ProcessingUnit.find(pr_pi.processing_unit_id))
+    end
+
+    @processing_unit_all = proc_unit_all_absolute - @processing_unit_pi_array
   end
 
   # POST /incidence_types
@@ -96,5 +104,9 @@ class IncidenceTypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def incidence_type_params
       params.require(:incidence_type).permit(:name, :code, :description)
+    end
+
+    def set_edit
+      @edit = true
     end
 end
