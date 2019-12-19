@@ -2,6 +2,7 @@ class ProcessingUnitsController < ApplicationController
   layout "admin/admin_layout"
 
   before_action :set_processing_unit, only: [:edit, :update, :destroy, :assign_incidence_types, :unassign_incidence_types]
+  before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
 
   # GET /processing_units
@@ -12,6 +13,7 @@ class ProcessingUnitsController < ApplicationController
 
   # GET /processing_units/new
   def new
+    @edit = false
     @staff_ut = []
     @staff_all = Staff.all
     @incidence_type_ut = []
@@ -22,16 +24,24 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units/1/edit
   def edit
     staff_all_absolute = Staff.all
-    @staff_ut = Staff.joins(:processing_units).where(pu_staffs: { staff_id: params[:id] }).select(:id, :username).distinct
-    @staff_all = staff_all_absolute - @staff_ut
+    staff_ps = PuStaff.joins(:staff, :processing_unit).where(processing_unit_id: params[:id])
+    @staff_ps_array = Array.new
+
+    staff_ps.each do |st_ps|
+      @staff_ps_array += Array(Staff.find(st_ps.staff_id))
+    end
+
+    @staff_all = staff_all_absolute - @staff_ps_array
+
 
     incidence_type_all_absolute = IncidenceType.all
-    @incidence_type_ut = PuIt.joins(:incidence_type, :processing_unit).where(processing_unit_id: params[:id])
+    incidence_type_ut = PuIt.joins(:incidence_type, :processing_unit).where(processing_unit_id: params[:id])
     @incidence_type_ut_array = Array.new
 
-    @incidence_type_ut.each do |inc_ut|
+    incidence_type_ut.each do |inc_ut|
       @incidence_type_ut_array += Array(IncidenceType.find(inc_ut.incidence_type_id))
     end
+
     @incidence_type_all = incidence_type_all_absolute - @incidence_type_ut_array
   end
 
@@ -66,7 +76,7 @@ class ProcessingUnitsController < ApplicationController
   end
 
   # DELETE /processing_units/1
-  # DELETE /processing_units/1.json
+  # DELETE /processing_units/1.jsonbefore_actionedit, only: [:new, :edit]
   def destroy
     @processing_unit.destroy
     respond_to do |format|
@@ -94,5 +104,9 @@ class ProcessingUnitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
       params.require(:processing_unit).permit(:code, :description)
+    end
+
+    def set_edit
+      @edit = true
     end
 end

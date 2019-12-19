@@ -3,6 +3,7 @@ class StaffsController < ApplicationController
 
   before_action :set_staff, only: [:edit, :update, :destroy]
   before_action :set_processing_units, only: [:edit, :update]
+  before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
 
   # GET /staffs
@@ -13,6 +14,8 @@ class StaffsController < ApplicationController
 
   # GET /staffs/new
   def new
+    @edit = false
+    
     @proc_unit_staff = []
     @proc_unit_all = ProcessingUnit.all
     @staff = Staff.new
@@ -21,8 +24,14 @@ class StaffsController < ApplicationController
   # GET /staffs/1/edit
   def edit
     processing_unit_all_absolute = ProcessingUnit.all
-    @processing_unit_ut = ProcessingUnit.joins(:staff).where(pu_staffs: { staff_id: params[:id] }).select(:id, :code).distinct
-    @processing_unit_all = processing_unit_all_absolute - @processing_unit_ut
+    processing_unit_ps = PuStaff.joins(:processing_unit, :staff).where(staff_id: params[:id])
+    @processing_unit_ps_array = Array.new
+
+    processing_unit_ps.each do |pr_ps|
+      @processing_unit_ps_array += Array(ProcessingUnit.find(pr_ps.processing_unit_id))
+    end
+
+    @processing_unit_all = processing_unit_all_absolute - @processing_unit_ps_array
   end
 
   # POST /staffs
@@ -81,4 +90,9 @@ class StaffsController < ApplicationController
       @proc_unit_staff = ProcessingUnit.joins(:staff).select(:id, :code)
       @proc_unit_all = ProcessingUnit.left_outer_joins(:staff).select(:id, :code)
     end
+
+    def set_edit
+      @edit = true
+    end
+
 end
