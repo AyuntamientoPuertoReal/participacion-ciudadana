@@ -187,8 +187,7 @@ IncidenceTracking.find_or_create_by(incidence: Incidence.find_by(description: "I
                                     processing_units: "Administración del sistema",
                                     status: 1,
                                     previous_status: 1,
-                                    message: "Esto es una incidencia inicial de prueba.",
-                                    date: DateTime.new(2019, 12, 3))
+                                    message: "Esto es una incidencia inicial de prueba.")
 puts "✔"
 
 puts "Todas las tareas finalizaron exitosamente."
