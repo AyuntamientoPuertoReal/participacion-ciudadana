@@ -20,7 +20,7 @@
   </div>
 </div>
 
-
+<% if @edit %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
@@ -59,7 +59,7 @@
     <div class="large-2 medium-2 small-2">
       <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
         <a href="#"><i class="fi-arrow-right"></i></a>
-        <a href="#"><i class="fi-x"></i></a>
+        <!-- <a href="#"><i class="fi-x"></i></a> -->
         <a href="#"><i class="fi-arrow-left"></i></a>
       </div>
     </div>
@@ -79,7 +79,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @staff_ut.each do |staff| %>
+          <% @staff_ps_array.each do |staff| %>
             <tr id="ut_asignada_<%= staff.id %>">
               <td><input type="checkbox"/></td>
               <td><%= staff.username %></td>
@@ -162,7 +162,7 @@
 
       </div>
     </div>
-
+<% end %>
     <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
       <%= f.submit "Guardar", class: "button primary" %>
     </div>
