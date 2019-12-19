@@ -23,13 +23,8 @@ class IncidencesController < ApplicationController
     #ON inc1.incidence_id = inc_trac_group.incidence_id
     #AND inc1.created_at = inc_trac_group.created_at
 
-    incidence_tracking_group = IncidenceTracking.group(:incidence_id).select("incidence_id as incidence_trackings_incidence_id, MAX(created_at) as maximum_created_at")
-    incidence_tracking_status = IncidenceTracking.joins(
-      '(SELECT incidence_id as incidence_trackings_incidence_id, MAX(created_at) as maximum_created_at FROM "incidence_trackings" GROUP BY "incidence_trackings"."incidence_id) inc_trac_group
-        ON inc1.incidence_id = inc_trac_group.incidence_id
-        AND inc1.created_at = inc_trac_group.created_at')
-
-    puts incidence_tracking_status
+    incidence_tracking_group = IncidenceTracking.group(:incidence_id).select("incidence_id, MAX(created_at) as maximum_created_at")
+    @incidence_tracking_status = IncidenceTracking.joins('INNER JOIN (SELECT incidence_id, MAX(created_at) as maximum_created_at FROM incidence_trackings GROUP BY incidence_id) "inc_trac_group" ON "incidence_trackings"."incidence_id" = "inc_trac_group"."incidence_id" AND "incidence_trackings"."created_at" = "inc_trac_group"."maximum_created_at"')
 
     @incidence_type_name = Hash.new
     incidence_type = IncidenceType.where(:id => @incidences.select(:incidence_type_id)).select(:id, :name)
@@ -58,7 +53,9 @@ class IncidencesController < ApplicationController
       incidence_tracking_incidence.each do |tracking|
         @staff_names[tracking.staff_id] = Staff.find(tracking.staff_id).full_name
       end
-    end 
+    end
+  
+    puts @incidence_tracking_status
   end
 
   private
