@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :staffs
 
   # Controlador de demostración. Se eliminará una vez que haya algún controlador real.
