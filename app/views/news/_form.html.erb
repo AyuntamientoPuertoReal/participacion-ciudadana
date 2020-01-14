@@ -1,5 +1,5 @@
-<%= form_with(model: news, local: true) do |form| %>
-  <% if news.errors.any? %>
+<%= form_with(model: news, local: true) do |f| %>
+  <!-- <% if news.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(news.errors.count, "error") %> prohibited this news from being saved:</h2>
 
@@ -9,9 +9,83 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
+  <% end %> -->
+<div class="grid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos de la Noticia</h3>
+      </div>
   </div>
+  <div class="grid-x">
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Autor" %>
+      <p><%= @author_name %></p>
+    </div>
+    
+    <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+        <% if @user_role == 1 || @user_publish %>
+          <fieldset class="large-5 cell">
+            <legend>Estado de publicacion</legend>
+            <div class="grid-x">
+              <%= f.radio_button :published, true %> 
+              <%= f.label 'Publicado' %>
+            </div>
+            <div class="grid-x">
+              <%= f.radio_button :published, false %> 
+              <%= f.label 'Sin publicar' %>
+            </div>
+          </fieldset>
+        <% else %>
+          <% if @edit %>
+            <%= f.label "Fecha de creacion" %>
+            <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+  
+  <% if @user_role == 1 || @user_publish %>
+    <div class="grid-x">
+      <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+        <%= f.label "Fecha de creacion" %>
+        <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
+      </div>
+    </div>
+  <% end %>
+  
+</div>
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Redaccion de la noticia</h3>
+      </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Titulo
+        <%= f.text_field :title %>
+        </label>
+      </div>
+  </div>
+  
+  <div class="grid-x">
+      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Descripcion
+        <%= f.text_area :description %>
+        </label>
+      </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Cuerpo
+        <%= f.cktext_area :body %>
+        </label>
+      </div>
+  </div>
+  
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
+</div>
 <% end %>

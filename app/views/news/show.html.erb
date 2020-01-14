@@ -1,4 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos de la Noticia</h3>
+      </div>
+  </div>
+  <div class="grid-x">
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <label>Autor</label>
+      <p><%= @author_name %></p>
+    </div>
+    
+    <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Estado de publicacion</label>
+        <% if @news.published %>
+        <p>Publicado</p>
+        <% else %>
+        <p>Sin publicar</p>
+        <% end %>
+    </div>
+  </div>
 
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
+  <div class="grid-x">
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <label>Fecha de creacion</label>
+      <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
+    </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Redaccion de la noticia</h3>
+      </div>
+  </div>
+  <div class="grid-x">
+      <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Titulo</label>
+        </p><%= @news.title %></p>
+      </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Descripcion</label>
+        <p><%= @news.description %></p>
+      </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+        <label>Cuerpo</label>
+        <p><%= raw @news.body %></p>
+      </div>
+  </div>
+</div>
