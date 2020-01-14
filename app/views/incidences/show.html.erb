@@ -54,7 +54,7 @@
         <h3 class="text-center">Historial</h3>
     </div>
       <% if !(@incidence_tracking_status.nil?) %>
-      <% if @user_role == 5 || @incidence_tracking_status.status != 3 %>
+      <% if @user_role == 1 || @incidence_tracking_status.status != 3 %>
       <% if @incidence_tracking_status.status != 4 %>
         <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
           <%= link_to "Nuevo estado", new_incidence_incidence_tracking_path(@incidence), class: "button success"  %>
