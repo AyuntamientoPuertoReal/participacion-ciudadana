@@ -1,15 +1,12 @@
 class InterestPointsController < ApplicationController
-  before_action :set_interest_point, only: [:show, :edit, :update, :destroy]
+  layout "admin/admin_layout"
+  
+  before_action :set_interest_point, only: [:edit, :update, :destroy]
 
   # GET /interest_points
   # GET /interest_points.json
   def index
     @interest_points = InterestPoint.all
-  end
-
-  # GET /interest_points/1
-  # GET /interest_points/1.json
-  def show
   end
 
   # GET /interest_points/new
@@ -69,6 +66,6 @@ class InterestPointsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interest_point_params
-      params.fetch(:interest_point, {})
+      params.require(:interest_point).permit(:name, :description, :image_url, :latitude, :longitude)
     end
 end
