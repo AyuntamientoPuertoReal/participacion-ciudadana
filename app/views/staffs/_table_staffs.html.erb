@@ -1,0 +1,55 @@
+<table class="hover">
+  <thead>
+  <tr>
+    <th width="100">Codigo</th>
+    <th width="100">Nombre Completo</th>
+    <th width="50">Publicar</th>
+    <th width="50">Modificar Web</th>
+    <th width="50">Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @staffs.each do |staff| %>
+    <tr id="staff_<%= staff.id %>">
+      <td><%= staff.username %></td>
+      <td><%= staff.full_name %></td>
+
+      <% if staff.can_publish == true %>
+        <td>Si</td>
+      <% else %>
+        <td>No</td>
+      <% end %>
+
+      <% if staff.is_web_editor == true %>
+        <td>Si</td>
+      <% else %>
+        <td>No</td>
+      <% end %>
+
+      <td>
+        <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-2">
+          <div class="cell">
+            <%= link_to "Modificar", edit_staff_path(staff), class: "button primary" %>
+          </div>
+
+          <div class="cell">
+            <a class="button alert" data-open="ModalEliminar_<%= staff.id %>">Eliminar</a>
+            <div class="small reveal" id="ModalEliminar_<%= staff.id %>" data-reveal="true">
+              <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+              <div class="grid-x">
+                <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                  <%= link_to "Aceptar", staff, method: :delete, remote: true, class: "button success", type: "button", data: {close: ""} %>
+                </div>
+
+                <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                  <a class="button alert" type="button" data-close>Cancelar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

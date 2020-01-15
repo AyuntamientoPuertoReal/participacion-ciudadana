@@ -1,0 +1,19 @@
+$('table#procUnit_table_asignado tbody tr').each(function () {
+    var id_pu = this.id.split("_")[2];
+
+    if($('tr#procUnit_asignado_' + id_pu + ' td input[type="checkbox"]').is(":checked")) {
+        Rails.ajax({
+            url: "/unassign_staff/<%= @staff.id %>",
+            type: "get",
+            data: "assigned_pu="+id_pu,
+            success: function (data) {
+            },
+            error: function () {},
+            dataType: 'script'
+        });
+        $('tr#procUnit_asignado_' + id_pu).clone().appendTo("table#procUnit_table_disponible tbody");
+        $('table#procUnit_table_disponible tbody tr#procUnit_asignado_' + id_pu).attr("id", "procUnit_disponible_"+id_pu);
+        $('table#procUnit_table_disponible tbody tr#procUnit_disponible_' + id_pu + ' td input[type="checkbox"]').removeProp('checked');
+        $('tr#procUnit_asignado_' + id_pu).remove();
+    }
+});
