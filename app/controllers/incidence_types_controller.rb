@@ -1,7 +1,7 @@
 class IncidenceTypesController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_incidence_type, only: [:edit, :update, :destroy, :increment_order, :decrement_order]
+  before_action :set_incidence_type, only: [:edit, :update, :destroy, :increment_order, :decrement_order, :assign_pu_it, :unassign_pu_it]
   before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
 
@@ -92,6 +92,16 @@ class IncidenceTypesController < ApplicationController
       @incidence_type.increment!(:order)
       @previous_it.decrement!(:order)
     end
+    respond_to :js
+  end
+
+  def assign_pu_it
+    PuIt.find_or_create_by(incidence_type: @incidence_type, processing_unit: ProcessingUnit.find_by(id: params[:available_pu_it]))
+    respond_to :js
+  end
+
+  def unassign_pu_it
+    PuIt.find_or_create_by(incidence_type: @incidence_type, processing_unit: ProcessingUnit.find_by(id: params[:assigned_pu_it])).destroy
     respond_to :js
   end
 

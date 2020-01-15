@@ -18,4 +18,12 @@ class Staff < ApplicationRecord
     login = conditions.delete(:login)
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", {value: login.strip.downcase}]).first
   end
+
+  def self.search(search)
+    if search
+      where('lower(username) LIKE ? OR upper(username) LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      all
+    end
+  end
 end

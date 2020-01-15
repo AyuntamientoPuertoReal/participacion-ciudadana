@@ -48,7 +48,7 @@
             <tr id="ut_disponible_<%= staff.id %>">
               <td><input type="checkbox"/></td>
               <td><%= staff.username %></td>
-            <tr>
+            </tr>
           <% end %>
           </tbody>
         </table>
@@ -58,9 +58,8 @@
 
     <div class="large-2 medium-2 small-2">
       <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
-        <a href="#"><i class="fi-arrow-right"></i></a>
-        <!-- <a href="#"><i class="fi-x"></i></a> -->
-        <a href="#"><i class="fi-arrow-left"></i></a>
+        <a href="/assign_pu_staff/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-right" ></i></a>
+        <a href="/unassign_pu_staff/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-left" ></i></a>
       </div>
     </div>
 
@@ -83,7 +82,7 @@
             <tr id="ut_asignada_<%= staff.id %>">
               <td><input type="checkbox"/></td>
               <td><%= staff.username %></td>
-            <tr>
+            </tr>
           <% end %>
           </tbody>
         </table>
@@ -117,7 +116,7 @@
             <tbody>
             <% @incidence_type_all.each do |incidence_type| %>
               <tr id="incTy_disponible_<%= incidence_type.id %>">
-                <td><input type="checkbox" class="ch_disponible"/></td>
+                <td><input type="checkbox"/></td>
                 <td><%= incidence_type.code %></td>
               </tr>
             <% end %>
@@ -130,7 +129,6 @@
       <div class="large-2 medium-2 small-2">
         <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
           <a href="/assign_incidence_type/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-right cell" ></i></a>
-<!--          <a href="/reset_assigns" data-remote="true"><i class="fi-x"></i></a>-->
           <a href="/unassign_incidence_type/<%= processing_unit.id %>" data-remote="true"><i class="fi-arrow-left cell" ></i></a>
         </div>
       </div>
@@ -152,7 +150,7 @@
             <tbody>
             <% @incidence_type_ut_array.each do |incidence_type| %>
               <tr id="incTy_asignado_<%= incidence_type.id %>">
-                <td><input type="checkbox" class="ch_asignado"/></td>
+                <td><input type="checkbox"/></td>
                 <td><%= incidence_type.code %></td>
               </tr>
             <% end %>
