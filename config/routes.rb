@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :staffs
 
   # Controlador de demostración. Se eliminará una vez que haya algún controlador real.
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
 
   authenticate :staff do
     resources :staffs, except: [:show]
+    resources :news
     resources :processing_units, except: [:show]
     get 'assign_incidence_type/:id', to:'processing_units#assign_incidence_types', as: 'assign_it'
     get 'unassign_incidence_type/:id', to:'processing_units#unassign_incidence_types', as: 'unassign_it'

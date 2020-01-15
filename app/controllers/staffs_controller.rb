@@ -93,7 +93,11 @@ class StaffsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
+      if params[:staff][:password].blank? && params[:staff][:password_confirmation].blank?
+        params.require(:staff).permit(:full_name, :username, :email, :is_web_editor, :can_publish, :description, :role_id)
+      else
       params.require(:staff).permit(:full_name, :username, :email, :password, :password_confirmation, :is_web_editor, :can_publish, :description, :role_id)
+      end
     end
 
     def set_processing_units
