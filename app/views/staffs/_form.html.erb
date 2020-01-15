@@ -35,7 +35,7 @@
                 <%= f.radio_button :is_web_editor, true %>
                 <%= f.label 'Si' %>
           </div>
-          
+
           <div class="grid-x">
                 <%= f.radio_button :is_web_editor, false %>
                 <%= f.label 'No' %>
@@ -67,12 +67,12 @@
         <fieldset class="large-6 cell">
           <legend>Publicar</legend>
           <div class="grid-x">
-            <%= f.radio_button :can_publish, true %> 
+            <%= f.radio_button :can_publish, true %>
             <%= f.label 'Si' %>
           </div>
 
           <div class="grid-x">
-            <%= f.radio_button :can_publish, false %> 
+            <%= f.radio_button :can_publish, false %>
             <%= f.label 'No' %>
           </div>
         </fieldset>
@@ -91,7 +91,7 @@
           <label>Disponibles
             <input type="text" placeholder="Buscar">
           </label>
-        
+
           <table id="procUnit_table_disponible" class="hover">
             <thead>
               <tr>
@@ -109,24 +109,23 @@
             </tbody>
           </table>
         </div>
-        
+
       </div>
-      
+
       <div class="large-2 medium-2 small-2">
         <div class="grid-y cell large-offset-6 medium-offset-6 small-offset-6">
-          <a href="#"><i class="fi-arrow-right"></i></a>
-          <!-- <a href="#"><i class="fi-x"></i></a> -->
-          <a href="#"><i class="fi-arrow-left"></i></a>
+          <a href="/assign_staff/<%= staff.id %>" data-remote="true"><i class="fi-arrow-right"></i></a>
+          <a href="/unassign_staff/<%= staff.id %>" data-remote="true"><i class="fi-arrow-left"></i></a>
         </div>
       </div>
-      
+
       <div class="grid-y large-2 medium-2 small-2">
-        
+
         <div class="cell">
           <label>Asignadas
             <input type="text" placeholder="Buscar">
           </label>
-        
+
           <table id="procUnit_table_asignado" class="hover">
             <thead>
               <tr>
@@ -141,11 +140,11 @@
                 <td><%= proc_unit.code %></td>
               </tr>
             <% end %>
-              
+
             </tbody>
           </table>
         </div>
-        
+
       </div>
     </div>
 <% end %>

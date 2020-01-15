@@ -1,7 +1,7 @@
 class ProcessingUnitsController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_processing_unit, only: [:edit, :update, :destroy, :assign_incidence_types, :unassign_incidence_types]
+  before_action :set_processing_unit, only: [:edit, :update, :destroy, :assign_incidence_types, :unassign_incidence_types, :assing_pu_staff, :unasssign_pu_staff]
   before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
 
@@ -92,6 +92,16 @@ class ProcessingUnitsController < ApplicationController
 
   def unassign_incidence_types
     PuIt.find_or_create_by(processing_unit: @processing_unit, incidence_type: IncidenceType.find_by(id: params[:assigned_incidence])).destroy
+    respond_to :js
+  end
+
+  def assign_pu_staff
+    PuStaff.find_or_create_by(processing_unit: @processing_unit, staff: Staff.find_by(id: params[:available_pu_staff]))
+    respond_to :js
+  end
+
+  def unassign_pu_staff
+    PuStaff.find_or_create_by(processing_unit: @processing_unit, staff: Staff.find_by(id: params[:assigned_pu_staff])).destroy
     respond_to :js
   end
 

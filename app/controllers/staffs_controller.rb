@@ -1,7 +1,7 @@
 class StaffsController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_staff, only: [:edit, :update, :destroy]
+  before_action :set_staff, only: [:edit, :update, :destroy, :assign_pu_staff, :unassign_pu_staff]
   before_action :set_processing_units, only: [:edit, :update]
   before_action :set_edit, only: [:new, :edit]
   load_and_authorize_resource
@@ -9,13 +9,13 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all
+    @staffs = Staff.search(params[:search])
   end
 
   # GET /staffs/new
   def new
     @edit = false
-    
+
     @proc_unit_staff = []
     @proc_unit_all = ProcessingUnit.all
     @staff = Staff.new
@@ -73,6 +73,16 @@ class StaffsController < ApplicationController
       format.json { head :no_content }
       format.js
     end
+  end
+
+  def assign_staff
+    PuStaff.find_or_create_by(staff: @staff, processing_unit: ProcessingUnit.find_by(id: params[:available_pu]))
+    respond_to :js
+  end
+
+  def unassign_staff
+    PuStaff.find_or_create_by(staff: @staff, processing_unit: ProcessingUnit.find_by(id: params[:assigned_pu])).destroy
+    respond_to :js
   end
 
   private
