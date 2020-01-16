@@ -96,8 +96,9 @@ class NewsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+
     def news_params
-      params.fetch(:news, {})
+      params.require(:news).permit(:published, :title, :description, :body, :image_url)
     end
 
     def set_edit
