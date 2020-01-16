@@ -40,7 +40,7 @@
   <div class="grid-x">
     <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
       <%= f.label "Descripcion" %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, rows: "8" %>
     </div>
   </div>
 
@@ -55,18 +55,18 @@
    
   <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
       <%= f.label "Latitud" %>
-      <%= f.number_field :name, step: "any" %>
+      <%= f.number_field :latitude, step: "any", id: "inp_latitud" %>
 
       <%= f.label "Longitud" %>
-      <%= f.number_field :name, step: "any" %>
+      <%= f.number_field :longitude, step: "any", id: "inp_longitud" %>
     
-      <a id="into_map" class="button primary" href="#">Poner en mapa</a>
+      <a id="into_map" class="button primary">Mostrar en mapa</a>
   </div>
    
   <div class="large-6 medium-6 small-6 large-offset-2 medium-offset-2 small-offset-2">
     <div class="mapouter">
       <div class="gmap_canvas">
-        <iframe name="map_test" width="400" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=36.52866345,-6.143663&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <iframe name="map_preview" width="400" height="400" id="gmap_canvas" src="<%= @src_map %>" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
       </div>
     </div>
   </div>
