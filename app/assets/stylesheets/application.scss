@@ -18,6 +18,7 @@
 @import "foundation-icons";
 
 $brand: #9E0176;
+$darker-brand: darken($brand, 10);
 
 @font-face
 {
@@ -139,4 +140,32 @@ i
 .admin-workspace
 {
   padding: 2rem 1rem;
+}
+
+.sessions-new
+{
+  background-color: $darker-brand;
+  font-family: "Source Sans Pro";
+
+  h2
+  {
+    text-align: center;
+    color: white;
+    font-family: inherit;
+  }
+}
+
+.login-panel
+{
+  background-color: white;
+  width: 40%;
+  margin: auto;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 2px 0px #eee;
+
+  form
+  {
+    margin-bottom: 1em;
+  }
 }

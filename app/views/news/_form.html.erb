@@ -61,26 +61,37 @@
   </div>
 
   <div class="grid-x">
+    <div class="large-12 medium-12 small-12">
+      <%= f.label "Imagen destacada", class: "text-center" %>
+    </div>
+
+    <div class="large-12 medium-12 small-12 text-center">
+      <img class="thumbnail" src="<% @news.image_url %>" alt="Farola Rota">
+    </div>
+    
+    <div class="large-4 medium-4 small-4 large-offset-5 medium-offset-5 small-offset-5 text-center">
+      <%= f.file_field :image_url, accept: "image/png, image/jpg, image/jpeg" %>
+    </div>
+   </div>
+
+  <div class="grid-x">
       <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
-        <label>Titulo
+        <%= f.label "Titulo" %>
         <%= f.text_field :title %>
-        </label>
       </div>
   </div>
   
   <div class="grid-x">
       <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
-        <label>Descripcion
-        <%= f.text_area :description %>
-        </label>
+        <%= f.label "Descripcion" %>
+        <%= f.text_area :description, rows: "3"  %>
       </div>
   </div>
 
   <div class="grid-x">
       <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
-        <label>Cuerpo
-        <%= f.cktext_area :body %>
-        </label>
+        <%= f.label "Cuerpo" %>
+        <%= f.text_area :body %>
       </div>
   </div>
   

@@ -1,5 +1,7 @@
 class InterestPointsController < ApplicationController
-  before_action :set_interest_point, only: [:show, :edit, :update, :destroy]
+  layout "admin/admin_layout"
+  
+  before_action :set_interest_point, only: [:edit, :update, :destroy]
 
   # GET /interest_points
   # GET /interest_points.json
@@ -7,18 +9,15 @@ class InterestPointsController < ApplicationController
     @interest_points = InterestPoint.all
   end
 
-  # GET /interest_points/1
-  # GET /interest_points/1.json
-  def show
-  end
-
   # GET /interest_points/new
   def new
     @interest_point = InterestPoint.new
+    @src_map = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10783.67073104068!2d-6.185858228210201!3d36.529886059768806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0dcc2483d623a7%3A0x71b44bb8c8947118!2s11510%20Puerto%20Real%2C%20C%C3%A1diz!5e0!3m2!1ses!2ses!4v1579166904692!5m2!1ses!2ses"
   end
 
   # GET /interest_points/1/edit
   def edit
+    @src_map = "https://maps.google.com/maps?q="+@interest_point.latitude+","+@interest_point.longitude+"&t=&z=13&ie=UTF8&iwloc=&output=embed"
   end
 
   # POST /interest_points
@@ -69,6 +68,6 @@ class InterestPointsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interest_point_params
-      params.fetch(:interest_point, {})
+      params.require(:interest_point).permit(:name, :description, :image_url, :latitude, :longitude)
     end
 end

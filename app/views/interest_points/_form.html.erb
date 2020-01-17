@@ -1,5 +1,5 @@
-<%= form_with(model: interest_point, local: true) do |form| %>
-  <% if interest_point.errors.any? %>
+<%= form_with(model: interest_point, local: true) do |f| %>
+  <!-- <% if interest_point.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(interest_point.errors.count, "error") %> prohibited this interest_point from being saved:</h2>
 
@@ -12,6 +12,70 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
+  </div> -->
+<div class="grid-y">
+  <div class="grid-x">
+      <div class="large-12 medium-12 small-12">
+        <h3 class="text-center">Datos de la Punto de Interes</h3>
+      </div>
+      
+      <div class="large-12 medium-12 small-12 text-center">
+        <img class="thumbnail" src="<% @interest_point.image_url %>" alt="Farola Rota">
+      </div>
+    
+      <div class="large-4 medium-4 small-4 large-offset-5 medium-offset-5 small-offset-5 text-center">
+        <%= f.file_field :image_url, accept: "image/png, image/jpg, image/jpeg" %>
+      </div>
+   </div>
   </div>
+  
+  <div class="grid-x">
+    <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Nombre" %>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  
+  <div class="grid-x">
+    <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Descripcion" %>
+      <%= f.text_area :description, rows: "8" %>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Localizacion</h3>
+    </div>
+  </div>
+
+
+ <div class="grid-x">
+   
+  <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Latitud" %>
+      <%= f.number_field :latitude, step: "any", id: "inp_latitud" %>
+
+      <%= f.label "Longitud" %>
+      <%= f.number_field :longitude, step: "any", id: "inp_longitud" %>
+    
+      <a id="into_map" class="button primary">Mostrar en mapa</a>
+  </div>
+   
+  <div class="large-6 medium-6 small-6 large-offset-2 medium-offset-2 small-offset-2">
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe name="map_preview" width="400" height="400" id="gmap_canvas" src="<%= @src_map %>" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+      </div>
+    </div>
+  </div>
+   
+</div>
+ 
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
+</div>
+
 <% end %>
