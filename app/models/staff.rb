@@ -21,7 +21,7 @@ class Staff < ApplicationRecord
 
   def self.search(search)
     if search
-      where('lower(username) LIKE ? OR upper(username) LIKE ?', "%#{search}%", "%#{search}%")
+      where('lower(username) LIKE ?', "%#{search.strip.downcase}%")
     else
       all
     end
