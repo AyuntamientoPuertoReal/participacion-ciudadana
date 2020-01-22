@@ -24,12 +24,17 @@
       <%= f.text_area :description %>
     </div>
   </div>
+
+  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
+    <%= f.submit "Guardar", class: "button primary" %>
+  </div>
 </div>
 <% if @edit %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <h3 class="text-center">Unidad Gestoras</h3>
+      <h4 class="text-center">Unidad Tramitadoras</h4>
+      <p class="text-center">*Los cambios efectuados seran automaticamente actualizados</p>
     </div>
   </div>
   <div class="grid-x">
@@ -95,8 +100,5 @@
     </div>
   </div>
 <% end %>
-  <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
-    <%= f.submit "Guardar", class: "button primary" %>
-  </div>
 </div>
 <% end %>

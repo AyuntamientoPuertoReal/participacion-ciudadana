@@ -19,9 +19,54 @@ class Staff < ApplicationRecord
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", {value: login.strip.downcase}]).first
   end
 
-  def self.search(search)
+  def self.search(code, name, ut)
+    hash_where = {"code_str" => "", "name_str" => "", "ut_str" => ""}
+    string_where = ""
+
+    if code || name || ut != "Ninguno"
+      if code
+        if code != ""
+          hash_where["code_str"] = "lower(username) LIKE " + "'%#{code.strip.downcase}%'"
+        end
+      end
+      if name
+        if name != ""
+          hash_where["name_str"] = "lower(full_name) LIKE " + "'%#{name.strip.downcase}%'"
+        end
+      end
+      if ut
+        if ut != "Ninguno"
+          hash_where["ut_str"] = ""
+        end
+      end
+
+      hash_where.values.each do |valor|
+          if valor != ""
+            if string_where != ""
+              string_where = string_where + " AND " + valor
+            else
+              string_where = valor
+            end
+          end
+      end
+
+      where(string_where)
+    else
+      all
+    end
+  end
+
+  def self.search_name(search)
     if search
-      where('lower(username) LIKE ?', "%#{search.strip.downcase}%")
+      where('lower(code) LIKE ?', "%#{search.strip.downcase}%")
+    else
+      all
+    end
+  end
+
+  def self.search_ut(search)
+    if search
+      where('lower(ut) LIKE ?', "%#{search.strip.downcase}%")
     else
       all
     end

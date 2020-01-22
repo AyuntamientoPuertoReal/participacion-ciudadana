@@ -9,7 +9,7 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.search(params[:search])
+    @staffs = Staff.search(params[:search_code], params[:search_name], params[:search_ut])
   end
 
   # GET /staffs/new
