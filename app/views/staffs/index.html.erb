@@ -1,34 +1,25 @@
 <div class="grid-container">
-  <div class="grid-x grid-margin-x small-up-3 medium-up-4 large-up-6">
+  <div class="grid-x grid-margin-x large-10 medium-10 small-10">
+  <%= form_with method: :get, url: staffs_path, id: 'staffs_search', class: "grid-x small-up-3 medium-up-4 large-up-6" do |f| %>
     <div class="cell">
-      <%= form_with method: :get, url: staffs_path, id: 'staffs_search' do |form| %>
-        <%= form.label :search, 'Código' %>
-        <%= form.text_field :search, value: params[:search],  placeholder: 'Nombre' %>
-      <% end %>
-
-      <!-- FUNCIONA EL BUSCADOR SIN AJAX -->
-      <%#= form_tag staffs_path, :method => 'get' do %>
-      <%#= text_field_tag :search, params[:search] %>
-      <%# end %>
-
+        <%= f.label :search_code, 'Código' %>
+        <%= f.text_field :search_code, value: params[:search_code] %>
     </div>
 
     <div class="cell">
-      <%= form_with url: '/search_staff', method: 'get' do %>
-        <%= label_tag :nombre_completo, 'Nombre Completo' %>
-        <%= text_field_tag :nombre_completo, nil, placeholder: 'Nombre Completo' %>
-      <% end %>
+        <%= f.label :search_name, 'Nombre Completo' %>
+        <%= f.text_field :search_name, value: params[:search_name] %>
     </div>
 
     <div class="cell">
-      <%= form_with url: '/search_staff', method: 'get' do %>
-        <%= label_tag :unidad_tramitadora, 'Unidad Tramitadora' %>
-        <%= text_field_tag :unidad_tramitadora, nil, placeholder: 'Unidad Tramitadora' %>
-      <% end %>
+        <%= f.label :search_ut, 'Unidad Tramitadora' %>
+        <%= f.text_field :search_ut, value: "Ninguno" %>
     </div>
-
-    <div class="cell large-offset-4">
-      <%= link_to "Nuevo Usuario", new_staff_path, class: "button success" %>
+  <% end %>
+    <div class="grid-x">
+      <div class="large-2 medium-2 small-2">
+        <%= link_to "Nuevo Usuario", new_staff_path, class: "button success" %>
+      </div>
     </div>
   </div>
 

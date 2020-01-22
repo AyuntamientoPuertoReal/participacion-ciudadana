@@ -1,0 +1,29 @@
+<div class="grid-container">
+  <div class="grid-x grid-margin-x small-up-3 medium-up-3 large-up-5">
+  <%= form_with method: :get, url: staffs_path, id: 'staffs_search', class: "grid-x small-up-3 medium-up-4 large-up-6" do |f| %>
+    <div class="cell">
+        <%= f.label :search_description, 'Descripcion' %>
+        <%= f.text_field :search_description, value: params[:search_description] %>
+    </div>
+
+    <div class="cell">
+        <%= f.label :search_type, 'Tipo' %>
+        <%= f.text_field :search_type, value: params[:search_type] %>
+    </div>
+
+    <div class="cell">
+        <%= f.label :search_dateBegin, 'Fecha' %>
+        <%= f.text_field :search_dateBegin, value: params[:search_dateBegin] %>
+    </div>
+
+    <div class="cell">
+        <%= f.label :search_dateEnd, 'Hasta' %>
+        <%= f.text_field :search_dateEnd, value: params[:search_dateEnd] %>
+    </div>
+  <% end %>
+  </div>
+  
+  <div class="grid-x grid-margin-x">
+    <%= render 'table_incidences' %>
+  </div>
+</div>

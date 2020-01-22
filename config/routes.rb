@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     resources :incidence_trackings, except: [:show]
     resources :incidence_types, except: [:show]
     resources :interest_points, except: [:show]
-    resources :incidences, only: [:index, :show]
+    resources :incidences, only: [:show]
+    get '/incidences_index_new', to: 'incidences#index_new', as: 'incidences_index_new'
+    get '/incidences_index_inprocess', to: 'incidences#index_inprocess', as: 'incidences_index_inprocess'
+    get '/incidences_index_closed', to: 'incidences#index_closed', as: 'incidences_index_closed'
     resources :incidence, except: [:index, :show] do
       resources :incidence_trackings
     end

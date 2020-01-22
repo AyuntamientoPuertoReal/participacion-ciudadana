@@ -1,3 +1,5 @@
+
+  <!--
 <ul class="vertical menu" data-accordion-menu>
 
   <% if can? :manage, Staff %>
@@ -9,7 +11,7 @@
   <% if can? :manage, ProcessingUnit %>
     <li>
       <a class="admin-sidebar-list-item" href="<%= processing_units_path %>"><i class="fi-torsos-all"></i> <span>Gestión de Unidades Tramitadoras</span></a>
-    </li>
+    </li> 
   <% end %>
 
   <% if (can? :manage, IncidenceType) | (can? :read, Incidence) %>
@@ -20,18 +22,12 @@
           <li><a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
         <% end %>
         <% if can? :read, Incidence  %>
-          <li><a class="admin-sidebar-list-item" href="<%= incidences_path %>"><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
+          <li><a class="admin-sidebar-list-item" href=""><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
         <% end %>
       </ul>
-    </li>
+    </li> 
   <% end %>
-    <li>
-      <a class="admin-sidebar-list-item" href="<%= news_index_path %>"><i class="fi-comments"></i> <span>Gestión de Noticias</span></a>
-    </li>
-
-    <li>
-      <a class="admin-sidebar-list-item" href="<%= interest_points_path %>"><i class="fi-male-female"></i> <span>Gestión de Puntos de Interes</span></a>
-    </li>
+ -->
 
 
   <!-- Parte de la Web de Participacion
@@ -46,4 +42,43 @@
       <li><a class="admin-sidebar-list-item" href="#"><i class="fi-photo"></i> <span>Personalización de Imágenes</span></a></li>
     </ul>
   </li>  -->
+<ul class="vertical menu" data-accordion-menu>
+  <li>
+  <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span>Incidencias</span></a>
+      <ul class="menu vertical nested">
+        <li><a class="admin-sidebar-list-item" href="<%= incidences_index_new_path %>"><i class="fi-marker"></i> <span>Nuevas</span></a></li>
+        <li><a class="admin-sidebar-list-item" href="<%= incidences_index_inprocess_path %>"><i class="fi-monitor"></i> <span>En Proceso</span></a></li>
+        <li><a class="admin-sidebar-list-item" href="<%= incidences_index_closed_path %>"><i class="fi-checkbox"></i> <span>Finalizadas</span></a></li>
+      </ul>
+  </li>
+
+  <li>
+  <a class="admin-sidebar-list-item" href="#"><i class="fi-web"></i> <span>Web</span></a>
+      <ul class="menu vertical nested">
+        <li>
+          <a class="admin-sidebar-list-item" href="<%= news_index_path %>"><i class="fi-comments"></i> <span>Noticias</span></a>
+        </li>
+
+        <li>
+          <a class="admin-sidebar-list-item" href="<%= interest_points_path %>"><i class="fi-male-female"></i> <span>Puntos de Interes</span></a>
+        </li>
+      </ul>
+  </li>
+
+  <li>
+  <a class="admin-sidebar-list-item" href="#"><i class="fi-widget"></i> <span>Configuracion</span></a>
+      <ul class="menu vertical nested">
+        <li>
+          <a class="admin-sidebar-list-item" href="<%= staffs_path %>"><i class="fi-torso"></i> <span>Usuarios</span></a>
+        </li>
+
+        <li>
+          <a class="admin-sidebar-list-item" href="<%= processing_units_path %>"><i class="fi-torsos-all"></i> <span>Unidades Tramitadoras</span></a>
+        </li>
+
+        <li>
+          <a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Tipos de Incidencias</span></a>
+        </li>
+      </ul>
+  </li>
 </ul>
