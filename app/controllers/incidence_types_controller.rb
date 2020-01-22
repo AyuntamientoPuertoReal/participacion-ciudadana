@@ -35,7 +35,10 @@ class IncidenceTypesController < ApplicationController
   # POST /incidence_types
   # POST /incidence_types.json
   def create
+    last_order = IncidenceType.all.pluck(:order).max + 1
+
     @incidence_type = IncidenceType.new(incidence_type_params)
+    @incidence_type.order = last_order
 
     respond_to do |format|
       if @incidence_type.save
@@ -113,7 +116,7 @@ class IncidenceTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incidence_type_params
-      params.require(:incidence_type).permit(:name, :code, :description)
+      params.require(:incidence_type).permit(:name, :code, :description, :order)
     end
 
     def set_edit
