@@ -10,6 +10,16 @@ class StaffsController < ApplicationController
   # GET /staffs.json
   def index
     @staffs = Staff.search(params[:search_code], params[:search_name], params[:search_ut])
+    ut_code_tmp = ProcessingUnit.all.select(:id, :code)
+    @ut_code = Hash.new
+
+    ut_code_tmp.each do |ut_code_ind|
+      if @ut_code.blank?
+        @ut_code[0] = "Indeterminado"
+      end
+      @ut_code[ut_code_ind.id] = ut_code_ind.code
+    end
+
   end
 
   # GET /staffs/new

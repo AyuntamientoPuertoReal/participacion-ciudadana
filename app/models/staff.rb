@@ -23,20 +23,31 @@ class Staff < ApplicationRecord
     hash_where = {"code_str" => "", "name_str" => "", "ut_str" => ""}
     string_where = ""
 
-    if code || name || ut != "Ninguno"
-      if code
-        if code != ""
+    if code || name || ut
+      if !(code.blank?)
           hash_where["code_str"] = "lower(username) LIKE " + "'%#{code.strip.downcase}%'"
-        end
       end
-      if name
-        if name != ""
+      
+      if !(name.blank?)
           hash_where["name_str"] = "lower(full_name) LIKE " + "'%#{name.strip.downcase}%'"
-        end
       end
-      if ut
-        if ut != "Ninguno"
-          hash_where["ut_str"] = ""
+
+      if ut != "0"  
+        pu_staff_query = PuStaff.where(:processing_unit_id => ut).select(:staff_id)
+        pu_staff_ids = ""
+        
+        pu_staff_query.each do |staff_pu|
+          if pu_staff_ids.blank?
+            pu_staff_ids = staff_pu.staff_id.to_s
+          else
+            pu_staff_ids += ", " + staff_pu.staff_id.to_s
+          end
+        end
+        puts pu_staff_ids
+        if !(pu_staff_ids.blank?)
+          hash_where["ut_str"] = "id IN (" + "#{pu_staff_ids}" + ")"
+        else
+          hash_where["ut_str"] = "id IS NULL"
         end
       end
 
@@ -56,19 +67,4 @@ class Staff < ApplicationRecord
     end
   end
 
-  def self.search_name(search)
-    if search
-      where('lower(code) LIKE ?', "%#{search.strip.downcase}%")
-    else
-      all
-    end
-  end
-
-  def self.search_ut(search)
-    if search
-      where('lower(ut) LIKE ?', "%#{search.strip.downcase}%")
-    else
-      all
-    end
-  end
 end

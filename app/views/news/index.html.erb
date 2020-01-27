@@ -1,101 +1,39 @@
 <div class="grid-container">
   <div class="grid-x">
-      <div class="grid-x grid-margin-x small-up-3 medium-up-3 large-up-3">
+      <div class="grid-x small-8 medium-8 large-8">
+      <%= form_with method: :get, url: news_index_path, id: 'news_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
         <div class="cell">
-          <label>
-            Titulo
-            <input type="text" placeholder="Titulo">
-          </label>
+          <%= f.label :search_title, 'Titulo' %>
+          <%= f.text_field :search_title, value: params[:search_title] %>
         </div>
         
         <div class="cell">
-          <label>
-            Autor
-            <input type="text" placeholder="Autor">
-          </label>
+          <%= f.label :search_author, 'Autor' %>
+          <%= f.text_field :search_author, value: params[:search_author] %>
         </div>
         
-        <div class="cell">  
-          <label>
-            Fecha
-            <input type="date" placeholder="Seccion">
-          </label>
+        <div class="cell">
+          <%= f.label :search_createdAt, 'Fecha' %>
+          <%= f.text_field :search_createdAt, value: params[:search_createdAt] %>  
         </div>
 
-        <div class="cell">  
-         <label>Publicado
-            <select>
-              <option value="si">Si</option>
-              <option value="no">No</option>
-            </select>
-          </label>
+        <div class="cell"> 
+          <%= f.label :search_published, 'Publicado' %>
+          <%= f.select :search_published, options_for_select([["Si", 1], ["No", 2], ["Indefinido", 0]], 0), select: params[:search_published] %>
         </div>
-        
+      <% end %>
       </div>
+
       <% if @current_user.is_web_editor || @user_role == 1 || @user_role == 2 %>
-      <div class="grid-x">
-        <div class="cell large-offset-10">
+      <div class="grid-x small-3 medium-3 large-3 small-offset-1 medium-offset-1 large-offset-1">
+        <div class="cell">
           <%= link_to "Nueva Noticia", new_news_path, class: "button success" %>
         </div>
       </div>
       <% end %>
-  
   </div>
   
-  <div class="grid-x grid-margin-x">
-    <table class="hover">
-      <thead>
-        <tr>
-          <th width="25">Fecha</th>
-          <th width="50">Titulo</th>
-          <th width="50">Autor</th>
-          <th width="50">Publicado</th>
-          <th width="50">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @news.each do |new| %>
-        <tr id="<%= new.id %>">
-          <td><%= new.created_at.strftime("%d/%m/%Y %R") %></td>
-          <td><%= new.title %></td>
-          <td><%= @author_name[new.author_id] %></td>
-          <td>
-          <% if @user_role == 1 || @user_publish %>
-            <ul class="dropdown menu" data-dropdown-menu>
-              <li>
-                <% if new.published %>
-                <a href="#">Si</a>
-                <% else %>
-                <a href="#">No</a>
-                <% end %>
-                <ul class="menu">
-                  <li><a href="#">Si</a></li>
-                  <li><a href="#">No</a></li>
-                </ul>
-              </li>
-            </ul>
-          <% else %>
-            <% if new.published %>
-            Si
-            <% else %>
-            No
-            <% end %>
-          <% end %>
-          </td>
-          <td>
-            <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
-              <div class="cell">
-                <% if @user_role == 1 || @user_role == 2 || new.author_id == @current_user.id %>
-                  <%= link_to "Detalles", edit_news_path(new), class: "button primary" %>
-                <% else %>
-                  <%= link_to "Detalles", news_path(new), class: "button primary" %>
-                <% end %>
-              </div>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <div class="grid-x grid-margin-x" id="news">
+    <%= render 'table_news' %>
   </div>
 </div>
