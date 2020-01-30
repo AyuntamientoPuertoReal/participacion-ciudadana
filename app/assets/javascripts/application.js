@@ -22,8 +22,6 @@
 
 $(document).on('turbolinks:load', function () {
     $(function(){ $(document).foundation(); });
-});
-
-$(document).on('turbolinks:request-end', function() {
-    if (tinyMCE) { tinyMCE.remove(); }
+    tinymce.remove();
+    tinymce.init({selector:'.tinymce'});
 });
