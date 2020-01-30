@@ -8,7 +8,7 @@ class NewsController < ApplicationController
   # GET /news.json
   def index
     @current_user = current_user
-    @news = News.all
+    @news = News.search(params[:search_title], params[:search_author], params[:search_createdAt], params[:search_published])
     @user_role = current_user.role.id
     @user_publish = current_user.can_publish
     @author_name = Hash.new
