@@ -8,7 +8,7 @@ class NewsController < ApplicationController
   # GET /news.json
   def index
     @current_user = current_user
-    @news = News.all
+    @news = News.search(params[:search_title], params[:search_author], params[:search_createdAt], params[:search_published])
     @user_role = current_user.role.id
     @user_publish = current_user.can_publish
     @author_name = Hash.new
@@ -34,6 +34,7 @@ class NewsController < ApplicationController
 
   # GET /news/1/edit
   def edit
+    @news.body.gsub!("img src=\"..", "img src=\"")
     @author_name = Staff.find(@news.author_id).full_name
     @user_publish = current_user.can_publish
   end
@@ -87,6 +88,20 @@ class NewsController < ApplicationController
       format.html { redirect_to news_index_url, notice: 'News was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def image_upload
+    blob = ActiveStorage::Blob.create_after_upload!(
+      io: params[:file],
+      filename: params[:file].original_filename,
+      content_type: params[:file].content_type
+    )
+
+    render json: {
+        image: {
+            url: rails_blob_path(blob)
+        }
+    }
   end
 
   private

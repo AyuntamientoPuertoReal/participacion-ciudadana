@@ -93,7 +93,8 @@
   <div class="grid-x">
       <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
         <%= f.label "Cuerpo" %>
-        <%= f.text_area :body %>
+        <%= f.text_area :body, class: "tinymce", rows: 10, cols: 120 %>
+        <%= tinymce %>
       </div>
   </div>
   

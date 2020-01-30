@@ -8,5 +8,5 @@ $(document).on("turbolinks:load", function () {
 
     $("#search_name").keyup(function_search);
 
-    $("#search_ut").keyup(function_search);
+    $("#search_ut").change(function_search);
 });

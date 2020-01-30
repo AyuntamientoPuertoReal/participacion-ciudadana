@@ -1,23 +1,25 @@
 <div class="grid-container">
-  <div class="grid-x grid-margin-x large-10 medium-10 small-10">
-  <%= form_with method: :get, url: staffs_path, id: 'staffs_search', class: "grid-x small-up-3 medium-up-4 large-up-6" do |f| %>
-    <div class="cell">
-        <%= f.label :search_code, 'Código' %>
-        <%= f.text_field :search_code, value: params[:search_code] %>
-    </div>
+  <div class="grid-x">
+    <div class="grid-x grid-margin-x large-8 medium-8 small-8">
+      <%= form_with method: :get, url: staffs_path, id: 'staffs_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
+        <div class="cell">
+            <%= f.label :search_code, 'Código' %>
+            <%= f.text_field :search_code, value: params[:search_code] %>
+        </div>
 
-    <div class="cell">
-        <%= f.label :search_name, 'Nombre Completo' %>
-        <%= f.text_field :search_name, value: params[:search_name] %>
-    </div>
+        <div class="cell">
+            <%= f.label :search_name, 'Nombre Completo' %>
+            <%= f.text_field :search_name, value: params[:search_name] %>
+        </div>
 
-    <div class="cell">
-        <%= f.label :search_ut, 'Unidad Tramitadora' %>
-        <%= f.text_field :search_ut, value: "Ninguno" %>
+        <div class="cell">
+            <%= f.label :search_ut, 'Unidad Tramitadora' %>
+            <%= f.select :search_ut, options_from_collection_for_select(@ut_code, :first, :last, 0), select: params[:search_ut] %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
     <div class="grid-x">
-      <div class="large-2 medium-2 small-2">
+      <div class="cell">
         <%= link_to "Nuevo Usuario", new_staff_path, class: "button success" %>
       </div>
     </div>
