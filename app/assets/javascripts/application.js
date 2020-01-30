@@ -15,7 +15,8 @@
 //= require jquery
 //= require turbolinks
 //= require foundation
-//= require tinymce
+//= require foundation-datepicker
+//= require locales/foundation-datepicker.es.js
 //= require_tree .
 
 // $(function(){ $(document).foundation(); });

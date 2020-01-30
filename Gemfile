@@ -57,6 +57,9 @@ gem 'devise'
 # Seguridad
 gem 'cancancan'
 
+# Notificaciones
+gem 'rpush'
+
 # Editor de texto WYSIWYG
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
