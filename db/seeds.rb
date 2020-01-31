@@ -60,42 +60,51 @@ end
 
 # Tipos de incidencias
 print "Creando los tipos de incidencias... "
-IncidenceType.find_or_create_by(code: "PAR",
-                                name: "Parques y Jardines",
-                                description: "Incidencias sobre Parques y Jardines",
-                                order: 1)
-IncidenceType.find_or_create_by(code: "INF",
-                                name: "Infraestructura",
-                                description: "Incidencias sobre Infraestructura",
-                                order: 2)
-IncidenceType.find_or_create_by(code: "LIM",
-                                name: "Limpieza",
-                                description: "Incidencias sobre Limpieza",
-                                order: 3)
-IncidenceType.find_or_create_by(code: "ILU",
-                                name: "Iluminación",
-                                description: "Incidencias sobre Iluminación",
-                                order: 4)
-IncidenceType.find_or_create_by(code: "RES",
-                                name: "Recogida de Residuos",
-                                description: "Incidencias sobre la Recogida de Residuos",
-                                order: 5)
-IncidenceType.find_or_create_by(code: "AMB",
-                                name: "Medio Ambiente",
-                                description: "Incidencias sobre Medioambiente",
-                                order: 6)
-IncidenceType.find_or_create_by(code: "SAN",
-                                name: "Saneamiento",
-                                description: "Incidencias sobre Saneamiento",
-                                order: 7)
-IncidenceType.find_or_create_by(code: "GEN",
-                                name: "General",
-                                description: "Incidencias Generales",
-                                order: 8)
-IncidenceType.find_or_create_by(code: "ACC",
-                                name: "Accesibilidad",
-                                description: "Incidencias sobre accesibilidad",
-                                order: 9)
+
+@seed_incidences = Array.new
+
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "PAR",
+                                                      name: "Parques y Jardines",
+                                                      description: "Incidencias sobre Parques y Jardines"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "INF",
+                                                      name: "Infraestructura",
+                                                      description: "Incidencias sobre Infraestructura"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "LIM",
+                                                      name: "Limpieza",
+                                                      description: "Incidencias sobre Limpieza"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "ILU",
+                                                      name: "Iluminación",
+                                                      description: "Incidencias sobre Iluminación"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "RES",
+                                                      name: "Recogida de Residuos",
+                                                      description: "Incidencias sobre la Recogida de Residuos"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "AMB",
+                                                      name: "Medio Ambiente",
+                                                      description: "Incidencias sobre Medioambiente"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "SAN",
+                                                      name: "Saneamiento",
+                                                      description: "Incidencias sobre Saneamiento"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "GEN",
+                                                      name: "General",
+                                                      description: "Incidencias Generales"))
+@seed_incidences.push(IncidenceType.find_or_create_by(code: "ACC",
+                                                      name: "Accesibilidad",
+                                                      description: "Incidencias sobre accesibilidad"))
+
+@last_order = IncidenceType.all.pluck(:order).compact.max
+
+if @last_order.nil?
+  @last_order = 0
+end
+
+@seed_incidences.each do |it|
+  if it.order.nil?
+    @last_order += 1
+    it.order = @last_order
+    it.save
+  end
+end
+
 puts "✔"
 
 # Puntos de interés
