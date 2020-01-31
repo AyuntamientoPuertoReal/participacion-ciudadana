@@ -169,3 +169,7 @@ i
     margin-bottom: 1em;
   }
 }
+// Arregla input campo fecha de la clase datepicker
+input.datepicker{
+  position:relative;
+}

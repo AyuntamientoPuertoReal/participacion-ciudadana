@@ -12,8 +12,8 @@
     </div>
 
     <div class="cell">
-        <%= f.label :search_dateBegin, 'Fecha' %>
-        <%= f.text_field :search_dateBegin, value: params[:search_dateBegin] %>
+        <%= f.label :search_dateBegin, 'Desde' %>
+        <%= f.text_field :search_dateBegin, value: params[:search_dateBegin],  placeholder: 'dd/mm/yyyy', class: 'datepicker', id: 'dpdesde'%>
     </div>
 
     <div class="cell">

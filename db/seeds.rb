@@ -10,21 +10,24 @@
 unless Apicasso::Key.exists?
   print "Creación del token de Apicasso... "
   Apicasso::Key.create(scope:
-                           {read:
+                           { read:
                                 {
-                                    incidence: true,
-                                    phone_identifier: true,
-                                    interest_point: true,
-                                    incidence_type: true,
-                                    incidence_tracking: true,
-                                    news: true
+                                  incidence: true,
+                                  phone_identifier: true,
+                                  interest_point: true,
+                                  incidence_type: true,
+                                  incidence_tracking: true,
+                                  news: true
                                 },
-                            create:
+                             create:
                                 {
-                                    incidence: true,
-                                    phone_identifier: true
-                                }
-                           })
+                                  incidence: true,
+                                  phone_identifier: true
+                                },
+                             update:
+                                {
+                                  phone_identifier: true
+                                } })
   puts "✔"
 end
 
