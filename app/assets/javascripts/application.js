@@ -15,10 +15,13 @@
 //= require jquery
 //= require turbolinks
 //= require foundation
+//= require tinymce
 //= require_tree .
 
 // $(function(){ $(document).foundation(); });
 
 $(document).on('turbolinks:load', function () {
     $(function(){ $(document).foundation(); });
+    tinymce.remove();
+    tinymce.init({selector:'.tinymce'});
 });

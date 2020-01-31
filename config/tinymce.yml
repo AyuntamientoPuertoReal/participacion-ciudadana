@@ -1,0 +1,8 @@
+toolbar:
+  - styleselect | bold italic underline strikethrough | indent outdent | blockquote | uploadimage | link | bullist numlist | undo redo
+plugins:
+  - link
+  - textcolor
+  - uploadimage
+  - lists
+language: "es"
