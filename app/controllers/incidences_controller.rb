@@ -1,9 +1,9 @@
 class IncidencesController < ApplicationController
   layout "admin/admin_layout"
 
-  skip_authorize_resource only: [:index_new, :index_inprocess, :index_closed]
+  skip_authorize_resource only: [:index_new, :index_inprocess, :index_closed, :notify]
 
-  before_action :set_incidence, only: [:show]
+  before_action :set_incidence, only: [:show, :notify]
   load_and_authorize_resource
 
   def index_new
@@ -20,7 +20,7 @@ class IncidencesController < ApplicationController
     else
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where.not(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     end
-    
+
     #SELECT inc1.id, inc1.incidence_id, inc1.status
     #FROM incidence_trackings inc1
     #INNER JOIN(incidence_tracking_group) inc_trac_group
@@ -64,7 +64,7 @@ class IncidencesController < ApplicationController
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     end
 
-    
+
     @incidence_type_name = Hash.new
     incidence_type = IncidenceType.where(:id => @incidences.select(:incidence_type_id)).select(:id, :name)
 
@@ -99,7 +99,7 @@ class IncidencesController < ApplicationController
     else
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     end
-    
+
     @incidence_type_name = Hash.new
     incidence_type = IncidenceType.where(:id => @incidences.select(:incidence_type_id)).select(:id, :name)
 
@@ -117,7 +117,7 @@ class IncidencesController < ApplicationController
     @incidence_tracking_status = IncidenceTracking.where(:incidence_id => params[:id]).select(:status, :created_at).order("created_at DESC").first
     incidence_tracking_incidence = IncidenceTracking.where(:incidence_id => params[:id]).select(:id, :staff_id, :status, :message, :created_at).order(:created_at)
     incidence_tracking_enviado = IncidenceTracking.new({:id => 0, :staff_id => 0, :status => 1, :message => "Creacion de la Incidencia", :created_at => @incidence.created_at})
-    
+
     if incidence_tracking_incidence.empty?
       @incidence_tracking_incidence = Array(incidence_tracking_enviado)
     else
@@ -127,11 +127,45 @@ class IncidencesController < ApplicationController
         @staff_names[tracking.staff_id] = Staff.find(tracking.staff_id).full_name
       end
     end
-  
+
     puts @incidence_tracking_status
   end
 
+  def notify
+    #get all devices registered in our db and loop through each of them
+    PhoneIdentifier.all.each do |device|
+      n = Rpush::Gcm::Notification.new
+      # use the pushme_droid app we previously registered in our initializer file to send the notification
+      n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
+      n.registration_ids = [device.fcm_token]
+
+      n.data = {
+          click_action: 'FLUTTER_NOTIFICATION_CLICK',
+          incidence: @incidence.to_json
+      }
+
+      # parameter for the notification
+      n.notification = {
+          body: 'Just wanted to tell you that you are beautiful!',
+          title: 'Hey this is rpush from rails!',
+          image: 'https://cdn.pixabay.com/photo/2014/11/14/03/38/news-530220_1280.jpg',
+          #icon: 'https://goo.gl/Fz9nrQ'
+      }
+
+
+      #save notification entry in the db
+      n.save!
+    end
+
+    # send all notifications stored in db
+    Rpush.push
+
+    render json: {sent: true}, status: :ok
+  end
+
+
   private
+
   def set_incidence
     @incidence = Incidence.find(params[:id])
   end

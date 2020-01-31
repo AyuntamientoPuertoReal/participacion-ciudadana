@@ -1,72 +1,76 @@
 <div class="grid-y">
   <div class="grid-x">
-      <div class="large-12 medium-12 small-12">
-        <h3 class="text-center">Datos de la Incidencia</h3>
-      </div>
-      <div class="large-12 medium-12 small-12 text-center">
-        <img class="thumbnail" src="<%= @incidence.image_url %>">
-      </div>
-  </div>
-
- <div class="grid-x">
-  <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
-    <h3>Descripcion</h3>
-    <div class="row">
-      <div class="columns">
-        <p><%= @incidence.description %></p>
-      </div>
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Datos de la Incidencia</h3>
+    </div>
+    <div class="large-12 medium-12 small-12 text-center">
+      <img class="thumbnail" src="<%= @incidence.image_url %>">
     </div>
   </div>
 
-  <div class="large-2 medium-2 small-10 large-offset-2 medium-offset-2 small-offset-2">
-  <h3>Estado</h3>
+  <div class="grid-x">
+    <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+      <h3>Descripcion</h3>
       <div class="row">
         <div class="columns">
-        <% if @incidence_tracking_status.nil? %>
-            <p style="color: #2EFE2E;">Enviado</p>
-        <% else %>
-          <% if @incidence_tracking_status.status == 2 %>
-            <p style="color: #D2691E;">En Proceso</p>
-          <% elsif @incidence_tracking_status.status == 3 %>
-            <p style="color: #1E90FF;">Finalizado</p>
-          <% elsif @incidence_tracking_status.status == 4 %>
-            <p style="color: #B90000;">Desestimada</p>
+          <p><%= @incidence.description %></p>
+        </div>
+      </div>
+    </div>
 
+    <div class="large-2 medium-2 small-10 large-offset-2 medium-offset-2 small-offset-2">
+      <h3>Estado</h3>
+      <div class="row">
+        <div class="columns">
+          <% if @incidence_tracking_status.nil? %>
+            <p style="color: #2EFE2E;">Enviado</p>
+          <% else %>
+            <% if @incidence_tracking_status.status == 2 %>
+              <p style="color: #D2691E;">En Proceso</p>
+            <% elsif @incidence_tracking_status.status == 3 %>
+              <p style="color: #1E90FF;">Finalizado</p>
+            <% elsif @incidence_tracking_status.status == 4 %>
+              <p style="color: #B90000;">Desestimada</p>
+
+            <% end %>
           <% end %>
-        <% end %>
-          
+
         </div>
       </div>
-  </div>
-  
-  <div class="large-5 medium-5 small-10 large-offset-2 medium-offset-2 small-offset-2">
-    <h3>Localizacion</h3>
-    <div class="mapouter">
-      <div class="responsive-embed">
-        <iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=<%= @incidence.latitude %>,<%= @incidence.longitude %>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+    </div>
+
+    <div class="large-5 medium-5 small-10 large-offset-2 medium-offset-2 small-offset-2">
+      <h3>Localizacion</h3>
+      <div class="mapouter">
+        <div class="responsive-embed">
+          <iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=<%= @incidence.latitude %>,<%= @incidence.longitude %>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
       </div>
     </div>
   </div>
-</div>
-  
-<div class="grid-x grid-margin-x">
+
+  <div class="grid-x grid-margin-x">
     <div class="large-12 medium-12 small-12">
-        <h3 class="text-center">Historial</h3>
+      <h3 class="text-center">Historial</h3>
     </div>
-      <% if !(@incidence_tracking_status.nil?) %>
+    <% if !(@incidence_tracking_status.nil?) %>
       <% if @user_role == 1 || @incidence_tracking_status.status != 3 %>
-      <% if @incidence_tracking_status.status != 4 %>
-        <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
-          <%= link_to "Nuevo estado", new_incidence_incidence_tracking_path(@incidence), class: "button success"  %>
-        </div>
-      <% end %>
-      <% end %>
-        <% else %>
+        <% if @incidence_tracking_status.status != 4 %>
           <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
-            <%= link_to "Nuevo estado", new_incidence_incidence_tracking_path(@incidence), class: "button success"  %>
+            <%= link_to "Nuevo estado", new_incidence_incidence_tracking_path(@incidence), class: "button success" %>
           </div>
+        <% end %>
       <% end %>
-  <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
-    <%= render 'table_incidence_tracking' %>
+    <% else %>
+      <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
+        <%= link_to "Nuevo estado", new_incidence_incidence_tracking_path(@incidence), class: "button success" %>
+      </div>
+      <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
+        <%= link_to "Notificación", nofity_path, class: "button success" %>
+      </div>
+    <% end %>
+    <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
+      <%= render 'table_incidence_tracking' %>
+    </div>
   </div>
 </div>

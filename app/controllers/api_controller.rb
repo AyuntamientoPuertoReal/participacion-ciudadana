@@ -6,11 +6,11 @@ class ApiController < ApplicationController
 
   def show_incidences_historical
     render json: {entries: Incidence.find_by_sql(["SELECT inc.id, inc.image_url, inc.description, inc.latitude, inc.longitude, inc.created_at, it.status, ityp.name
-                                                   FROM incidences inc, (SELECT id, status, date, incidence_id
+                                                   FROM incidences inc, (SELECT id, status, created_at, incidence_id
                                                                          FROM incidence_trackings it1
-                                                                         WHERE date = (SELECT MAX(date)
-                                                                                       FROM incidence_trackings it2
-                                                                                       WHERE it1.incidence_id = it2.incidence_id)
+                                                                         WHERE created_at = (SELECT MAX(created_at)
+                                                                                             FROM incidence_trackings it2
+                                                                                             WHERE it1.incidence_id = it2.incidence_id)
                                                                          UNION ALL
                                                                          SELECT DISTINCT CAST(NULL AS bigint) as id, 1 as status, CAST(NULL AS timestamp) as date, inc.id as incidence_id
                                                                          FROM incidence_trackings it, incidences inc
