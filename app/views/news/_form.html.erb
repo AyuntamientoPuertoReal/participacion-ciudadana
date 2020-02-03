@@ -10,28 +10,28 @@
       </ul>
     </div>
   <% end %> -->
-<div class="grid-y">
-  <div class="grid-x">
+  <div class="grid-y">
+    <div class="grid-x">
       <div class="large-12 medium-12 small-12">
         <h3 class="text-center">Datos de la Noticia</h3>
       </div>
-  </div>
-  <div class="grid-x">
-    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Autor" %>
-      <p><%= @author_name %></p>
     </div>
-    
-    <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+    <div class="grid-x">
+      <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+        <%= f.label "Autor" %>
+        <p><%= @author_name %></p>
+      </div>
+
+      <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
         <% if @user_role == 1 || @user_publish %>
           <fieldset class="large-5 cell">
             <legend>Estado de publicacion</legend>
             <div class="grid-x">
-              <%= f.radio_button :published, true %> 
+              <%= f.radio_button :published, true %>
               <%= f.label 'Publicado' %>
             </div>
             <div class="grid-x">
-              <%= f.radio_button :published, false %> 
+              <%= f.radio_button :published, false %>
               <%= f.label 'Sin publicar' %>
             </div>
           </fieldset>
@@ -41,25 +41,25 @@
             <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
           <% end %>
         <% end %>
+      </div>
     </div>
+
+    <% if @edit %>
+      <% if @user_role == 1 || @user_publish %>
+        <div class="grid-x">
+          <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+            <%= f.label "Fecha de creacion" %>
+            <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
   </div>
-  
-  <% if @edit %>
-  <% if @user_role == 1 || @user_publish %>
-    <div class="grid-x">
-      <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
-        <%= f.label "Fecha de creacion" %>
-        <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
-      </div>
-    </div>
-  <% end %>
-  <% end %>
-  
-</div>
   <div class="grid-x">
-      <div class="large-12 medium-12 small-12">
-        <h3 class="text-center">Redaccion de la noticia</h3>
-      </div>
+    <div class="large-12 medium-12 small-12">
+      <h3 class="text-center">Redaccion de la noticia</h3>
+    </div>
   </div>
 
   <div class="grid-x">
@@ -70,35 +70,37 @@
     <div class="large-12 medium-12 small-12 text-center">
       <img class="thumbnail" src="<% @news.image_url %>" alt="Farola Rota">
     </div>
-    
+
     <div class="large-4 medium-4 small-4 large-offset-5 medium-offset-5 small-offset-5 text-center">
       <%= f.file_field :image_url, accept: "image/png, image/jpg, image/jpeg" %>
     </div>
-   </div>
-
-  <div class="grid-x">
-      <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
-        <%= f.label "Titulo" %>
-        <%= f.text_field :title %>
-      </div>
-  </div>
-  
-  <div class="grid-x">
-      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
-        <%= f.label "Descripcion" %>
-        <%= f.text_area :description, rows: "3"  %>
-      </div>
   </div>
 
   <div class="grid-x">
-      <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
-        <%= f.label "Cuerpo" %>
-        <%= f.text_area :body %>
-      </div>
+    <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Titulo" %>
+      <%= f.text_field :title %>
+    </div>
   </div>
-  
+
+  <div class="grid-x">
+    <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Descripcion" %>
+      <%= f.text_area :description, rows: "3"  %>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label "Cuerpo" %>
+      <%= f.text_area :body %>
+    </div>
+  </div>
+
   <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
     <%= f.submit "Guardar", class: "button primary" %>
   </div>
-</div>
+  <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
+    <%= link_to "Notificación", nofity_path, class: "button success" %>
+  </div>
 <% end %>

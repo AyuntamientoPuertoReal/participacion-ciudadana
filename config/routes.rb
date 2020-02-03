@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :incidence, except: [:index, :show] do
       resources :incidence_trackings
     end
-    get 'notification/notify/:id', to: 'incidences#notify', as: 'nofity'
+    get 'notification/notify/:id', to: 'news#notify', as: 'nofity'
 
     get 'assign_incidence_type/:id', to:'processing_units#assign_incidence_types', as: 'assign_it'
     get 'unassign_incidence_type/:id', to:'processing_units#unassign_incidence_types', as: 'unassign_it'
