@@ -139,7 +139,7 @@ Rpush.reflect do |on|
     # let's name this one pushme_droid
     app.name = "appparticipacion_droid"
     # FCM auth key from firebase project
-    app.auth_key = "AAAAPcwRFnM:APA91bETXv1YksuhFsSlAl_SB4V3lCvGns_O7V3oxYS1Wff7JaQii9gH9oUIAM_Fd460uKWmAoOOn_rjp3jTwXRfR4C8hQErvRAeF56qaVRft5OO9bpYNYoAoTe355_HPDVcb08oa8si"
+    app.auth_key = Rails.application.credentials.fcm_auth_key
     app.connections = 1
     # save our app in db
     app.save!

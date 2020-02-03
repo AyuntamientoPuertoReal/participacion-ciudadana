@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get 'demo/index', to: 'demo#index', as: 'demo'
   root to: 'demo#index'
 
-  post '/tinymce_assets', to: 'news#image_upload'
-
   authenticate :staff do
     resources :staffs, except: [:show]
     resources :news
