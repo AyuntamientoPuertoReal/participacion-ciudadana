@@ -132,7 +132,7 @@ Rpush.reflect do |on|
   # Called when an exception is raised.
   # on.error do |error|
   # end
-
+  
   # initializer file may run multiple times but we don't wanna register the app multiple times so first check if it already exists in db and create new one only if it doesn't.
   if (!Rpush::Gcm::App.find_by_name("appparticipacion_droid"))
     app = Rpush::Gcm::App.new

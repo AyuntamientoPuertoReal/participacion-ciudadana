@@ -1,0 +1,39 @@
+<table class="hover">
+  <thead>
+    <tr>
+      <th width="200">Nombre</th>
+      <th width="300">Descripcion</th>
+      <th width="250">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @interest_points.each do |int_point| %>
+    <tr>
+      <td><%= int_point.name %></td>
+      <td><%= truncate(int_point.description, length: 150) %></td>
+      <td>
+        <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
+          <div class="cell">
+            <%= link_to "Detalles", edit_interest_point_path(int_point), class: "button primary" %>
+          </div>
+          <div class="cell">
+            <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
+              <div class="small reveal" id="ModalEliminar1" data-reveal>
+                <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+                <div class="grid-x">
+                  <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                    <a class="button success" type="button" data-close>Aceptar</a>
+                  </div>
+                  
+                  <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                    <a class="button alert" type="button" data-close>Cancelar</a>
+                  </div>
+                </div>
+              </div>
+           </div>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

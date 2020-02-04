@@ -14,7 +14,7 @@
         
         <div class="cell">
           <%= f.label :search_createdAt, 'Fecha' %>
-          <%= f.text_field :search_createdAt, value: params[:search_createdAt] %>  
+          <%= f.text_field :search_createdAt, value: params[:search_createdAt],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
         </div>
 
         <div class="cell"> 

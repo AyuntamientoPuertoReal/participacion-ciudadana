@@ -31,6 +31,9 @@
           <% end %>
           <td><%= tracking.message %></td>
           <td><%= @staff_names[tracking.staff_id] %></td>
+          <% if !(@incidence_tracking_status.nil?) %>
+          <% if @incidence_tracking_status.status != 3 %>
+          <% if @incidence_tracking_status.status != 4 %>
           <td>
             <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-1">
               <% if tracking.id != 0 %>
@@ -62,7 +65,11 @@
               <% end %>
               <% end %>
             </div>
-        </tr>
+          </td>
+          <% end %>
+          <% end %>
+          <% end %>
+      </tr>
       <% end %>
     </tbody>
 </table>
