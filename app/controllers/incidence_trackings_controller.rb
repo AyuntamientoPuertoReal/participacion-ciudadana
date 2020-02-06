@@ -47,8 +47,24 @@ class IncidenceTrackingsController < ApplicationController
 
     respond_to do |format|
       if @incidence_tracking.save
+
+        fcm_token = PhoneIdentifier.select('id', 'fcm_token').joins(:incidence).where('incidences.id = ?', @incidence.id).first.fcm_token
+        n = Rpush::Gcm::Notification.new
+        n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
+        n.registration_ids = [fcm_token]
+        n.data = {
+            click_action: 'FLUTTER_NOTIFICATION_CLICK',
+            incidence: @incidence.to_json
+        }
+        n.notification = {
+            body: 'Su incidencia "' + @incidence.description + '" ha sido actualizada.',
+            title: 'Participación Puerto Real',
+        }
+        n.save!
+        Rpush.push
+
         format.html { redirect_to incidence_path(@incidence) }
-        format.json { render :index, status: :created, location: @incidence_tracking }
+        format.json { render :index, status: :created, location: @incidence_tracking, send_notification: true }
       else
         format.html { render :new }
         format.json { render json: @incidence_tracking.errors, status: :unprocessable_entity }
@@ -61,8 +77,25 @@ class IncidenceTrackingsController < ApplicationController
   def update
     respond_to do |format|
       if @incidence_tracking.update(incidence_tracking_params)
+
+        fcm_token = PhoneIdentifier.select('id', 'fcm_token').joins(:incidence).where('incidences.id = ?', @incidence.id).first.fcm_token
+        n = Rpush::Gcm::Notification.new
+        n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
+        n.registration_ids = [fcm_token]
+
+        n.data = {
+            click_action: 'FLUTTER_NOTIFICATION_CLICK',
+            incidence: @incidence.to_json
+        }
+        n.notification = {
+            body: 'Su incidencia "' + @incidence.description + '" ha sido actualizada.',
+            title: 'Participación Puerto Real',
+        }
+        n.save!
+        Rpush.push
+
         format.html { redirect_to incidence_path(@incidence) }
-        format.json { render :index, status: :ok, location: @incidence_tracking }
+        format.json { render :index, status: :ok, location: @incidence_tracking, send_notification: true }
       else
         format.html { render :edit }
         format.json { render json: @incidence_tracking.errors, status: :unprocessable_entity }
