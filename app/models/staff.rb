@@ -43,7 +43,7 @@ class Staff < ApplicationRecord
             pu_staff_ids += ", " + staff_pu.staff_id.to_s
           end
         end
-        puts pu_staff_ids
+
         if !(pu_staff_ids.blank?)
           hash_where["ut_str"] = "id IN (" + "#{pu_staff_ids}" + ")"
         else

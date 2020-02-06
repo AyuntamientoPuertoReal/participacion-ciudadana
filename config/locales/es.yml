@@ -1,0 +1,43 @@
+es:
+  tablas_crud:
+   general:
+    table_index:
+    tag:
+
+   indicence:
+    status:
+    details:
+
+
+    
+   
+  general:
+    back: "Volver"
+    start:
+      message: "La aplicacion se esta ejecutrando en el entorno: "
+      text_link_puerto_real_participa: "Volver a Puerto Real - Participa"
+      text_admin_home_1: "Puerto Real - Participa"
+      text_admin_home_2: "ADMINISTRACÍON"
+    login:
+      tag_password: "Contraseña"
+      tag_username: "Nombre de usuaario"
+      tag_access_system: "Acceder al sistema"
+      buttom_login: "Iniciar sesión"
+      chackbox_remember: "Recordarme"
+      password_forgot: "¿Has olvidado la contraseña?"
+
+    menu_side_bar:
+      incidence:
+        name: "Incidencias"
+        new_incidence_name: "Nuevas"
+        inprocess_incidence_name: "En Proceso"
+        closed_incidence_name: "Finalizadas"
+      web:
+        name: "Web"
+        notice_name: "Noticias"
+        interest_point_name: "Puntos de Interes"
+      configuration:
+        name: "Configuracion"
+        staff_name: "Usuarios"
+        processing_units_name: "Unidades Tramitadoras"
+        incidence_type_name: "Tipos de Incidencia"

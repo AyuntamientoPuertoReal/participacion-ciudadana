@@ -8,7 +8,13 @@ $(document).on("turbolinks:load", function () {
 
     $("#search_author").keyup(function_search);
 
-    $("#search_createdAt").keyup(function_search);
+    $("#search_createdAt").change(function_search);
 
     $("#search_published").change(function_search);
+
+    $('.datepicker').fdatepicker({
+        closeButton: true,
+        language: 'es',
+        format: 'dd/mm/yyyy',
+    });
 });

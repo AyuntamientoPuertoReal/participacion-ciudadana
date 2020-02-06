@@ -1,0 +1,33 @@
+<table class="hover">
+  <thead>
+    <tr>
+      <th width="50">Orden</th>
+      <th width="50">Codigo</th>
+      <th width="50">Nombre</th>
+      <th width="200">Descripcion</th>
+      <th width="50">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @incidence_types.each do |incidence_type| %>
+    <tr id="<%= incidence_type.id %>" name="<%= incidence_type.order %>">
+      <td>
+        <div class="grid-y grid-margin-y">
+          <a href="/incrementorder/<%= incidence_type.id %>" data-remote="true"><i class="fi-arrow-up cell" ></i></a>
+          <a href="/decrementorder/<%= incidence_type.id %>" data-remote="true"><i class="fi-arrow-down cell" ></i></a>
+        </div>
+      </td>
+      <td><%= incidence_type.code %></td>
+      <td><%= incidence_type.name %></td>
+      <td><%= incidence_type.description %></td>
+      <td>
+        <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
+          <div class="cell">
+            <%= link_to "Detalles", edit_incidence_type_path(incidence_type), class: "button primary" %>
+          </div>
+        </div>
+      </td>
+    <tr>
+  <% end %>
+  </tbody>
+</table>

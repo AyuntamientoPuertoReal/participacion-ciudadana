@@ -1,0 +1,40 @@
+<table class="hover">
+  <thead>
+    <tr>
+      <th width="50">Codigo</th>
+      <th width="200">Descripcion</th>
+      <th width="50">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @processing_units.each do |processing_unit| %>
+    <tr id="staff_<%= processing_unit.id %>">
+      <td><%= processing_unit.code %></td>
+      <td><%= processing_unit.description %></td>
+      <td>
+        <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-2">
+          <div class="cell">
+            <%= link_to "Modificar", edit_processing_unit_path(processing_unit), class: "button primary" %>
+          </div>
+          
+          <div class="cell">
+            <a class="button alert" data-open="ModalEliminar_<%= processing_unit.id %>">Eliminar</a>
+              <div class="small reveal" id="ModalEliminar_<%= processing_unit.id %>" data-reveal="true">
+                <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+                <div class="grid-x">
+                  <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
+                    <%= link_to "Aceptar", processing_unit, method: :delete, class: "button success", type: "button", data: {close: ""} %>
+                  </div>
+                  
+                  <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
+                    <a class="button alert" type="button" data-close>Cancelar</a>
+                  </div>
+                </div>
+              </div>
+           </div>
+          </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

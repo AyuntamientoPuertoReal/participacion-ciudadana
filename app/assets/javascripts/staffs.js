@@ -3,7 +3,7 @@ $(document).on("turbolinks:load", function () {
         $.get($("#staffs_search").attr("action"), $("#staffs_search").serializeArray(), null, "script");
         return false;
     };
-
+    
     $("#search_code").keyup(function_search);
 
     $("#search_name").keyup(function_search);
