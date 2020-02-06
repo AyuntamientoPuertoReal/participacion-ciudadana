@@ -100,7 +100,9 @@
   <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
     <%= f.submit "Guardar", class: "button primary" %>
   </div>
-  <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
-    <%= link_to "Notificación", nofity_path, class: "button success" %>
-  </div>
+  <% if @edit %>
+      <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
+      <%= link_to "Notificación", notify_path, class: "button success" %>
+    </div>
+  <% end %>
 <% end %>
