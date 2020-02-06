@@ -1,41 +1,40 @@
-    <table class="hover">
-      <thead>
-        <tr>
-          <th width="50">Foto</th>
-          <th width="200">Descripcion</th>
-          <th width="50">Tipo</th>
-          <th width="50">Fecha</th>
-          <th width="50">Estado</th>
-          <th width="50">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @incidences.each do |incidence| %>
-        <tr id="incidence_<%= incidence.id %>">
-          <td><%= incidence.image_url %></td>
-          <td><%= incidence.description %></td>
-          <td><%= @incidence_type_name[incidence.incidence_type_id] %></td>
-          <td><%= incidence.created_at.strftime("%d/%m/%Y") %></td>
-          <% if @incidence_tracking_status.find_by(:incidence_id => incidence.id).blank? || @incidence_tracking_status.where(:incidence_id => incidence.id).nil? %>
-            <td style="color: #2EFE2E;">Enviado</td>
-          <% else %>
-            <% if @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 2 %>
-              <td style="color: #D2691E;">En Proceso</td>
-            <% elsif @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 3 %>
-              <td style="color: #1E90FF;">Finalizado</td>
-            <% elsif @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 4 %>
-              <td style="color: #B90000;">Desestimada</td>
-          <% end %>
+<table class="hover">
+  <thead>
+    <tr>
+      <th width="50">Foto</th>
+      <th width="200">Descripcion</th>
+      <th width="50">Tipo</th>
+      <th width="50">Fecha</th>
+      <th width="50">Estado</th>
+      <th width="50">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @incidences.each do |incidence| %>
+    <tr id="incidence_<%= incidence.id %>">
+      <td><%= incidence.image_url %></td>
+      <td><%= incidence.description %></td>
+      <td><%= @incidence_type_name[incidence.incidence_type_id] %></td>
+      <td><%= incidence.created_at.strftime("%d/%m/%Y") %></td>
+      <% if @incidence_tracking_status.find_by(:incidence_id => incidence.id).blank? || @incidence_tracking_status.where(:incidence_id => incidence.id).nil? %>
+        <td style="color: #2EFE2E;">Enviado</td>
+      <% else %>
+        <% if @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 2 %>
+          <td style="color: #D2691E;">En Proceso</td>
+        <% elsif @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 3 %>
+          <td style="color: #1E90FF;">Finalizado</td>
+        <% elsif @incidence_tracking_status.find_by(:incidence_id => incidence.id).status == 4 %>
+          <td style="color: #B90000;">Desestimada</td>
         <% end %>
-          <td></td>
-          <td>
-            <div class="grid-x grid-margin-x">
-              <div class="cell">
-                <%= link_to "Detalles", incidence_path(incidence), class: "button primary" %>
-              </div>
-            </div>
-          </td>
-        </tr>
       <% end %>
-      </tbody>
-    </table>
+      <td>
+        <div class="grid-x grid-margin-x">
+          <div class="cell">
+            <%= link_to "Detalles", incidence_path(incidence), class: "button primary" %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

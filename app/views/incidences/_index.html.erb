@@ -1,29 +1,31 @@
-<div class="grid-container">
-  <div class="grid-x grid-margin-x small-up-3 medium-up-3 large-up-5">
-  <%= form_with method: :get, url: staffs_path, id: 'staffs_search', class: "grid-x small-up-3 medium-up-4 large-up-6" do |f| %>
-    <div class="cell">
-        <%= f.label :search_description, 'Descripcion' %>
-        <%= f.text_field :search_description, value: params[:search_description] %>
-    </div>
+ <div class="grid-container">
+  <div class="grid-x">
+    <div class="grid-x grid-margin-x large-8 medium-8 small-8">
+    <%= form_with method: :get, url: @url_path, id: 'incidences_search', class: "grid-margin-x small-up-1 medium-up-1 large-up-1" do |f| %>
+        <div class="cell">
+            <%= f.label :search_description, 'Descripcion' %>
+            <%= f.text_field :search_description, value: params[:search_description] %>
+        </div>
 
-    <div class="cell">
-        <%= f.label :search_type, 'Tipo' %>
-        <%= f.text_field :search_type, value: params[:search_type] %>
-    </div>
+        <div class="cell">
+            <%= f.label :search_type, 'Tipo' %>
+            <%= f.select :search_type, options_from_collection_for_select(@incidence_type_name, :first, :last, 0), select: params[:search_type] %>
+        </div>
 
-    <div class="cell">
-        <%= f.label :search_dateBegin, 'Desde' %>
-        <%= f.text_field :search_dateBegin, value: params[:search_dateBegin],  placeholder: 'dd/mm/yyyy', class: 'datepicker', id: 'dpdesde'%>
-    </div>
+        <div class="cell">
+            <%= f.label :search_dateBegin, 'Desde' %>
+            <%= f.text_field :search_dateBegin, value: params[:search_dateBegin],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
+        </div>
 
-    <div class="cell">
-        <%= f.label :search_dateEnd, 'Hasta' %>
-        <%= f.text_field :search_dateEnd, value: params[:search_dateEnd] %>
+        <div class="cell">
+            <%= f.label :search_dateEnd, 'Hasta' %>
+            <%= f.text_field :search_dateEnd, value: params[:search_dateEnd],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
+        </div>
+    <% end %>
     </div>
-  <% end %>
   </div>
   
-  <div class="grid-x grid-margin-x">
+  <div class="grid-x grid-margin-x small-12 medium-12 large-12" id="incidences">
     <%= render 'table_incidences' %>
   </div>
 </div>

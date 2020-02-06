@@ -6,7 +6,7 @@ class InterestPointsController < ApplicationController
   # GET /interest_points
   # GET /interest_points.json
   def index
-    @interest_points = InterestPoint.all
+    @interest_points = InterestPoint.search(params[:search_name])
   end
 
   # GET /interest_points/new
