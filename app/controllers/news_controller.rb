@@ -1,7 +1,7 @@
 class NewsController < ApplicationController
   layout "admin/admin_layout"
 
-  before_action :set_news, only: [:show, :edit, :update, :destroy]
+  before_action :set_news, only: [:show, :edit, :update, :destroy, :notify]
   before_action :set_edit, only: [:new, :edit]
 
   # GET /news
@@ -15,7 +15,7 @@ class NewsController < ApplicationController
 
     @news.each do |new_author|
       @author_name[new_author.author_id] = Staff.find(new_author.author_id).full_name
-    end 
+    end
   end
 
   # GET /news/1
@@ -44,17 +44,34 @@ class NewsController < ApplicationController
     @news = News.new(news_params)
     @news.author_id = current_user.id
 
-    if @news.published.nil? 
+    if @news.published.nil?
       @news.published = false
     end
-    
+
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: 'News was successfully created.' }
-        format.json { render :show, status: :created, location: @news }
+        if @news.published
+          PhoneIdentifier.all.each do |device|
+            n = Rpush::Gcm::Notification.new
+            n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
+            n.registration_ids = [device.fcm_token]
+            n.data = {
+                click_action: 'FLUTTER_NOTIFICATION_CLICK',
+            }
+
+            n.notification = {
+                body: 'Participación Ciudadana ha publicado una noticia nueva: "' + @news.title + '"',
+                title: 'Participación Puerto Real',
+            }
+            n.save!
+          end
+          Rpush.push
+        end
+        format.html {redirect_to @news, notice: 'News was successfully created.'}
+        format.json {render :show, status: :created, location: @news}
       else
-        format.html { render :new }
-        format.json { render json: @news.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @news.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -63,18 +80,18 @@ class NewsController < ApplicationController
   # PATCH/PUT /news/1.json
   def update
     @news.last_editor_id = current_user.id
-    
-    if @news.published.nil? 
+
+    if @news.published.nil?
       @news.published = false
     end
 
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'News was successfully updated.' }
-        format.json { render :show, status: :ok, location: @news }
+        format.html {redirect_to @news, notice: 'News was successfully updated.'}
+        format.json {render :show, status: :ok, location: @news}
       else
-        format.html { render :edit }
-        format.json { render json: @news.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @news.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -84,24 +101,44 @@ class NewsController < ApplicationController
   def destroy
     @news.destroy
     respond_to do |format|
-      format.html { redirect_to news_index_url, notice: 'News was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {redirect_to news_index_url, notice: 'News was successfully destroyed.'}
+      format.json {head :no_content}
     end
   end
 
+  def notify
+    PhoneIdentifier.all.each do |device|
+      n = Rpush::Gcm::Notification.new
+      n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
+      n.registration_ids = [device.fcm_token]
+      n.data = {
+          click_action: 'FLUTTER_NOTIFICATION_CLICK',
+      }
+
+      n.notification = {
+          title: 'Participación Puerto Real',
+          body: 'Participación Ciudadana ha publicado una noticia nueva: "' + @news.title + '"'
+      }
+      n.save!
+    end
+    Rpush.push
+    render json: {sent: true}, status: :ok
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_news
-      @news = News.where(:slug => params[:id]).first
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Use callbacks to share common setup or constraints between actions.
+  def set_news
+    @news = News.where(:slug => params[:id]).first
+  end
 
-    def news_params
-      params.require(:news).permit(:published, :title, :description, :body, :image_url)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
 
-    def set_edit
-      @edit = true
-    end
+  def news_params
+    params.require(:news).permit(:published, :title, :description, :body, :image_url)
+  end
+
+  def set_edit
+    @edit = true
+  end
 end
