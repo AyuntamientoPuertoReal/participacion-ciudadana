@@ -1,7 +1,7 @@
 class IncidencesController < ApplicationController
   layout "admin/admin_layout"
 
-  skip_authorize_resource only: [:index_new, :index_inprocess, :index_closed, :notify]
+  skip_authorize_resource only: [:index_new, :index_inprocess, :index_closed]
 
   before_action :set_incidence, only: [:show, :notify]
   load_and_authorize_resource
@@ -105,39 +105,6 @@ class IncidencesController < ApplicationController
       end
     end
   end
-
-  def notify
-    #get all devices registered in our db and loop through each of them
-    PhoneIdentifier.all.each do |device|
-      n = Rpush::Gcm::Notification.new
-      # use the pushme_droid app we previously registered in our initializer file to send the notification
-      n.app = Rpush::Gcm::App.find_by_name("appparticipacion_droid")
-      n.registration_ids = [device.fcm_token]
-
-      n.data = {
-          click_action: 'FLUTTER_NOTIFICATION_CLICK',
-          incidence: @incidence.to_json
-      }
-
-      # parameter for the notification
-      n.notification = {
-          body: 'Just wanted to tell you that you are beautiful!',
-          title: 'Hey this is rpush from rails!',
-          image: 'https://cdn.pixabay.com/photo/2014/11/14/03/38/news-530220_1280.jpg',
-          #icon: 'https://goo.gl/Fz9nrQ'
-      }
-
-
-      #save notification entry in the db
-      n.save!
-    end
-
-    # send all notifications stored in db
-    Rpush.push
-
-    render json: {sent: true}, status: :ok
-  end
-
 
   private
 

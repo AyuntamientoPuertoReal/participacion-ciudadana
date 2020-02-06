@@ -60,11 +60,6 @@ gem 'cancancan'
 # Notificaciones
 gem 'rpush'
 
-# Editor de texto WYSIWYG
-gem 'tinymce-rails'
-gem 'tinymce-rails-langs'
-gem 'tinymce-rails-imageupload', github: 'PerfectlyNormal/tinymce-rails-imageupload'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
