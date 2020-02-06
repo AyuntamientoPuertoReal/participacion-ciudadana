@@ -11,6 +11,9 @@ module ParticipacionCiudadana
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    config.time_zone = "Madrid"
+    config.i18n.default_locale = :es
+
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Settings in config/environments/* take precedence over those specified here.

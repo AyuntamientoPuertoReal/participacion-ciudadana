@@ -1,7 +1,7 @@
 <header>
   <div class="row back-link-row">
     <div class="large-12 columns">
-      <%= link_to "Volver a Puerto Real ― Participa", '#', class: 'back-link' %>
+      <%= link_to t("general.start.text_link_puerto_real_participa"), '#', class: 'back-link' %>
       <% if staff_signed_in? %>
         <span class="back-link">|</span>
         <%= link_to "Cerrar Sesión (#{current_staff.username})", destroy_staff_session_path, method: :delete, class: 'back-link' %>
