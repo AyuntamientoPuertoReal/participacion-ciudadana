@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
+
   devise_for :staffs
 
-  # Controlador de demostración. Se eliminará una vez que haya algún controlador real.
-  get 'demo/index', to: 'demo#index', as: 'demo'
-  root to: 'demo#index'
+  devise_scope :staff do
+    authenticated :staff do
+      root to: 'admin#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
 
   authenticate :staff do
+    get 'admin/index'
     resources :staffs, except: [:show]
     resources :news
     resources :processing_units, except: [:show]
@@ -19,7 +27,8 @@ Rails.application.routes.draw do
     resources :incidence, except: [:index, :show] do
       resources :incidence_trackings
     end
-    get 'notification/notify/:id', to: 'news#notify', as: 'nofity'
+    
+    get 'notification/notify/:id', to: 'news#notify', as: 'notify'
 
     get 'assign_incidence_type/:id', to:'processing_units#assign_incidence_types', as: 'assign_it'
     get 'unassign_incidence_type/:id', to:'processing_units#unassign_incidence_types', as: 'unassign_it'
