@@ -1,60 +1,21 @@
 <div class="grid-container">
   <div class="grid-x">
-      <div class="grid-x large-10 medium-10 small-10">
-        <div class="cell large-3 medium-3 small-3">
-          <label>
-            Nombre
-            <input type="text" placeholder="Titulo">
-          </label>
+    <div class="grid-x grid-margin-x large-8 medium-8 small-8">
+      <%= form_with method: :get, url: interest_points_path, id: 'interest_point_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
+        <div class="cell">
+            <%= f.label :search_name, 'Nombre' %>
+            <%= f.text_field :search_name, value: params[:search_name] %>
         </div>
-    </div>
-    
-      <div class="grid-x large-2 medium-2 small-2">
-        <div class="cell large-offset-2">
-          <%= link_to "Nuevo Punto", new_interest_point_path, class: "button success" %>
-        </div>
-      </div>
-  </div>
-  
-  <div class="grid-x grid-margin-x">
-    <table class="hover">
-      <thead>
-        <tr>
-          <th width="200">Nombre</th>
-          <th width="300">Descripcion</th>
-          <th width="250">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @interest_points.each do |interest_point| %>
-        <tr>
-          <td><%= interest_point.name %></td>
-          <td><%= truncate(interest_point.description, length: 150) %></td>
-          <td>
-            <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
-              <div class="cell">
-                <%= link_to "Detalles", edit_interest_point_path(interest_point), class: "button primary" %>
-              </div>
-              <div class="cell">
-                <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
-                  <div class="small reveal" id="ModalEliminar1" data-reveal>
-                    <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
-                    <div class="grid-x">
-                      <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
-                        <a class="button success" type="button" data-close>Aceptar</a>
-                      </div>
-                      
-                      <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
-                        <a class="button alert" type="button" data-close>Cancelar</a>
-                      </div>
-                    </div>
-                  </div>
-               </div>
-            </div>
-          </td>
-        </tr>
       <% end %>
-      </tbody>
-    </table>
+    </div>
+    <div class="grid-x">
+      <div class="cell">
+        <%= link_to "Nuevo Punto", new_interest_point_path, class: "button success" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-x grid-margin-x" id="interest_point">
+    <%= render 'table_interest_point' %> 
   </div>
 </div>

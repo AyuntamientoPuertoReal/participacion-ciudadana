@@ -7,3 +7,9 @@ changeMap = ->
     
 $(document).on('turbolinks:load', changeMap)
 
+function_search = ->
+  $("#search_name").keyup ->
+    $.get($("#interest_point_search").attr("action"), $("#interest_point_search").serializeArray(), null, "script")
+    return false
+
+$(document).on('turbolinks:load', function_search)

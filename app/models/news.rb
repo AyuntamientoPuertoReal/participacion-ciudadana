@@ -25,14 +25,14 @@ class News < ApplicationRecord
           end
 
           if !(autor_id_ids.blank?) 
-            hash_where["author_str"] = "author_id IN (" + "#{autor_id_ids}" + ")"
+            hash_where["author_str"] = "author_id IN (" + autor_id_ids + ")"
           else
             hash_where["author_str"] = "author_id IS NULL"
           end
       end
       
       if !(created_at.blank?)
-          hash_where["ut_str"] = ""
+          hash_where["created_at_str"] = "date(created_at) = '" + created_at + "'"
       end
 
       if published != "0"
