@@ -3,14 +3,14 @@
     <div class="grid-x grid-margin-x large-8 medium-8 small-8">
       <%= form_with method: :get, url: interest_points_path, id: 'interest_point_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
         <div class="cell">
-            <%= f.label :search_name, 'Nombre' %>
+            <%= f.label :search_name, t("tags.name") %>
             <%= f.text_field :search_name, value: params[:search_name] %>
         </div>
       <% end %>
     </div>
     <div class="grid-x">
       <div class="cell">
-        <%= link_to "Nuevo Punto", new_interest_point_path, class: "button success" %>
+        <%= link_to t("button_text.interest_point_new"), new_interest_point_path, class: "button success" %>
       </div>
     </div>
   </div>

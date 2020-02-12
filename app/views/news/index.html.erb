@@ -3,23 +3,23 @@
       <div class="grid-x small-8 medium-8 large-8">
       <%= form_with method: :get, url: news_index_path, id: 'news_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
         <div class="cell">
-          <%= f.label :search_title, 'Titulo' %>
+          <%= f.label :search_title, t("tags.title") %>
           <%= f.text_field :search_title, value: params[:search_title] %>
         </div>
         
         <div class="cell">
-          <%= f.label :search_author, 'Autor' %>
+          <%= f.label :search_author, t("tags.author") %>
           <%= f.text_field :search_author, value: params[:search_author] %>
         </div>
         
         <div class="cell">
-          <%= f.label :search_createdAt, 'Fecha' %>
+          <%= f.label :search_createdAt, t("tags.date") %>
           <%= f.text_field :search_createdAt, value: params[:search_createdAt],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
         </div>
 
         <div class="cell"> 
-          <%= f.label :search_published, 'Publicado' %>
-          <%= f.select :search_published, options_for_select([["Si", 1], ["No", 2], ["Indefinido", 0]], 0), select: params[:search_published] %>
+          <%= f.label :search_published, t("tags.published") %>
+          <%= f.select :search_published, options_for_select([[t("tags.indeterminate"), 0], [t("general.yes_option"), 1], [t("general.no_option"), 2]], 0), select: params[:search_published] %>
         </div>
       <% end %>
       </div>
@@ -27,7 +27,7 @@
       <% if @current_user.is_web_editor || @user_role == 1 || @user_role == 2 %>
       <div class="grid-x small-3 medium-3 large-3 small-offset-1 medium-offset-1 large-offset-1">
         <div class="cell">
-          <%= link_to "Nueva Noticia", new_news_path, class: "button success" %>
+          <%= link_to t("button_text.news_new"), new_news_path, class: "button success" %>
         </div>
       </div>
       <% end %>

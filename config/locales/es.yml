@@ -1,29 +1,107 @@
 es:
-  tablas_crud:
-   general:
-    table_index:
-    tag:
+  tags:
+    description: "Descripcion"
+    type: "Tipo"
+    email: "Email"
+    password: "Contraseña"
+    repeat_password: "Repetir Contraseña"
+    from: "Hasta"
+    to: "Desde"
+    title: "Titulo"
+    author: "Autor"
+    date: "Fecha"
+    published: "Publicado"
+    no_published: "Sin publicar"
+    name: "Nombre"
+    full_name: "Nombre Completo"
+    code: "Codigo"
+    processing_unit_seach: "Unidad Tramitadora"
+    status: "Estado"
+    actions: "Acciones"
+    publish: "Publicar"
+    web_editor: "Modificar Web"
+    role: "Roles"
+    none: "Ninguno"
+    admin: "Administrador"
+    supervisor: "Supervisor"
+    order: "Orden"
+    indeterminate: "Indeterminado"
+    message: "Mensaje"
+    staff_user: "Personal"
+    select: "Seleccionar"
+    unit: "Unidad"
+    location: "Localizacion"
+    latitude: "Latitud"
+    longitude: "Longitud"
+    show_in_map: "Mostrar en mapa"
+    log: "Historial"
+    date_created: "Fecha de creacion"
+    news_date: "Redaccion de la noticia"
+    body: "Cuerpo"
 
-   indicence:
-    status:
-    details:
+  field_form:
+    new_register: "Crear nuevo: %{element}"
+    edit_register: "Editando registro: %{element} - %{regist}"
+    table_text: "*Los cambios efectuados seran automaticamente actualizados"
+    date_tag: "Datos de %{element}"
+    new_tracking: "Creando nuevo seguimiento de la Incidencia nº %{incidence}"
+    edit_tracking: "Editando seguimiento nº %{tracking}, de la Incidencia nº %{incidence}"
+    processing_unit: "Unidad Tramitadora"
+    incidence_type: "Tipo de Incidencia"
+    processing_unit: "Unidad Tramitadora"
+    staff: "Personal"
+    news: "Noticia"
+    interest_point: "Punto de Interes"
+    incidence: "Incidencia"
 
+  statuses:
+    send: "Enviado"
+    send_color: "#2EFE2E"
+    inprocess: "En Proceso"
+    inprocess_color: "#D2691E"
+    ended: "Finalizado"
+    ended_color: "#1E90FF"
+    no_acept: "Desestimada"
+    no_acept_color: "#B90000"
 
-    
-   
+  modals:
+    delete:
+      message: "¿Estas seguro que desea eliminar?"
+
+  button_text:
+    incidence_type_new: "Nuevo Tipo"
+    processing_unit_new: "Nueva Unidad"
+    staff_new: "Nuevo Usuario"
+    news_new: "Nueva Noticia"
+    interest_point_new: "Nuevo Punto"
+    incidence_tracking_new: "Nuevo Estado"
+    mod_edit: "Modificar"
+    details: "Detalles"
+    delete: "Eliminar"
+    save: "Guardar"
+    notification: "Notificacion"
+
   general:
     back: "Volver"
+    accept: "Aceptar"
+    cancel: "Cancelar"
+    yes_option: "Si"
+    no_option: "No"
+    avaible: "Disponibles"
+    selected: "Seleccionados"
+
     start:
       message: "La aplicacion se esta ejecutrando en el entorno: "
       text_link_puerto_real_participa: "Volver a Puerto Real - Participa"
-      text_admin_home_1: "Puerto Real - Participa"
-      text_admin_home_2: "ADMINISTRACÍON"
+      text_admin_home: "Puerto Real ― Participa <br/> <small>ADMINISTRACIÓN</small>"
+      log_out: "Cerrar Sesión (%{username})"
+      log_in: "Inciar Sesión"
     login:
       tag_password: "Contraseña"
-      tag_username: "Nombre de usuaario"
+      tag_username: "Nombre de usuario"
       tag_access_system: "Acceder al sistema"
       buttom_login: "Iniciar sesión"
-      chackbox_remember: "Recordarme"
+      checkbox_remember: "Recordarme"
       password_forgot: "¿Has olvidado la contraseña?"
 
     menu_side_bar:

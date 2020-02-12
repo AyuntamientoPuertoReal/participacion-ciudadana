@@ -22,7 +22,7 @@ class IncidencesController < ApplicationController
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where.not(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     end
 
-    @incidence_type_name = { 0 => "Indeterminado"}
+    @incidence_type_name = { 0 => t("tags.indeterminate")}
     incidence_type = IncidenceType.where(:id => @incidences.select(:incidence_type_id)).select(:id, :name)
 
     incidence_type.each do |incidence_type|
