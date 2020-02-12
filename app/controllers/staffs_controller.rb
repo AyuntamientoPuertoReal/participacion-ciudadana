@@ -12,7 +12,7 @@ class StaffsController < ApplicationController
     @staffs = Staff.search(params[:search_code], params[:search_name], params[:search_ut])
     
     ut_code_tmp = ProcessingUnit.all.select(:id, :code)
-    @ut_code = {0 => "Indeterminado"}
+    @ut_code = {0 => t("tags.indeterminate")}
 
     ut_code_tmp.each do |ut_code_ind|
       @ut_code[ut_code_ind.id] = ut_code_ind.code

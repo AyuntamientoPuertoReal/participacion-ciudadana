@@ -1,4 +1,15 @@
-<h1>Nuevo Punto de Interes:</h1>
-<%= link_to 'Volver', interest_points_path %>
+<% if @interest_point.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@interest_point.errors.count, "error") %> prohibited this staff from being saved:</h2>
 
+    <ul>
+      <% @interest_point.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.interest_point")) %></h1>
 <%= render 'form', interest_point: @interest_point %>
+<%= link_to t("general.back"), interest_points_path %>

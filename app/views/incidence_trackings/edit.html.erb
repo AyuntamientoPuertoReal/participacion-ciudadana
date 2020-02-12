@@ -1,5 +1,17 @@
-<h1>Editando Seguimiento nº <%= @incidence_tracking.id %>, de la incidencia <%= @incidence.id %>.</h1>
-<%= link_to "Volver", incidence_path(@incidence) %>
+<% if @incidence_tracking.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@incidence_tracking.errors.count, "error") %> prohibited this staff from being saved:</h2>
 
+    <ul>
+      <% @incidence_tracking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<h1><%= t("field_form.edit_tracking", deep_interpolation: true, tracking: @incidence_tracking.id, incidence: @incidence.id) %></h1>
 <%= render 'form', incidence_tracking: @incidence_tracking %>
+<%= link_to t("general.back"), incidence_path(@incidence) %>
 

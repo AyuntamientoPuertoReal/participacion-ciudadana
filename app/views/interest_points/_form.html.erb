@@ -1,23 +1,8 @@
 <%= form_with(model: interest_point, local: true) do |f| %>
-  <!-- <% if interest_point.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(interest_point.errors.count, "error") %> prohibited this interest_point from being saved:</h2>
-
-      <ul>
-      <% interest_point.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div> -->
 <div class="grid-y">
   <div class="grid-x">
       <div class="large-12 medium-12 small-12">
-        <h3 class="text-center">Datos de la Punto de Interes</h3>
+        <h3 class="text-center"><%= t("field_form.date_tag", deep_interpolation: true, element: t("field_form.interest_point")) %></h3>
       </div>
       
       <div class="large-12 medium-12 small-12 text-center">
@@ -32,21 +17,21 @@
   
   <div class="grid-x">
     <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Nombre" %>
+      <%= f.label t("tags.name") %>
       <%= f.text_field :name %>
     </div>
   </div>
   
   <div class="grid-x">
     <div class="large-9 medium-9 small-9 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Descripcion" %>
+      <%= f.label t("tags.description") %>
       <%= f.text_area :description, rows: "8" %>
     </div>
   </div>
 
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <h3 class="text-center">Localizacion</h3>
+      <h3 class="text-center"><%= t("tags.location") %></h3>
     </div>
   </div>
 
@@ -54,13 +39,13 @@
  <div class="grid-x">
    
   <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Latitud" %>
+      <%= f.label t("tags.latitude") %>
       <%= f.number_field :latitude, step: "any", id: "inp_latitud" %>
 
-      <%= f.label "Longitud" %>
+      <%= f.label t("tags.longitude") %>
       <%= f.number_field :longitude, step: "any", id: "inp_longitud" %>
     
-      <a id="into_map" class="button primary">Mostrar en mapa</a>
+      <a id="into_map" class="button primary"><%= t("tags.show_in_map") %></a>
   </div>
    
   <div class="large-6 medium-6 small-6 large-offset-2 medium-offset-2 small-offset-2">
@@ -74,7 +59,7 @@
 </div>
  
   <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
-    <%= f.submit "Guardar", class: "button primary" %>
+    <%= f.submit t("button_text.save"), class: "button primary" %>
   </div>
 </div>
 
