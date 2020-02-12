@@ -15,7 +15,6 @@
 //= require jquery
 //= require turbolinks
 //= require foundation
-//= require tinymce-jquery
 //= require foundation-datepicker
 //= require locales/foundation-datepicker.es.js
 //= require_tree .
@@ -24,6 +23,4 @@
 
 $(document).on('turbolinks:load', function () {
     $(function(){ $(document).foundation(); });
-    tinymce.remove();
-    tinymce.init({selector:'.tinymce'});
 });

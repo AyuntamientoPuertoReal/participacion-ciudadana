@@ -132,16 +132,4 @@ Rpush.reflect do |on|
   # Called when an exception is raised.
   # on.error do |error|
   # end
-  
-  # initializer file may run multiple times but we don't wanna register the app multiple times so first check if it already exists in db and create new one only if it doesn't.
-  if (!Rpush::Gcm::App.find_by_name("appparticipacion_droid"))
-    app = Rpush::Gcm::App.new
-    # let's name this one pushme_droid
-    app.name = "appparticipacion_droid"
-    # FCM auth key from firebase project
-    app.auth_key = "AAAAPcwRFnM:APA91bETXv1YksuhFsSlAl_SB4V3lCvGns_O7V3oxYS1Wff7JaQii9gH9oUIAM_Fd460uKWmAoOOn_rjp3jTwXRfR4C8hQErvRAeF56qaVRft5OO9bpYNYoAoTe355_HPDVcb08oa8si"
-    app.connections = 1
-    # save our app in db
-    app.save!
-  end
 end
