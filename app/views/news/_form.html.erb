@@ -10,41 +10,37 @@
       <%= f.label t("tags.author") %>
       <p><%= @author_name %></p>
     </div>
-    <div class="grid-x">
-      <div class="large-5 medium-5 small-5 large-offset-1 medium-offset-1 small-offset-1">
-        <%= f.label "Autor" %>
-        <p><%= @author_name %></p>
-      </div>
-
-      <div class="large-5 medium-5 small-3 large-offset-1 medium-offset-1 small-offset-1">
-        <% if @user_role == 1 || @user_publish %>
-          <fieldset class="cell">
-            <legend>Estado de publicacion</legend>
-            <div class="grid-x">
-              <%= f.radio_button :published, true %> 
-              <%= f.label t("tags.published") %>
-            </div>
-            <div class="grid-x">
-              <%= f.radio_button :published, false %> 
-              <%= f.label t("tags.no_published") %>
-            </div>
-          </fieldset>
-        <% else %>
-          <% if @edit %>
-            <%= f.label t("tags.date_created") %>
-            <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
+    <div class="large-3 medium-3 small-3 large-offset-1 medium-offset-1 small-offset-1">
+      <% if @user_role == 1 || @user_publish %>
+        <fieldset class="cell">
+          <legend><%= t("tags.publish_state") %></legend>
+          <div class="grid-x">
+            <%= f.radio_button :published, true %> 
+            <%= f.label t("tags.published") %>
+          </div>
+          <div class="grid-x">
+            <%= f.radio_button :published, false %> 
+            <%= f.label t("tags.no_published") %>
+          </div>
+        </fieldset>
+      <% else %>
+        <% if @edit %>
+          <%= f.label t("tags.publish_state") %>
+          <% if @new.published %>
+            <p><%= t("tags.published") %></p>
+          <% else %>
+            <p><%= t("tags.no_published") %></p>
           <% end %>
         <% end %>
+      <% end %>
     </div>
   </div>
   
   <% if @edit %>
     <% if @user_role == 1 || @user_publish %>
-    <div class="grid-x">
-      <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
-        <%= f.label t("tags.date_created") %>
-        <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
-      </div>
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <%= f.label t("tags.date_created") %>
+      <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
     </div>
     <% end %>
   <% end %>
@@ -99,4 +95,5 @@
       <%= link_to t("button_text.notification"), notify_path, class: "button success" %>
     </div>
   <% end %>
+</div>
 <% end %>
