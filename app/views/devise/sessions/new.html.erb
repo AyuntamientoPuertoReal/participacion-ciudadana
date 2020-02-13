@@ -1,26 +1,26 @@
-<h2>Acceder al sistema</h2>
+<h2><%= t("general.login.tag_access_system") %></h2>
 
 <div class="login-panel">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.label :login %><br/>
+      <%= f.label :login, t("general.login.tag_username") %>
       <%= f.text_field :login, autofocus: true, autocomplete: "login" %>
     </div>
 
     <div class="field">
-      <%= f.label :password %><br/>
+      <%= f.label :password, t("general.login.tag_password") %>
       <%= f.password_field :password, autocomplete: "current-password" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
       <div class="field">
         <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.label :remember_me, t("general.login.checkbox_remember") %>
       </div>
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Log in" %>
+      <%= f.submit t("general.login.buttom_login") %>
     </div>
   <% end %>
   <%= render "devise/shared/links" %>

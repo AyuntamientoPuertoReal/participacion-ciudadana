@@ -1,5 +1,15 @@
-<%= link_to 'Volver', incidence_types_path %>
-<h3>Editando el tipo de incidencia <%= @incidence_type.name %></h3>
+<% if @incidence_type.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@incidence_type.errors.count, "error") %> prohibited this staff from being saved:</h2>
 
+    <ul>
+      <% @incidence_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h3><%= t("field_form.edit_register", deep_interpolation: true, element: t("field_form.incidence_type"), regist: @incidence_type.code) %></h3>
 <%= render 'form', incidence_type: @incidence_type %>
-
+<%= link_to t("general.back"), incidence_types_path %>

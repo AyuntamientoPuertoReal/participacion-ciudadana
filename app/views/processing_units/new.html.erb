@@ -1,5 +1,15 @@
-<%= link_to 'Volver', processing_units_path %>
-<h3>Crear nueva unidad tramitadora</h3>
+<% if @processing_unit.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@processing_unit.errors.count, "error") %> prohibited this staff from being saved:</h2>
 
+    <ul>
+      <% @processing_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h3><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.processing_unit")) %></h3>
 <%= render 'form', processing_unit: @processing_unit %>
-
+<%= link_to t("general.back"), processing_units_path %>

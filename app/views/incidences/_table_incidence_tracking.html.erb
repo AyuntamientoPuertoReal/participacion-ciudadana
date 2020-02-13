@@ -1,14 +1,14 @@
 <table class="hover">
     <thead>
       <tr>
-        <th width="25">Fecha</th>
-        <th width="25">Estado</th>
-        <th width="50">Mensaje</th>
-        <th width="50">Personal</th>
+        <th width="25"><%= t("tags.date") %></th>
+        <th width="25"><%= t("tags.status") %></th>
+        <th width="50"><%= t("tags.message") %></th>
+        <th width="50"><%= t("tags.staff_user") %></th>
         <% if !(@incidence_tracking_status.nil?) %>
         <% if @incidence_tracking_status.status != 3 %>
         <% if @incidence_tracking_status.status != 4 %>
-        <th width="100">Acciones</th>
+        <th width="100"><%= t("tags.actions") %></th>
         <% end %>
         <% end %>
         <% end %>
@@ -19,14 +19,14 @@
       <tr id=<%= tracking.id %>>
           <td><%= tracking.created_at.strftime("%d/%m/%Y %R") %></td>
           <% if tracking.status == 1 %>
-                  <td style="color: #2EFE2E;">Enviado</td>
+                  <td style="color: <%= t("statuses.send_color") %>;"><%= t("statuses.send") %></td>
               <% else %>
                 <% if tracking.status == 2 %>
-                    <td style="color: #D2691E;">En Proceso</td>
+                    <td style="color: <%= t("statuses.inprocess_color") %>;"><%= t("statuses.inprocess") %></td>
                 <% elsif tracking.status == 3 %>
-                    <td style="color: #1E90FF;">Finalizado</td>
+                    <td style="color: <%= t("statuses.ended_color") %>;"><%= t("statuses.ended") %></td>
                 <% elsif tracking.status == 4 %>
-                    <td style="color: #B90000;">Desestimada</td>
+                    <td style="color: <%= t("statuses.no_acept_color") %>;"><%= t("statuses.no_acept") %></td>
               <% end %>
           <% end %>
           <td><%= tracking.message %></td>
@@ -40,23 +40,23 @@
                 <% if @user_role == 5 || @incidence_tracking_status.status != 3  %>
                 <% if @incidence_tracking_status.status != 4 %>
                 <div class="cell">
-                    <%= link_to "Modificar", edit_incidence_incidence_tracking_path(@incidence, tracking), class: "button primary"  %>
+                    <%= link_to t("button_text.mod_edit"), edit_incidence_incidence_tracking_path(@incidence, tracking), class: "button primary"  %>
                 </div>
                 <% end %>
                 <% end %>
                 <% if @user_role == 5 || (@incidence_tracking_status.status != 3 && index >= (@incidence_tracking_incidence.size - 1))  %>
                 <% if @incidence_tracking_status.status != 4 %>
                 <div class="cell">
-                    <a class="button alert" data-open="ModalEliminar1">Eliminar</a>
-                    <div class="small reveal" id="ModalEliminar1" data-reveal>
-                        <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+                    <a class="button alert" data-open="ModalEliminar_<%= tracking.id %>">Eliminar</a>
+                    <div class="small reveal" id="ModalEliminar_<%= tracking.id %>" data-reveal>
+                        <h3 class="text-center"><%= t("modals.delete.message") %></h3>
                         <div class="grid-x">
                         <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
-                            <%= link_to "Aceptar", incidence_incidence_tracking_path(@incidence, tracking), method: :delete, class: "button success", type: "button", data: {close: ""} %>
+                          <a class="button success" type="button" rel="nofollow" data-method="delete" href="<%= incidence_incidence_tracking_path(@incidence, tracking) %>" data-close><%= t("general.accept") %></a>
                         </div>
 
                         <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
-                            <a class="button alert" type="button" data-close>Cancelar</a>
+                            <a class="button alert" type="button" data-close><%= t("general.cancel") %></a>
                         </div>
                         </div>
                     </div>

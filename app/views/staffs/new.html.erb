@@ -1,5 +1,16 @@
-<%= link_to 'Volver', staffs_path %>
-<h3>Crear nuevo usuario</h3>
+<% if @staff.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
 
+    <ul>
+      <% @staff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h3><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.staff")) %></h3>
 <%= render 'form', staff: @staff %>
+<%= link_to t("general.back"), staffs_path %>
 

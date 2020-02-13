@@ -2,53 +2,52 @@
 <div class="grid-y">
   <div class="grid-x">
       <div class="large-12 medium-12 small-12">
-        <h3 class="text-center">Datos del tipo de Incidencia</h3>
+        <h3 class="text-center"><%= t("field_form.date_tag", deep_interpolation: true, element: t("field_form.incidence_type")) %></h3>
       </div>
   </div>
 
   <div class="grid-x">
     <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Nombre" %>
+      <%= f.label t("tags.name") %>
       <%= f.text_field :name %>
     </div>
     
     <div class="large-1 medium-1 small-1 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Codigo" %>
+      <%= f.label t("tags.code") %>
       <%= f.text_field :code %>
     </div>
   </div>  
   
   <div class="grid-x">
     <div class="large-8 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Descripcion" %>
+      <%= f.label t("tags.description") %>
       <%= f.text_area :description %>
     </div>
   </div>
 
   <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
-    <%= f.submit "Guardar", class: "button primary" %>
+    <%= f.submit t("button_text.save"), class: "button primary" %>
   </div>
 </div>
 <% if @edit %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <h4 class="text-center">Unidad Tramitadoras</h4>
-      <p class="text-center">*Los cambios efectuados seran automaticamente actualizados</p>
+      <h4 class="text-center"><%= t("field_form.processing_unit") %></h4>
+      <p class="text-center"><%= t("field_form.table_text") %></p>
     </div>
   </div>
   <div class="grid-x">
     <div class="grid-y large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
       <div class="cell">
-        <label>Disponibles
-          <input type="text" placeholder="Buscar">
-        </label>
-      
+
+        <p class="text-center"><%= t("general.avaible") %></p>
+
         <table id="procUnit_table_disponible" class="hover">
           <thead>
             <tr>
-              <th width="25">Seleccionar</th>
-              <th width="75">Unidad</th>
+              <th width="25"><%= t("tags.select") %></th>
+              <th width="75"><%= t("tags.unit") %></th>
             </tr>
           </thead>
           <tbody>
@@ -73,16 +72,13 @@
     
     <div class="grid-y large-2 medium-2 small-2">
       
-       <div class="cell">
-        <label>Asignadas
-          <input type="text" placeholder="Buscar">
-        </label>
-      
+      <div class="cell">
+        <p class="text-center"><%= t("general.selected") %></p>
         <table id="procUnit_table_asignada" class="hover">
           <thead>
             <tr>
-              <th width="25">Seleccionar</th>
-              <th width="75">Unidad</th>
+              <th width="25"><%= t("tags.select") %></th>
+              <th width="75"><%= t("tags.unit") %></th>
             </tr>
           </thead>
           <tbody>
@@ -99,6 +95,6 @@
       
     </div>
   </div>
-<% end %>
 </div>
+<% end %>
 <% end %>

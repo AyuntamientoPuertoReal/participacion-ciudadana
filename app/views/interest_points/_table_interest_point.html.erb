@@ -1,9 +1,9 @@
 <table class="hover">
   <thead>
     <tr>
-      <th width="200">Nombre</th>
-      <th width="300">Descripcion</th>
-      <th width="250">Acciones</th>
+      <th width="200"><%= t("tags.name") %></th>
+      <th width="300"><%= t("tags.description") %></th>
+      <th width="250"><%= t("tags.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -14,19 +14,19 @@
       <td>
         <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
           <div class="cell">
-            <%= link_to "Detalles", edit_interest_point_path(int_point), class: "button primary" %>
+            <%= link_to t("button_text.mod_edit"), edit_interest_point_path(int_point), class: "button primary" %>
           </div>
           <div class="cell">
-            <a class="button alert" data-open="ModalEliminar1">Eliminar</a>     
-              <div class="small reveal" id="ModalEliminar1" data-reveal>
-                <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+            <a class="button alert" data-open="ModalEliminar_<%= int_point.id %>">Eliminar</a>     
+              <div class="small reveal" id="ModalEliminar_<%= int_point.id %>" data-reveal>
+                <h3 class="text-center"><%= t("modals.delete.message") %></h3>
                 <div class="grid-x">
                   <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
-                    <a class="button success" type="button" data-close>Aceptar</a>
+                    <a class="button success" type="button" rel="nofollow" data-method="delete" href="<%= interest_point_path(int_point.id) %>" data-close><%= t("general.accept") %></a>
                   </div>
                   
                   <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
-                    <a class="button alert" type="button" data-close>Cancelar</a>
+                    <a class="button alert" type="button" data-close><%= t("general.cancel") %></a>
                   </div>
                 </div>
               </div>
