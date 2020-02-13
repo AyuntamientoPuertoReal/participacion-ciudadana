@@ -28,22 +28,7 @@
   </div>
 
   <div class="grid-x">
-    <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-        <fieldset class="large-6 cell">
-          <legend><%= t("tags.web_editor") %></legend>
-          <div class="grid-x">
-                <%= f.radio_button :is_web_editor, true %>
-                <%= f.label t("general.yes_option") %>
-          </div>
-
-          <div class="grid-x">
-                <%= f.radio_button :is_web_editor, false %>
-                <%= f.label t("general.no_option") %>
-          </div>
-        </fieldset>
-    </div>
-
-    <div class="large-3 medium-3 small-3 large-offset-1 medium-offset-1 small-offset-1">
+    <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
       <fieldset class="large-6 cell">
         <legend><%= t("tags.role") %></legend>
         <div class="grid-x">
@@ -59,6 +44,21 @@
         <div class="grid-x">
           <%= f.radio_button :role_id, Role.find(2).id %>
           <%= f.label t("tags.supervisor") %>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="large-3 medium-3 small-3">
+      <fieldset class="large-6 cell">
+        <legend>Modificar Web</legend>
+        <div class="grid-x">
+          <%= f.radio_button :is_web_editor, true %>
+          <%= f.label 'Si' %>
+        </div>
+
+        <div class="grid-x">
+          <%= f.radio_button :is_web_editor, false %>
+          <%= f.label 'No' %>
         </div>
       </fieldset>
     </div>
