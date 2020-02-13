@@ -11,14 +11,14 @@
       <p><%= @author_name %></p>
     </div>
     <div class="grid-x">
-      <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
+      <div class="large-5 medium-5 small-5 large-offset-1 medium-offset-1 small-offset-1">
         <%= f.label "Autor" %>
         <p><%= @author_name %></p>
       </div>
 
-      <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
+      <div class="large-5 medium-5 small-3 large-offset-1 medium-offset-1 small-offset-1">
         <% if @user_role == 1 || @user_publish %>
-          <fieldset class="large-5 cell">
+          <fieldset class="cell">
             <legend>Estado de publicacion</legend>
             <div class="grid-x">
               <%= f.radio_button :published, true %> 
@@ -39,26 +39,17 @@
   </div>
   
   <% if @edit %>
-  <% if @user_role == 1 || @user_publish %>
+    <% if @user_role == 1 || @user_publish %>
     <div class="grid-x">
       <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
         <%= f.label t("tags.date_created") %>
         <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
       </div>
     </div>
-
-    <% if @edit %>
-      <% if @user_role == 1 || @user_publish %>
-        <div class="grid-x">
-          <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
-            <%= f.label "Fecha de creacion" %>
-            <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
-          </div>
-        </div>
-      <% end %>
     <% end %>
-
+  <% end %>
   </div>
+
   <div class="grid-x">
       <div class="large-12 medium-12 small-12">
         <h3 class="text-center"><%= t("tags.news_date") %></h3>
@@ -67,7 +58,7 @@
 
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <%= f.label "Imagen destacada", class: "text-center" %>
+      <%= f.label t("tags.main_image"), class: "text-center" %>
     </div>
 
     <div class="large-12 medium-12 small-12 text-center">
@@ -96,8 +87,7 @@
   <div class="grid-x">
       <div class="large-8 medium-8 small-8 large-offset-2 medium-offset-2 small-offset-2">
         <%= f.label t("tags.body") %>
-        <%= f.text_area :body, class: "tinymce", rows: 10, cols: 120 %>
-        <%= tinymce %>
+        <%= f.text_area :body, rows: 10, cols: 120 %>
       </div>
   </div>
 
@@ -106,7 +96,7 @@
   </div>
   <% if @edit %>
       <div class="cell large-3 medium-3 small-3 large-offset-9 medium-offset-9 small-offset-9">
-      <%= link_to "Notificación", notify_path, class: "button success" %>
+      <%= link_to t("button_text.notification"), notify_path, class: "button success" %>
     </div>
   <% end %>
 <% end %>

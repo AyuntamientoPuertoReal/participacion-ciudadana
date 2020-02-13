@@ -38,6 +38,7 @@ es:
     date_created: "Fecha de creacion"
     news_date: "Redaccion de la noticia"
     body: "Cuerpo"
+    main_image: "Imagen Destacada"
 
   field_form:
     new_register: "Crear nuevo: %{element}"
