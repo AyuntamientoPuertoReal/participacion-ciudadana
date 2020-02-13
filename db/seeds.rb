@@ -313,7 +313,7 @@ if (!Rpush::Gcm::App.find_by_name("appparticipacion_droid"))
   app.auth_key = Rails.application.credentials.fcm_auth_key
   app.connections = 1
   # save our app in db
-  app.save!
+  app.save
   puts "✔"
 end
 
