@@ -129,7 +129,7 @@ class NewsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_news
-    @news = News.where(:slug => params[:id]).first
+    @news = News.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
