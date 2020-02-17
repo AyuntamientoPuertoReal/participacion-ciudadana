@@ -48,6 +48,7 @@ es:
     date_tag: "Datos de %{element}"
     new_tracking: "Creando nuevo seguimiento de la Incidencia nº %{incidence}"
     edit_tracking: "Editando seguimiento nº %{tracking}, de la Incidencia nº %{incidence}"
+    advice_app: "*Este campo aparece en la APP."
     processing_unit: "Unidad Tramitadora"
     incidence_type: "Tipo de Incidencia"
     staff: "Personal"
@@ -81,6 +82,14 @@ es:
     delete: "Eliminar"
     save: "Guardar"
     notification: "Notificacion"
+
+  error_messages:
+    errors_count: "Hemos encontrado este numero de errores, %{count}:"
+    blank_field: "No puede estar vacio."
+    not_unique: "Ya existe. Inserte otro."
+    minimum: "Es demasiado corto. Necesita minimo de %{min} caracteres."
+    maximum: "Es demasiado largo. Tiene un maximo de %{max} caracteres."
+    errors: "errores"
 
   general:
     back: "Volver"

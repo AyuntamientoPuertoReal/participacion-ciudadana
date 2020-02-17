@@ -1,4 +1,17 @@
 <%= form_with(model: @incidence_tracking, url: @url_form, method: @method_form, local: true) do |f| %>
+
+<% if @incidence_tracking.errors.any? %>
+  <div data-abide-error class="alert callout" id="error_explanation">
+    <h2><%= t("error_messages.errors_count", deep_interpolation: true, count: pluralize(@incidence_tracking.errors.count, t("error_messages.errors"))) %></h2>
+
+    <ul>
+      <% @incidence_tracking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">

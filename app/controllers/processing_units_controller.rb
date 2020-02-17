@@ -49,6 +49,7 @@ class ProcessingUnitsController < ApplicationController
   # POST /processing_units.json
   def create
     @processing_unit = ProcessingUnit.new(processing_unit_params)
+    @processing_unit.code = @processing_unit.code.upcase
 
     respond_to do |format|
       if @processing_unit.save
@@ -64,6 +65,8 @@ class ProcessingUnitsController < ApplicationController
   # PATCH/PUT /processing_units/1
   # PATCH/PUT /processing_units/1.json
   def update
+    @processing_unit.code = @processing_unit.code.upcase
+
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to processing_units_path, notice: 'Processing unit was successfully updated.' }

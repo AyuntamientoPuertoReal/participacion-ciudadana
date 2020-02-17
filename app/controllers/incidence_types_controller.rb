@@ -39,6 +39,7 @@ class IncidenceTypesController < ApplicationController
 
     @incidence_type = IncidenceType.new(incidence_type_params)
     @incidence_type.order = next_order
+    @incidence_type.code = @incidence_type.code.upcase
 
     respond_to do |format|
       if @incidence_type.save
@@ -54,6 +55,8 @@ class IncidenceTypesController < ApplicationController
   # PATCH/PUT /incidence_types/1
   # PATCH/PUT /incidence_types/1.json
   def update
+    @incidence_type.code = @incidence_type.code.upcase
+
     respond_to do |format|
       if @incidence_type.update(incidence_type_params)
         format.html { redirect_to incidence_types_path, notice: 'Incidence type was successfully updated.' }
