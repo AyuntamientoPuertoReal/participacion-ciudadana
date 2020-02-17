@@ -1,5 +1,17 @@
 <%= form_with(model: processing_unit, remote: true) do |f| %>
 
+<% if @processing_unit.errors.any? %>
+  <div data-abide-error class="alert callout" id="error_explanation">
+    <h2><%= t("error_messages.errors_count", deep_interpolation: true, count: pluralize(@processing_unit.errors.count, t("error_messages.errors"))) %></h2>
+
+    <ul>
+      <% @processing_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
