@@ -9,7 +9,7 @@ class Ability
         can :manage, IncidenceTracking
       end
 
-      if user.role == Role.find(1)
+      if user.role == Role.find_by(name: "Administrador")
         can :manage, Staff
         can :manage, ProcessingUnit
         can :manage, IncidenceType
@@ -17,7 +17,7 @@ class Ability
         can :manage, IncidenceTracking
       end
 
-      if user.role == Role.find(2)
+      if user.role == Role.find_by(name: "Supervisor")
         can :read, Incidence
         can :manage, IncidenceTracking
       end

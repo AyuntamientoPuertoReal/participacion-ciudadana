@@ -24,7 +24,7 @@
           <td>
             <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-3">
               <div class="cell">
-                <% if @user_role == 1 || @user_role == 2 || new.author_id == @current_user.id %>
+                <% if @user_role == "Administrador" || @user_role == "Supervisor" || new.author_id == @current_user.id %>
                   <%= link_to t("button_text.details"), edit_news_path(new), class: "button primary" %>
                 <% else %>
                   <%= link_to t("button_text.details"), news_path(new), class: "button primary" %>
