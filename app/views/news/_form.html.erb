@@ -24,7 +24,7 @@
       <p><%= @author_name %></p>
     </div>
     <div class="large-3 medium-3 small-3 large-offset-1 medium-offset-1 small-offset-1">
-      <% if @user_role == 1 || @user_publish %>
+      <% if @user_role == "Administrador" || @user_role == "Supervisor" || @user_publish %>
         <fieldset class="cell">
           <legend><%= t("tags.publish_state") %></legend>
           <div class="grid-x">
@@ -50,7 +50,7 @@
   </div>
   
   <% if @edit %>
-    <% if @user_role == 1 || @user_publish %>
+    <% if @user_role == "Administrador" || @user_role == "Supervisor" || @user_publish %>
     <div class="large-3 medium-3 small-3 large-offset-2 medium-offset-2 small-offset-2">
       <%= f.label t("tags.date_created") %>
       <p><%= @news.created_at.strftime("%d/%m/%Y %R") %></p>
@@ -71,11 +71,11 @@
     </div>
 
     <div class="large-12 medium-12 small-12 text-center">
-      <img class="thumbnail" src="<% @news.image_url %>" alt="Farola Rota">
+      <%= image_tag(@news.header_image) if @news.header_image.attached? %>
     </div>
 
     <div class="large-4 medium-4 small-4 large-offset-5 medium-offset-5 small-offset-5 text-center">
-      <%= f.file_field :image_url, accept: "image/png, image/jpg, image/jpeg" %>
+      <%= f.file_field :header_image, accept: "image/png, image/jpg, image/jpeg" %>
     </div>
   </div>
 
