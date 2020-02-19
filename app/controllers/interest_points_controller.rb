@@ -27,8 +27,10 @@ class InterestPointsController < ApplicationController
 
     respond_to do |format|
       if @interest_point.save
-        format.html { redirect_to @interest_point, notice: 'Interest point was successfully created.' }
-        format.json { render :show, status: :created, location: @interest_point }
+        @interest_point.image_url = rails_blob_path(@interest_point.point_image, only_path: true) if @interest_point.point_image.attached?
+        @interest_point.save
+        format.html { redirect_to interest_points_path, notice: 'Interest point was successfully created.' }
+        format.json { render :index, status: :created, location: @interest_point }
       else
         format.html { render :new }
         format.json { render json: @interest_point.errors, status: :unprocessable_entity }
@@ -41,8 +43,10 @@ class InterestPointsController < ApplicationController
   def update
     respond_to do |format|
       if @interest_point.update(interest_point_params)
-        format.html { redirect_to @interest_point, notice: 'Interest point was successfully updated.' }
-        format.json { render :show, status: :ok, location: @interest_point }
+        @interest_point.image_url = rails_blob_path(@interest_point.point_image, only_path: true) if @interest_point.point_image.attached?
+        @interest_point.save
+        format.html { redirect_to interest_points_path, notice: 'Interest point was successfully updated.' }
+        format.json { render :index, status: :ok, location: @interest_point }
       else
         format.html { render :edit }
         format.json { render json: @interest_point.errors, status: :unprocessable_entity }
@@ -68,6 +72,6 @@ class InterestPointsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interest_point_params
-      params.require(:interest_point).permit(:name, :description, :image_url, :latitude, :longitude)
+      params.require(:interest_point).permit(:name, :description, :image_url, :latitude, :longitude, :point_image)
     end
 end

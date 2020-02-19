@@ -19,11 +19,11 @@
       </div>
       
       <div class="large-12 medium-12 small-12 text-center">
-        <img class="thumbnail" src="<% @interest_point.image_url %>" alt="Farola Rota">
+        <%= image_tag(@interest_point.point_image) if @interest_point.point_image.attached? %>
       </div>
     
       <div class="large-4 medium-4 small-4 large-offset-5 medium-offset-5 small-offset-5 text-center">
-        <%= f.file_field :image_url, accept: "image/png, image/jpg, image/jpeg" %>
+        <%= f.file_field :point_image, accept: "image/png, image/jpg, image/jpeg" %>
       </div>
    </div>
   </div>
