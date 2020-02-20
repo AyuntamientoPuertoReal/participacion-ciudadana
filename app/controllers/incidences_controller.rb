@@ -7,7 +7,7 @@ class IncidencesController < ApplicationController
   load_and_authorize_resource
 
   def index_new
-    user_role = current_user.role.id
+    user_role = current_user.role.name
     user_id = current_user.id
     
     proc_un_user = PuStaff.where(:staff_id => user_id).select(:processing_unit_id).distinct
@@ -16,7 +16,7 @@ class IncidencesController < ApplicationController
     @incidence_tracking_status = IncidenceTracking.joins('INNER JOIN (SELECT incidence_id, MAX(created_at) as maximum_created_at FROM incidence_trackings GROUP BY incidence_id) "inc_trac_group" ON "incidence_trackings"."incidence_id" = "inc_trac_group"."incidence_id" AND "incidence_trackings"."created_at" = "inc_trac_group"."maximum_created_at"')
     incidence_tracking_where_status = IncidenceTracking.all.select(:incidence_id)
 
-    if user_role == 1 || 2
+    if user_role == "Administrador" || user_role == "Supervisor"
       @incidences = Incidence.where.not(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     else
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where.not(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
@@ -34,7 +34,7 @@ class IncidencesController < ApplicationController
   end
 
   def index_inprocess
-    user_role = current_user.role.id
+    user_role = current_user.role.name
     user_id = current_user.id
 
     proc_un_user = PuStaff.where(:staff_id => user_id).select(:processing_unit_id).distinct
@@ -43,7 +43,7 @@ class IncidencesController < ApplicationController
     @incidence_tracking_status = IncidenceTracking.joins('INNER JOIN (SELECT incidence_id, MAX(created_at) as maximum_created_at FROM incidence_trackings GROUP BY incidence_id) "inc_trac_group" ON "incidence_trackings"."incidence_id" = "inc_trac_group"."incidence_id" AND "incidence_trackings"."created_at" = "inc_trac_group"."maximum_created_at"')
     incidence_tracking_where_status = IncidenceTracking.where(:status => 2).where(:id => @incidence_tracking_status.select(:id)).select(:incidence_id)
 
-    if user_role == 1 || 2
+    if user_role == "Administrador" || user_role == "Supervisor"
       @incidences = Incidence.where(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     else
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where(:id => incidence_tracking_where_status).distinct
@@ -61,7 +61,7 @@ class IncidencesController < ApplicationController
   end
 
   def index_closed
-    user_role = current_user.role.id
+    user_role = current_user.role.name
     user_id = current_user.id
 
     proc_un_user = PuStaff.where(:staff_id => user_id).select(:processing_unit_id).distinct
@@ -70,7 +70,7 @@ class IncidencesController < ApplicationController
     @incidence_tracking_status = IncidenceTracking.joins('INNER JOIN (SELECT incidence_id, MAX(created_at) as maximum_created_at FROM incidence_trackings GROUP BY incidence_id) "inc_trac_group" ON "incidence_trackings"."incidence_id" = "inc_trac_group"."incidence_id" AND "incidence_trackings"."created_at" = "inc_trac_group"."maximum_created_at"')
     incidence_tracking_where_status = IncidenceTracking.where(:status => [3, 4]).where(:id => @incidence_tracking_status.select(:id)).select(:incidence_id)
 
-    if user_role == 1 || 2
+    if user_role == "Administrador" || user_role == "Supervisor"
       @incidences = Incidence.where(:id => incidence_tracking_where_status.select(:incidence_id)).distinct
     else
       @incidences = Incidence.where(:incidence_type_id => incidences_types_pu_staff.select(:incidence_type_id)).where(:id => incidence_tracking_where_status.select(:incidence_id)).distinct

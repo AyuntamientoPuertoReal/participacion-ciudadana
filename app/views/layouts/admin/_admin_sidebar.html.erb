@@ -1,84 +1,43 @@
-
-  <!--
 <ul class="vertical menu" data-accordion-menu>
-
-  <% if can? :manage, Staff %>
+  <% if current_staff.role.name == "Administrador" || current_staff.role.name == "Supervisor" || current_staff.processing_units.any? %>
     <li>
-      <a class="admin-sidebar-list-item" href="<%= staffs_path %>"><i class="fi-torso"></i> <span>Gestión de Usuarios</span></a>
-    </li>
-  <% end %>
-
-  <% if can? :manage, ProcessingUnit %>
-    <li>
-      <a class="admin-sidebar-list-item" href="<%= processing_units_path %>"><i class="fi-torsos-all"></i> <span>Gestión de Unidades Tramitadoras</span></a>
-    </li> 
-  <% end %>
-
-  <% if (can? :manage, IncidenceType) | (can? :read, Incidence) %>
-    <li>
-      <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span>Gestión de Incidencias</span></a>
-      <ul class="menu vertical nested">
-        <% if can? :manage, IncidenceType %>
-          <li><a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span>Listado de Tipos de Incidencias</span></a></li>
-        <% end %>
-        <% if can? :read, Incidence  %>
-          <li><a class="admin-sidebar-list-item" href=""><i class="fi-marker"></i> <span>Listado de Incidencias</span></a></li>
-        <% end %>
-      </ul>
-    </li> 
-  <% end %>
- -->
-
-
-  <!-- Parte de la Web de Participacion
- <li>
-    <a class="admin-sidebar-list-item" href="#"><i class="fi-comment-quotes"></i> <span>Gestión de Noticias</span></a>
-  </li>
-
-  <li>
-    <a class="admin-sidebar-list-item" href="#"><i class="fi-web"></i> <span>Gestión de la Web</span></a>
-    <ul class="menu vertical nested">
-      <li><a class="admin-sidebar-list-item" href="#"><i class="fi-background-color"></i> <span>Personalización de Textos</span></a></li>
-      <li><a class="admin-sidebar-list-item" href="#"><i class="fi-photo"></i> <span>Personalización de Imágenes</span></a></li>
-    </ul>
-  </li>  -->
-<ul class="vertical menu" data-accordion-menu>
-  <li>
-  <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span><%= t("general.menu_side_bar.incidence.name") %></span></a>
+      <a class="admin-sidebar-list-item" href="#"><i class="fi-first-aid"></i> <span><%= t("general.menu_side_bar.incidence.name") %></span></a>
       <ul class="menu vertical nested">
         <li><a class="admin-sidebar-list-item" href="<%= incidences_index_new_path %>"><i class="fi-marker"></i> <span><%= t("general.menu_side_bar.incidence.new_incidence_name") %></span></a></li>
         <li><a class="admin-sidebar-list-item" href="<%= incidences_index_inprocess_path %>"><i class="fi-monitor"></i> <span><%= t("general.menu_side_bar.incidence.inprocess_incidence_name") %></span></a></li>
         <li><a class="admin-sidebar-list-item" href="<%= incidences_index_closed_path %>"><i class="fi-checkbox"></i> <span><%= t("general.menu_side_bar.incidence.closed_incidence_name") %></span></a></li>
       </ul>
-  </li>
+    </li>
+  <% end %>
 
-  <li>
-  <a class="admin-sidebar-list-item" href="#"><i class="fi-web"></i> <span><%= t("general.menu_side_bar.web.name") %></span></a>
+  <% if current_staff.role.name == "Administrador" || current_staff.role.name == "Supervisor" || current_staff.is_web_editor? %>
+    <li>
+      <a class="admin-sidebar-list-item" href="#"><i class="fi-web"></i> <span><%= t("general.menu_side_bar.web.name") %></span></a>
       <ul class="menu vertical nested">
         <li>
           <a class="admin-sidebar-list-item" href="<%= news_index_path %>"><i class="fi-comments"></i> <span><%= t("general.menu_side_bar.web.notice_name") %></span></a>
         </li>
-
         <li>
           <a class="admin-sidebar-list-item" href="<%= interest_points_path %>"><i class="fi-male-female"></i> <span><%= t("general.menu_side_bar.web.interest_point_name") %></span></a>
         </li>
       </ul>
-  </li>
+    </li>
+  <% end %>
 
-  <li>
-  <a class="admin-sidebar-list-item" href="#"><i class="fi-widget"></i> <span><%= t("general.menu_side_bar.configuration.name") %></span></a>
+  <% if current_staff.role.name == "Administrador" %>
+    <li>
+      <a class="admin-sidebar-list-item" href="#"><i class="fi-widget"></i> <span><%= t("general.menu_side_bar.configuration.name") %></span></a>
       <ul class="menu vertical nested">
         <li>
           <a class="admin-sidebar-list-item" href="<%= staffs_path %>"><i class="fi-torso"></i> <span><%= t("general.menu_side_bar.configuration.staff_name") %></span></a>
         </li>
-
         <li>
           <a class="admin-sidebar-list-item" href="<%= processing_units_path %>"><i class="fi-torsos-all"></i> <span><%= t("general.menu_side_bar.configuration.processing_units_name") %></span></a>
         </li>
-
         <li>
           <a class="admin-sidebar-list-item" href="<%= incidence_types_path %>"><i class="fi-folder"></i> <span><%= t("general.menu_side_bar.configuration.incidence_type_name") %></span></a>
         </li>
       </ul>
-  </li>
+    </li>
+  <% end %>
 </ul>

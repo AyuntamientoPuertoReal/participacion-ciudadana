@@ -9,7 +9,7 @@ class NewsController < ApplicationController
   def index
     @current_user = current_user
     @news = News.search(params[:search_title], params[:search_author], params[:search_createdAt], params[:search_published])
-    @user_role = current_user.role.id
+    @user_role = current_user.role.name
     @user_publish = current_user.can_publish
     @author_name = Hash.new
 
@@ -50,6 +50,8 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.save
+        @news.image_url = rails_blob_path(@news.header_image, only_path: true) if @news.header_image.attached?
+        @news.save
         if @news.published
           PhoneIdentifier.all.each do |device|
             n = Rpush::Gcm::Notification.new
@@ -87,6 +89,8 @@ class NewsController < ApplicationController
 
     respond_to do |format|
       if @news.update(news_params)
+        @news.image_url = rails_blob_path(@news.header_image, only_path: true) if @news.header_image.attached?
+        @news.save
         format.html {redirect_to @news, notice: 'News was successfully updated.'}
         format.json {render :show, status: :ok, location: @news}
       else
@@ -135,7 +139,7 @@ class NewsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
 
   def news_params
-    params.require(:news).permit(:published, :title, :description, :body, :image_url)
+    params.require(:news).permit(:published, :title, :description, :body, :image_url, :header_image)
   end
 
   def set_edit

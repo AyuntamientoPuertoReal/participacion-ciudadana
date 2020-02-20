@@ -51,7 +51,6 @@ es:
     advice_app: "*Este campo aparece en la APP."
     processing_unit: "Unidad Tramitadora"
     incidence_type: "Tipo de Incidencia"
-    processing_unit: "Unidad Tramitadora"
     staff: "Personal"
     news: "Noticia"
     interest_point: "Punto de Interes"
@@ -104,9 +103,10 @@ es:
     start:
       message: "La aplicacion se esta ejecutrando en el entorno: "
       text_link_puerto_real_participa: "Volver a Puerto Real - Participa"
-      text_admin_home: "Puerto Real ― Participa <br/> <small>ADMINISTRACIÓN</small>"
+      text_admin_home: "APP <br/> Participación Ciudadana <br/> Ayuntamiento de Puerto Real <br/> <small>ADMINISTRACIÓN</small>"
       log_out: "Cerrar Sesión (%{username})"
       log_in: "Inciar Sesión"
+      site_title: "APP Participación Ciudadana - Ayuntamiento de Puerto Real: Panel de Administración"
     login:
       tag_password: "Contraseña"
       tag_username: "Nombre de usuario"
