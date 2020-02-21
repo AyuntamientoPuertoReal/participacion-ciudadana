@@ -1,11 +1,11 @@
 <table class="hover">
   <thead>
   <tr>
-    <th width="100">Codigo</th>
-    <th width="100">Nombre Completo</th>
-    <th width="50">Publicar</th>
-    <th width="50">Modificar Web</th>
-    <th width="50">Acciones</th>
+    <th width="100"><%= t("tags.code") %></th>
+    <th width="100"><%= t("tags.full_name") %></th>
+    <th width="50"><%= t("tags.publish") %></th>
+    <th width="50"><%= t("tags.web_editor") %></th>
+    <th width="50"><%= t("tags.actions") %></th>
   </tr>
   </thead>
   <tbody>
@@ -15,34 +15,34 @@
       <td><%= staff.full_name %></td>
 
       <% if staff.can_publish == true %>
-        <td>Si</td>
+        <td><%= t("general.yes") %></td>
       <% else %>
-        <td>No</td>
+        <td><%= t("general.no") %></td>
       <% end %>
 
       <% if staff.is_web_editor == true %>
-        <td>Si</td>
+        <td><%= t("general.yes") %></td>
       <% else %>
-        <td>No</td>
+        <td><%= t("general.no") %></td>
       <% end %>
 
       <td>
         <div class="grid-x grid-margin-x small-up-1 medium-up-1 large-up-2">
           <div class="cell">
-            <%= link_to "Modificar", edit_staff_path(staff), class: "button primary" %>
+            <%= link_to t("button_text.mod_edit"), edit_staff_path(staff), class: "button primary" %>
           </div>
 
           <div class="cell">
-            <a class="button alert" data-open="ModalEliminar_<%= staff.id %>">Eliminar</a>
+            <a class="button alert" data-open="ModalEliminar_<%= staff.id %>"><%= t("button_text.delete") %></a>
             <div class="small reveal" id="ModalEliminar_<%= staff.id %>" data-reveal="true">
-              <h3 class="text-center">¿Estas seguro que desea eliminar?</h3>
+              <h3 class="text-center"><%= t("modals.delete.message") %></h3>
               <div class="grid-x">
                 <div class="cell large-2 medium-2 small-2 large-offset-2 mediun-offset-2 small-offset-2">
-                  <%= link_to "Aceptar", staff, method: :delete, remote: true, class: "button success", type: "button", data: {close: ""} %>
+                  <a class="button success" type="button" rel="nofollow" data-method="delete" href="<%= staff_path(staff.id) %>" data-close><%= t("general.accept") %></a>
                 </div>
 
                 <div class="cell large-2 medium-2 small-2 large-offset-3 mediun-offset-3 small-offset-3">
-                  <a class="button alert" type="button" data-close>Cancelar</a>
+                  <a class="button alert" type="button" data-close><%= t("general.cancel") %></a>
                 </div>
               </div>
             </div>

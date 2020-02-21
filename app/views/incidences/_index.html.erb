@@ -3,22 +3,22 @@
     <div class="grid-x grid-margin-x large-8 medium-8 small-8">
     <%= form_with method: :get, url: @url_path, id: 'incidences_search', class: "grid-margin-x small-up-1 medium-up-1 large-up-1" do |f| %>
         <div class="cell">
-            <%= f.label :search_description, 'Descripcion' %>
+            <%= f.label :search_description, t("tags.description") %>
             <%= f.text_field :search_description, value: params[:search_description] %>
         </div>
 
         <div class="cell">
-            <%= f.label :search_type, 'Tipo' %>
+            <%= f.label :search_type, t("tags.type") %>
             <%= f.select :search_type, options_from_collection_for_select(@incidence_type_name, :first, :last, 0), select: params[:search_type] %>
         </div>
 
         <div class="cell">
-            <%= f.label :search_dateBegin, 'Desde' %>
+            <%= f.label :search_dateBegin, t("tags.to") %>
             <%= f.text_field :search_dateBegin, value: params[:search_dateBegin],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
         </div>
 
         <div class="cell">
-            <%= f.label :search_dateEnd, 'Hasta' %>
+            <%= f.label :search_dateEnd, t("tags.from") %>
             <%= f.text_field :search_dateEnd, value: params[:search_dateEnd],  placeholder: 'dd/mm/yyyy', class: 'datepicker' %>
         </div>
     <% end %>

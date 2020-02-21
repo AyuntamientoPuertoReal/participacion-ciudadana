@@ -1,5 +1,3 @@
-<%= link_to 'Volver', processing_units_path %>
-<h3>Crear nueva unidad tramitadora</h3>
-
+<h3><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.processing_unit")) %></h3>
 <%= render 'form', processing_unit: @processing_unit %>
-
+<%= link_to t("general.back"), processing_units_path %>

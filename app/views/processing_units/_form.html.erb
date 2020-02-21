@@ -1,13 +1,13 @@
 <%= form_with(model: processing_unit, remote: true) do |f| %>
 
 <% if @processing_unit.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@processing_unit.errors.count, "error") %> prohibited this article from being saved:</h2>
- 
+  <div data-abide-error class="alert callout" id="error_explanation">
+    <h2><%= t("error_messages.errors_count", deep_interpolation: true, count: pluralize(@processing_unit.errors.count, t("error_messages.errors"))) %></h2>
+
     <ul>
-    <% @processing_unit.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+      <% @processing_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
     </ul>
   </div>
 <% end %>
@@ -15,34 +15,34 @@
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <h4 class="text-center">Datos de la Unidad</h4>
+      <h4 class="text-center"><%= t("field_form.date_tag", deep_interpolation: true, element: t("field_form.processing_unit")) %></h4>
     </div>
   </div>
   <div class="grid-x">
     <div class="large-2 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-    <%= f.label "Codigo" %>
+    <%= f.label t("tags.code") %>
     <%= f.text_field :code %>
     </div>
   </div>
 
   <div class="grid-x">
     <div class="large-8 medium-2 small-2 large-offset-2 medium-offset-2 small-offset-2">
-      <%= f.label "Descripcion" %>
+      <%= f.label t("tags.description") %>
       <%= f.text_area :description %>
     </div>
   </div>
 </div>
 
 <div class="grid-x large-offset-6 medium-offset-6 small-offset-6">
-  <%= f.submit "Guardar", class: "button primary" %>
+  <%= f.submit t("button_text.save"), class: "button primary" %>
 </div>
 
 <% if @edit %>
 <div class="grid-y">
   <div class="grid-x">
     <div class="large-12 medium-12 small-12">
-      <h4 class="text-center">Personal asignado</h4>
-      <p class="text-center">*Los cambios efectuados seran automaticamente actualizados</p>
+      <h4 class="text-center"><%= t("field_form.staff") %></h4>
+      <p class="text-center"><%= t("field_form.table_text") %></p>
     </div>
   </div>
 
@@ -50,15 +50,12 @@
     <div class="grid-y large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
 
       <div class="cell">
-        <label>Disponibles
-          <input type="text" placeholder="Buscar">
-        </label>
-
+        <p class="text-center"><%= t("general.avaible") %></p>
         <table id="ut_table_disponible" class="hover">
           <thead>
           <tr>
-            <th width="25">Seleccionar</th>
-            <th width="75">Usuario</th>
+            <th width="25"><%= t("tags.select") %></th>
+            <th width="75"><%= t("tags.unit") %></th>
           </tr>
           </thead>
           <tbody>
@@ -84,15 +81,13 @@
     <div class="grid-y large-2 medium-2 small-2">
 
       <div class="cell">
-        <label>Asignados
-          <input type="text" placeholder="Buscar">
-        </label>
+        <p class="text-center"><%= t("general.selected") %></p>
 
         <table id="ut_table_asignada" class="hover">
           <thead>
           <tr>
-            <th width="25">Seleccionar</th>
-            <th width="75">Usuario</th>
+            <th width="25"><%= t("tags.select") %></th>
+            <th width="75"><%= t("tags.unit") %></th>
           </tr>
           </thead>
           <tbody>
@@ -112,8 +107,8 @@
   <div class="grid-y">
     <div class="grid-x">
       <div class="large-12 medium-12 small-12">
-        <h4 class="text-center">Tipos de Incidencias</h4>
-        <p class="text-center">*Los cambios efectuados seran automaticamente actualizados</p>
+        <h4 class="text-center"><%= t("field_form.incidence_type") %></h4>
+        <p class="text-center"><%= t("field_form.table_text") %></p>
       </div>
     </div>
 
@@ -121,15 +116,12 @@
       <div class="grid-y large-2 medium-2 small-2 large-offset-3 medium-offset-3 small-offset-3">
 
         <div class="cell">
-          <label>Disponibles
-            <input type="text" placeholder="Buscar">
-          </label>
-
+          <p class="text-center"><%= t("general.avaible") %></p>
           <table id="incTy_table_disponible" class="hover">
             <thead>
             <tr>
-              <th width="25">Seleccionar</th>
-              <th width="75">Tipo</th>
+            <th width="25"><%= t("tags.select") %></th>
+            <th width="75"><%= t("tags.unit") %></th>
             </tr>
             </thead>
             <tbody>
@@ -155,15 +147,12 @@
       <div class="grid-y large-2 medium-2 small-2">
 
         <div class="cell">
-          <label>Asignadas
-            <input type="text" placeholder="Buscar">
-          </label>
-
+          <p class="text-center"><%= t("general.selected") %></p>
           <table id="incTy_table_asignado" class="hover">
             <thead>
             <tr>
-              <th width="25">Seleccionar</th>
-              <th width="75">Tipo</th>
+            <th width="25"><%= t("tags.select") %></th>
+            <th width="75"><%= t("tags.unit") %></th>
             </tr>
             </thead>
             <tbody>

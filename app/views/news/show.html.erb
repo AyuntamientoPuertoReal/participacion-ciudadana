@@ -32,10 +32,15 @@
         <h3 class="text-center">Redaccion de la noticia</h3>
       </div>
   </div>
+
+  <div class="large-12 medium-12 small-12 text-center">
+    <%= image_tag(@news.header_image) if @news.header_image.attached? %>
+  </div>
+
   <div class="grid-x">
       <div class="large-4 medium-4 small-4 large-offset-2 medium-offset-2 small-offset-2">
         <label>Titulo</label>
-        </p><%= @news.title %></p>
+        <p><%= @news.title %></p>
       </div>
   </div>
 

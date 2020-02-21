@@ -1,16 +1,16 @@
 <header>
   <div class="row back-link-row">
     <div class="large-12 columns">
-      <%= link_to t("general.start.text_link_puerto_real_participa"), '#', class: 'back-link' %>
       <% if staff_signed_in? %>
-        <span class="back-link">|</span>
-        <%= link_to "Cerrar Sesión (#{current_staff.username})", destroy_staff_session_path, method: :delete, class: 'back-link' %>
+        <%= link_to t("general.start.log_out", deep_interpolation: true, username: current_staff.username), destroy_staff_session_path, method: :delete, class: 'back-link' %>
+      <% else %>
+        <%= link_to t("general.start.log_in"), new_staff_session_path, method: :get, class: 'back-link' %>
       <% end %>
     </div>
   </div>
   <div class="row admin-home-row">
     <div class="large-12 columns">
-      <%= link_to raw("Puerto Real ― Participa <br/> <small>ADMINISTRACIÓN</small>"), '#', class: 'admin-home-link' %>
+      <%= link_to raw(t("general.start.text_admin_home")), authenticated_root_path, class: 'admin-home-link' %>
     </div>
   </div>
 </header>

@@ -3,19 +3,19 @@
     <div class="grid-x grid-margin-x large-8 medium-8 small-8">
       <%= form_with method: :get, url: processing_units_path, id: 'processing_units_search', class: "grid-margin-x small-up-1 medium-up-4 large-up-1" do |f| %>
         <div class="cell">
-            <%= f.label :search_code, 'Código' %>
+            <%= f.label :search_code, t("tags.code") %>
             <%= f.text_field :search_code, value: params[:search_code] %>
         </div>
 
         <div class="cell">
-            <%= f.label :search_description, 'Descripcion' %>
+            <%= f.label :search_description, t("tags.description") %>
             <%= f.text_field :search_description, value: params[:search_description] %>
         </div>
       <% end %>
     </div>
     <div class="grid-x">
       <div class="cell">
-        <%= link_to "Nueva Unidad", new_processing_unit_path, class: "button success" %>
+        <%= link_to t("button_text.processing_unit_new"), new_processing_unit_path, class: "button success" %>
       </div>
     </div>
   </div>

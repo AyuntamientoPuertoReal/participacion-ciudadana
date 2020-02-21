@@ -1,4 +1,3 @@
-<h1>Nuevo Punto de Interes:</h1>
-<%= link_to 'Volver', interest_points_path %>
-
+<h1><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.interest_point")) %></h1>
 <%= render 'form', interest_point: @interest_point %>
+<%= link_to t("general.back"), interest_points_path %>

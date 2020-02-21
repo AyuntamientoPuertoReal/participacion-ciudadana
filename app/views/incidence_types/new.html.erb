@@ -1,5 +1,4 @@
-<%= link_to 'Volver', incidence_types_path %>
-<h1>Crear nuevo tipo de incidencia</h1>
-
+<h3><%= t("field_form.new_register", deep_interpolation: true, element: t("field_form.incidence_type")) %></h3>
 <%= render 'form', incidence_type: @incidence_type %>
+<%= link_to t("general.back"), incidence_types_path %>
 

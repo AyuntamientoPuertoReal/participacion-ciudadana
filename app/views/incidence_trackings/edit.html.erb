@@ -1,5 +1,4 @@
-<h1>Editando Seguimiento nº <%= @incidence_tracking.id %>, de la incidencia <%= @incidence.id %>.</h1>
-<%= link_to "Volver", incidence_path(@incidence) %>
-
+<h1><%= t("field_form.edit_tracking", deep_interpolation: true, tracking: @incidence_tracking.id, incidence: @incidence.id) %></h1>
 <%= render 'form', incidence_tracking: @incidence_tracking %>
+<%= link_to t("general.back"), incidence_path(@incidence) %>
 

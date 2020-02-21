@@ -1,10 +1,3 @@
-<h1>Creando nuevo seguimiento para: </h1>
-  <% if @incidence_tracking.errors.any? %>
-    <% @incidence_tracking.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  <% end %>
-<%= link_to "Volver", incidence_path(@incidence) %>
-
+<h1><%= t("field_form.new_tracking", deep_interpolation: true, incidence: @incidence.id) %></h1>
 <%= render 'form', incidence_tracking: @incidence_tracking %>
-
+<%= link_to t("general.back"), incidence_path(@incidence) %>

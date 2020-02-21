@@ -4,6 +4,15 @@ class News < ApplicationRecord
   belongs_to :author, class_name: "Staff"
   belongs_to :last_editor, class_name: "Staff", optional: true
 
+  validates :title, :body, :description, presence: { message: I18n.t("error_messages.blank_field")}
+  validates :title, length: {maximum: 100, message: I18n.t("error_messages.maximum", deep_interpolation: true, max: "100")}
+  validates :title, length: {minimum: 10, message: I18n.t("error_messages.minimum", deep_interpolation: true, min: "10")}
+  validates :description, length: {maximum: 250, message: I18n.t("error_messages.maximum", deep_interpolation: true, max: "250")}
+  validates :description, length: {minimum: 10, message: I18n.t("error_messages.minimum", deep_interpolation: true, min: "10")}
+
+  has_one_attached :header_image
+  validates :header_image, attached: true
+
   def self.search(title, author, created_at, published)
     hash_where = {"title_str" => "", "author_str" => "", "created_at_str" => "", "published_str" => ""}
     string_where = ""

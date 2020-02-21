@@ -1,5 +1,3 @@
-<h3>Editando la unidad tramitadora <%= @processing_unit.code %></h3>
-
+<h3><%= t("field_form.edit_register", deep_interpolation: true, element: t("field_form.processing_unit"), regist: @processing_unit.code) %></h3>
 <%= render 'form', processing_unit: @processing_unit %>
-
-<%= link_to 'Volver', processing_units_path %>
+<%= link_to t("general.back"), processing_units_path %>
